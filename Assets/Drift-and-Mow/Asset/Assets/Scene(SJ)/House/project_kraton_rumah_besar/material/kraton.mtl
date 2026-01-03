@@ -1,0 +1,176 @@
+# Blender MTL File: 'rmh_besar_kraton_5.blend'
+# Material Count: 16
+
+newmtl Material.001
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.011743 0.037565 0.001968
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Bump -bm 0.300000 C:\\Users\\zak keren\\Desktop\\project_kraton_rumah_besar\\texturizer\\ee85c523aafff237f32416e5fe276114.jpg
+map_Kd C:\\Users\\zak keren\\Desktop\\project_kraton_rumah_besar\\texturizer\\ee85c523aafff237f32416e5fe276114.jpg
+
+newmtl Material.001_old-door-973843.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.011743 0.037565 0.001968
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd G:\home\old-door-973843.jpg
+map_Bump -bm 0.300000 C:\\Users\\zak keren\\Desktop\\project_kraton_rumah_besar\\texturizer\\ee85c523aafff237f32416e5fe276114.jpg
+
+newmtl Model001_Material004
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\zak keren\Desktop\All Modeling\gvv1e7u547-Borderlands 2 - Maya\Borderlands 2 - Maya\Mouth.tga
+
+newmtl Oak_Leav
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.147451 0.241569 0.122353
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd F:\All Save\Blander\All Modeling\yb0gh9no70-trees9\trees9\Oak_Leav.jpg
+
+newmtl acmat_0
+Ns 103.921569
+Ka 0.118954 0.118954 0.118954
+Kd 0.447059 0.352941 0.337255
+Ks 0.023529 0.023529 0.023529
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl acmat_1
+Ns 33.333333
+Ka 0.118954 0.118954 0.118954
+Kd 0.349020 0.207843 0.188235
+Ks 0.101961 0.101961 0.101961
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl acmat_2
+Ns 103.921569
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.529412 0.125490
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl acmat_3
+Ns 127.450980
+Ka 0.200000 0.200000 0.200000
+Kd 0.000000 0.000000 1.000000
+Ks 0.200000 0.200000 0.200000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl acmat_4
+Ns 103.921569
+Ka 0.233987 0.233987 0.233987
+Kd 0.800000 0.733333 0.611765
+Ks 0.031373 0.031373 0.031373
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl col_floor_depan
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.602061 0.602061
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl col_gagang_pintu_1
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.018917 0.018917 0.018917
+Ks 0.200000 0.200000 0.200000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl col_penyangga
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.132788 0.640000 0.044457
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Ka C:\\Users\\zak keren\\Desktop\\project_kraton_rumah_besar\\texturizer\\tex_lantai_ats_2.jpg
+map_Kd C:\\Users\\zak keren\\Desktop\\project_kraton_rumah_besar\\texturizer\\tex_lantai_ats_2.jpg
+
+newmtl col_rmh_bsr_1
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl col_roof
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Bump -bm 0.200000 C:\\Users\\zak keren\\Desktop\\project_kraton_rumah_besar\\texturizer\\roof_1.jpg
+map_Kd C:\\Users\\zak keren\\Desktop\\project_kraton_rumah_besar\\texturizer\\roof_1.jpg
+
+newmtl col_tangga
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.110063 0.019879 0.003525
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Bump -bm 0.200000 C:\\Users\\zak keren\\Desktop\\project_kraton_rumah_besar\\texturizer\\tangga.jpg
+map_Kd C:\\Users\\zak keren\\Desktop\\project_kraton_rumah_besar\\texturizer\\tangga.jpg
+
+newmtl col_tembok
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.425530 0.148793
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Bump -bm 0.200000 C:\\Users\\zak keren\\Desktop\\project_kraton_rumah_besar\\texturizer\\ee85c523aafff237f32416e5fe276114.jpg
+map_Kd C:\\Users\\zak keren\\Desktop\\project_kraton_rumah_besar\\texturizer\\ee85c523aafff237f32416e5fe276114.jpg

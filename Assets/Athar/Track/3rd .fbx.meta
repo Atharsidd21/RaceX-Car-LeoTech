@@ -1,0 +1,375 @@
+fileFormatVersion: 2
+guid: 7542ea1fb5a53194aaac08190079214b
+ModelImporter:
+  serializedVersion: 24200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaf mat 7.001
+    second: {fileID: 2100000, guid: 81fb333becb21184699189a6e4dd5f5a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaf mat 7.002
+    second: {fileID: 2100000, guid: 0266749d97c11e04380daef197160cc9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: 01913c8d560d04b489929cb414cfc899, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: arrow sign
+    second: {fileID: 2100000, guid: a5c09a4bc638ea64eb0d0b9ec9d58666, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bark03
+    second: {fileID: 2100000, guid: eed98e7fecc7ce6488d0f2c45d44036b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bark03.001
+    second: {fileID: 2100000, guid: dfc2f5720e5cdb840886ad196c3c4afb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bark03.002
+    second: {fileID: 2100000, guid: a1c5f0a35699d084a9c095f5a376ddd3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bridge
+    second: {fileID: 2100000, guid: 49582704d8f199143b7b9a9f4039558e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: dutch_ship_medium_hull
+    second: {fileID: 2100000, guid: 00777e8553b3e004dacfbbd1fec61083, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: dutch_ship_medium_rigging
+    second: {fileID: 2100000, guid: 59f1e84328815ec458f09fe982c6a33b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: dutch_ship_medium_sails
+    second: {fileID: 2100000, guid: 969d2013c9530234b8b91724a84eef86, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ef_glideboard
+    second: {fileID: 2100000, guid: 161105a471563a34faca23b5e7a68956, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: jali
+    second: {fileID: 2100000, guid: 49d35d10ba9cf6942a3da16a03e60a9f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kd_renga01
+    second: {fileID: 2100000, guid: 97ecb798eea3c53459141f45c64edca6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kd_roadALL
+    second: {fileID: 2100000, guid: 24bb2b8367d49f245a85f702e55595db, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kd_rock01
+    second: {fileID: 2100000, guid: 6a5862d1b7c47ca4f84e657a3d986a59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kd_rockTOP01
+    second: {fileID: 2100000, guid: 4bdf67c1afa30f2429b325dab2253171, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kd_saku01
+    second: {fileID: 2100000, guid: 43a343500e8654a45aafd51260870d77, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kd_sand01
+    second: {fileID: 2100000, guid: 072be5d1ea8f6174cb70511da7f26338, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kd_senro01
+    second: {fileID: 2100000, guid: 14d31f6e6a26e914895a888c8e160e6e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kd_wood01
+    second: {fileID: 2100000, guid: 68dc4b785bb2b53408290a454e013c86, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: soil
+    second: {fileID: 2100000, guid: 041a0295e69a5724a80590b97e5ca40f, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 61nMq5ya0ZL._AC_UF1000,1000_QL80_
+    second: {fileID: 2800000, guid: 1cf9b89f6a3b7aa44b4688805c6b3f7d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: bark03
+    second: {fileID: 2800000, guid: 4908aeec3c649674caaf211fca2c8c1d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: bgidge
+    second: {fileID: 2800000, guid: 00fae94d08579d94a924a47bff3b443e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: dutch_ship_medium_hull_diff_4k
+    second: {fileID: 2800000, guid: a987cc8cdf473d849a6251b7ee2af9b3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: dutch_ship_medium_hull_metal_4k
+    second: {fileID: 2800000, guid: 383bf62d099204e4fb8b7ed242532b9e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: dutch_ship_medium_hull_nor_gl_4k
+    second: {fileID: 2800000, guid: 9dab0d33d3d2b6a408094ec91c251ae3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: dutch_ship_medium_hull_rough_4k
+    second: {fileID: 2800000, guid: a3aa7b15857cc6045a0117de326ffae6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: dutch_ship_medium_rigging_diff_4k
+    second: {fileID: 2800000, guid: 7c03a25c34b5dd3428094e7839790bc0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: dutch_ship_medium_rigging_metal_4k
+    second: {fileID: 2800000, guid: 2a6d717e400d88e4db3a280c7479f464, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: dutch_ship_medium_rigging_nor_gl_4k
+    second: {fileID: 2800000, guid: beb89f667b76b8a4180d5b5be1b595a3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: dutch_ship_medium_rigging_rough_4k
+    second: {fileID: 2800000, guid: 5a79f9bf2c7da134d9492546ffc768ad, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: dutch_ship_medium_sails_alpha_4k
+    second: {fileID: 2800000, guid: 1acced88bcec2324aae790911e00cd14, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: dutch_ship_medium_sails_diff_4k
+    second: {fileID: 2800000, guid: d755b3d010d9789468e2b200dd75c80b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: dutch_ship_medium_sails_nor_gl_4k
+    second: {fileID: 2800000, guid: 2ca4fabb9c9f5e4489f6bdf2f964b58b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: dutch_ship_medium_sails_rough_4k
+    second: {fileID: 2800000, guid: a1c780863222d8d45a5584bd0d9f9190, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ef_glideboard_baseColor
+    second: {fileID: 2800000, guid: 344d5d9052712344086afbed65e5686b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: island oct623_Colormap_0_0
+    second: {fileID: 2800000, guid: be5b919b9d478544290832d78edcf110, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: island oct623_Normal Map_0_0
+    second: {fileID: 2800000, guid: 23c3a2139b522e54a8ddd234e10324fc, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: island oct623_Roughness Map_0_0
+    second: {fileID: 2800000, guid: 90d6fb1c7be640d4c90f78cef58d748b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: kd_renga01_baseColor
+    second: {fileID: 2800000, guid: fc0372bf8fd029649a74fa11088771af, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: kd_rock01_baseColor
+    second: {fileID: 2800000, guid: 527f35ead592f6a49af7efb58912c839, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: kd_rockTOP01_baseColor
+    second: {fileID: 2800000, guid: 2f1456b6388fe6644bf82c9e10f703bd, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: kd_saku01_baseColor
+    second: {fileID: 2800000, guid: be2e1e9b04d79d84a8e2f49c5bbd708c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: kd_sand01_baseColor
+    second: {fileID: 2800000, guid: 599146e3b47e5744c867a3e69593ec0a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: kd_senro01_baseColor
+    second: {fileID: 2800000, guid: c180baae2393cc44181fbfa040275e76, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: kd_wood01_baseColor
+    second: {fileID: 2800000, guid: 3e057fcde0b275945a7c75d0c41e021c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: leafG2
+    second: {fileID: 2800000, guid: 80575eef2f5b10b4f87ba8d24a307726, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: leafg2A
+    second: {fileID: 2800000, guid: 9f4a61775c34b914c9638a6d8aa3f9f7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: lf2D1
+    second: {fileID: 2800000, guid: a8e10c70a91f8124ba3808af0e161684, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: road
+    second: {fileID: 2800000, guid: e3116d256be45614e888fc7b8e4d08bc, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: water
+    second: {fileID: 2800000, guid: df3838b5d8bfd2e45859e559045a1c5d, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -53109,19 +53109,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1260548982108181471}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63f403e17ca74214fb09d3aef1be68c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   owncar: {fileID: 0}
-  vehiclePrefabs:
-  - {fileID: 4493774594652649359, guid: 0dbba4983951303459c55162cab32190, type: 3}
-  - {fileID: 3433750683821809974, guid: 1ceab5970384ef242afaad4b332c6bce, type: 3}
-  - {fileID: 102514, guid: a80005faaafeeed41b660f499b7d668e, type: 3}
-  - {fileID: 8799075692723707581, guid: cb3ac0807a1d17047a8b3cda0980432b, type: 3}
-  - {fileID: 3416858561705245710, guid: 380fca50b16360d4f9fb8bfdea07c915, type: 3}
-  - {fileID: 1609731031090814, guid: b9656e91273e0754b9481cd8a8a1cdd0, type: 3}
+  vehiclePrefabs: []
   spawnPoint: {fileID: 7031193368883571177}
 --- !u!114 &6036095668956887288
 MonoBehaviour:

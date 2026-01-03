@@ -1115,7 +1115,7 @@ GameObject:
   - component: {fileID: 3124150760457194784}
   m_Layer: 8
   m_Name: AI Car 1
-  m_TagString: AI
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

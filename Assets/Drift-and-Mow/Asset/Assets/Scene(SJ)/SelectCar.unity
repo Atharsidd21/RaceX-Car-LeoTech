@@ -5700,7 +5700,7 @@ MonoBehaviour:
   Torotate: {fileID: 1532440342894294193}
   turntable: {fileID: 6498753419958625659}
   RotateSpeed: 30
-  ListOfVehicles: {fileID: 5616184956348850481, guid: bc6b01cd3654a43478484d2a866ac82e,
+  ListOfVehicles: {fileID: 5616184956348850481, guid: 76ded6e3c0cf05942ba42682c1f901b9,
     type: 3}
   VehiclePointer: 0
   slideDistance: 30
@@ -6019,7 +6019,7 @@ Transform:
   m_GameObject: {fileID: 4708299273006775272}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 116.20001, y: 1.1, z: 22.68}
+  m_LocalPosition: {x: 116.20001, y: 1.5, z: 22.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

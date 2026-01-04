@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using DG.Tweening;
+//using DG.Tweening;
 
 
 public class AwakeManager : MonoBehaviour
@@ -13,10 +13,10 @@ public class AwakeManager : MonoBehaviour
     public VehicleLiist ListOfVehicles;
     public int VehiclePointer = 0;
     // For transitioning when selecting cars
-    [SerializeField] float slideDistance = 4f;
-    [SerializeField] float slideDuration = 0.5f;
+    //[SerializeField] float slideDistance = 4f;
+   // [SerializeField] float slideDuration = 0.5f;
 
-    bool isTransitioning = false;
+  //  bool isTransitioning = false;
 
     public TMP_Text Currencytext;
     public TMP_Text CarInfo;
@@ -24,6 +24,8 @@ public class AwakeManager : MonoBehaviour
     //public GameObject StartBtnBtn;
     public GameObject Player;
     public GameObject CurrentCar;
+    
+
 
     private const string CurrencyKey = "Currency";
 
@@ -66,6 +68,9 @@ public class AwakeManager : MonoBehaviour
         Player = Instantiate(carPrefab, turntable.position, Quaternion.identity);
         CurrentCar = Player;
         Player.tag = "Player";
+        RCC_SceneManager.Instance.activePlayerVehicle =
+    Player.GetComponent<RCC_CarControllerV3>();
+
     }
 
     void DestroyCurrentCar()
@@ -78,67 +83,30 @@ public class AwakeManager : MonoBehaviour
 
     public void NextBTN()
     {
-        if (isTransitioning) return;
         if (VehiclePointer >= ListOfVehicles.Vehicals.Length - 1) return;
 
-        isTransitioning = true;
+        DestroyCurrentCar();
 
-        Vector3 outPos = Player.transform.position + Vector3.left * slideDistance;
+        VehiclePointer++;
+        PlayerPrefs.SetInt("Pointer", VehiclePointer);
 
-        Player.transform.DOMove(outPos, slideDuration)
-            .SetEase(Ease.InOutCubic)
-            .OnComplete(() =>
-            {
-                DestroyCurrentCar();
-
-                VehiclePointer++;
-                PlayerPrefs.SetInt("Pointer", VehiclePointer);
-
-                Vector3 spawnPos = turntable.position + Vector3.right * slideDistance;
-                InstantiateSelectedCar();
-                Player.transform.position = spawnPos;
-
-                Player.transform.DOMove(turntable.position, slideDuration)
-                    .SetEase(Ease.InOutCubic)
-                    .OnComplete(() =>
-                    {
-                        isTransitioning = false;
-                        GetCarInfo();
-                    });
-            });
+        InstantiateSelectedCar();
+        GetCarInfo();
     }
 
     public void PreviousBTN()
     {
-        if (isTransitioning) return;
         if (VehiclePointer <= 0) return;
 
-        isTransitioning = true;
+        DestroyCurrentCar();
 
-        Vector3 outPos = Player.transform.position + Vector3.right * slideDistance;
+        VehiclePointer--;
+        PlayerPrefs.SetInt("Pointer", VehiclePointer);
 
-        Player.transform.DOMove(outPos, slideDuration)
-            .SetEase(Ease.InOutCubic)
-            .OnComplete(() =>
-            {
-                DestroyCurrentCar();
-
-                VehiclePointer--;
-                PlayerPrefs.SetInt("Pointer", VehiclePointer);
-
-                Vector3 spawnPos = turntable.position + Vector3.left * slideDistance;
-                InstantiateSelectedCar();
-                Player.transform.position = spawnPos;
-
-                Player.transform.DOMove(turntable.position, slideDuration)
-                    .SetEase(Ease.InOutCubic)
-                    .OnComplete(() =>
-                    {
-                        isTransitioning = false;
-                        GetCarInfo();
-                    });
-            });
+        InstantiateSelectedCar();
+        GetCarInfo();
     }
+
 
     public void GetCarInfo()
     {

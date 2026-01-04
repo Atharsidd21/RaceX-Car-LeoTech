@@ -636,7 +636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarController
   CarName: Car 3
   CarPrice: 0
-  rotationSpeed: 50
+  rotationSpeed: 0
 --- !u!1 &103758
 GameObject:
   m_ObjectHideFlags: 0

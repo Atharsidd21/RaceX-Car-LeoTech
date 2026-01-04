@@ -95,7 +95,7 @@ public class RCC_AICarController : MonoBehaviour {
         carController.externalController = true;
 
         // If Waypoints Container is not selected in Inspector Panel, find it on scene.
-        if (!waypointsContainer)
+       if (!waypointsContainer)
         waypointsContainer = FindObjectOfType(typeof(RCC_AIWaypointsContainer)) as RCC_AIWaypointsContainer;
 
         // Creating our Navigator and setting properties.

@@ -160,25 +160,41 @@ public class Menu : MonoBehaviour
     // ================= LEADERBOARD =================
     public void ShowLeaderboard(int rank)
     {
-        List<string> names = new List<string>(playerName);
-        string currentUsername = PlayerPrefs.GetString(nameStr, "Guest");
+        Debug.Log("ShowLeaderboard CALLED with rank = " + rank);
+
+        List<string> aiNames = new List<string>(playerName);
+
+        string playerUsername = PlayerPrefs.GetString(Menu.nameStr, "Guest");
+        int playerAvatarIndex = PlayerPrefs.GetInt(PlayerAvatarKey, 0);
 
         for (int i = 0; i < playerListLeaderboard.Count; i++)
         {
-            Text nameText = playerListLeaderboard[i]
-                .transform.GetChild(2)
+            GameObject row = playerListLeaderboard[i];
+
+            Text nameText = row.transform
+                .GetChild(2)
                 .GetChild(0)
                 .GetComponent<Text>();
 
+            Image avatarImage = row.transform
+                .GetChild(1)
+                .GetComponent<Image>();
+
             if (i == rank)
             {
-                nameText.text = currentUsername;
+                // PLAYER ROW
+                nameText.text = playerUsername;
+                avatarImage.sprite = avatarSprites[playerAvatarIndex];
             }
             else
             {
-                int ind = Random.Range(0, names.Count);
-                nameText.text = names[ind];
-                names.RemoveAt(ind);
+                int ind = Random.Range(0, aiNames.Count);
+                nameText.text = aiNames[ind];
+                aiNames.RemoveAt(ind);
+
+                avatarImage.sprite = avatarSprites[
+                    Random.Range(0, avatarSprites.Length)
+                ];
             }
         }
     }

@@ -98,8 +98,12 @@ public class End : MonoBehaviour
                 if (!finishOrder.Contains(gm.name))
                     finishOrder.Add(gm.name);
 
-                int rank = finishOrder.Count - 1;
+                int rank = finishOrder.IndexOf(gm.name);
+                Debug.Log("PLAYER FINISH RANK = " + rank);
+
                 PlayerPrefs.SetInt(Menu.LeaderboardRank, rank);
+                PlayerPrefs.SetInt(Menu.ShowLeaderBoard, 1);
+                PlayerPrefs.Save();
 
                 GameManager.Instance.ShowLeaderboardUI(rank);
                 CarSpawn.instance.owncar.GetComponent<Controller>().OnGameOver();

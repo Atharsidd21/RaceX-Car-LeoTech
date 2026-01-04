@@ -193,10 +193,11 @@ Material:
     - _Surface: 0
     - _UVSec: 0
     - _WorkflowMode: 0
+    - _XRMotionVectorsPass: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.12549016, g: 0.12549016, b: 0.12549016, a: 1}
-    - _Color: {r: 0.12549013, g: 0.12549013, b: 0.12549013, a: 1}
+    - _Color: {r: 0.12549016, g: 0.12549016, b: 0.12549016, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GridColor: {r: 0, g: 0, b: 0, a: 0}

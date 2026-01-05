@@ -5,7 +5,7 @@ public class Health : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            GameManager.Instance.HealCar();
+          // GameManager.Instance.HealCar();
             Destroy(gameObject,0.2f); // Self destroy after pickup
         }
     }

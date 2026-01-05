@@ -23,7 +23,7 @@ public class LeftRight : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             //Debug.Log("Player hit by moving obstacle");
-            GameManager.Instance?.DamageCar();
+           // GameManager.Instance?.DamageCar();
         }
     }
 }

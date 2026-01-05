@@ -28,7 +28,7 @@ public class Rotator1 : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.Instance.DamageCar(); // Call your car damage
+           // GameManager.Instance.DamageCar(); // Call your car damage
         }
     }
 }

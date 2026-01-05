@@ -59,14 +59,14 @@ public class End : MonoBehaviour
             lapText.text = $"LAP {playerLapCount + 1} / {totalLaps}";
     }
 
-      
+
 
     private void OnTriggerEnter(Collider other)
     {
         GameObject gm = other.transform.root.gameObject;
         //Debug.Log("Car Trigger" + gm.name + " " + gameObject.name);
 
-        if (gm.CompareTag("Player") ||  (gm.CompareTag("AI") && !finishOrder.Contains(gm.name)))
+        if (gm.CompareTag("Player") || (gm.CompareTag("AI") && !finishOrder.Contains(gm.name)))
 
         {
             // ? Prevent double trigger

@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
+    public static Menu Instance;
+
     // ================= PROFILE KEYS =================
     public static string nameStr = "username";
     public static string PlayerAvatarKey = "PLAYER_AVATAR_INDEX";
@@ -25,6 +27,11 @@ public class Menu : MonoBehaviour
     public Image avatarPreview;
     public Sprite[] avatarSprites;
     private int selectedAvatarIndex = 0;
+
+    // ================= FIXED GUEST =================
+    [Header("Fixed Guest Profile")]
+    [SerializeField] private string fixedGuestName = "Guest";
+    [SerializeField] private Sprite fixedGuestAvatar;
 
     // ================= PANELS =================
     [Header("Panels")]
@@ -64,12 +71,18 @@ public class Menu : MonoBehaviour
     // ================= UNITY =================
     private void Awake()
     {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
         DebugPlayerPrefsLocation();
         Debug.unityLogger.logEnabled = false;
     }
 
     private void Start()
     {
+    //PlayerPrefs.DeleteAll();
+
         MusicManager.Instance.PlayMusic();
         loadingBar.gameObject.SetActive(false);
 
@@ -128,8 +141,7 @@ public class Menu : MonoBehaviour
 
     public void PlayAsGuest()
     {
-        PlayerPrefs.SetString(nameStr, "Guest");
-        PlayerPrefs.SetInt(PlayerAvatarKey, 0);
+        PlayerPrefs.SetString(nameStr, fixedGuestName);
         PlayerPrefs.SetInt(IsGuestKey, 1);
         PlayerPrefs.SetInt(ProfileCompletedKey, 1);
         PlayerPrefs.Save();
@@ -147,7 +159,7 @@ public class Menu : MonoBehaviour
             return;
         }
 
-        username = PlayerPrefs.GetString(nameStr, "Guest");
+        username = PlayerPrefs.GetString(nameStr, fixedGuestName);
         selectedAvatarIndex = PlayerPrefs.GetInt(PlayerAvatarKey, 0);
 
         enterNameInputFieldNameScreen.text = username;
@@ -157,14 +169,16 @@ public class Menu : MonoBehaviour
         MainMenuPanel.SetActive(true);
     }
 
-    // ================= LEADERBOARD =================
+    //================ LEADERBOARD =================
     public void ShowLeaderboard(int rank)
     {
-        Debug.Log("ShowLeaderboard CALLED with rank = " + rank);
-
         List<string> aiNames = new List<string>(playerName);
+        List<Sprite> avatars = new List<Sprite>(avatarSprites);
 
-        string playerUsername = PlayerPrefs.GetString(Menu.nameStr, "Guest");
+
+        bool isGuest = PlayerPrefs.GetInt(IsGuestKey, 0) == 1;
+
+        string playerUsername = PlayerPrefs.GetString(nameStr, fixedGuestName);
         int playerAvatarIndex = PlayerPrefs.GetInt(PlayerAvatarKey, 0);
 
         for (int i = 0; i < playerListLeaderboard.Count; i++)
@@ -182,12 +196,23 @@ public class Menu : MonoBehaviour
 
             if (i == rank)
             {
-                // PLAYER ROW
+                // ✅ PLAYER / GUEST ROW
                 nameText.text = playerUsername;
-                avatarImage.sprite = avatarSprites[playerAvatarIndex];
+
+                if (isGuest)
+                {
+                    // FIXED guest avatar
+                    avatarImage.sprite = fixedGuestAvatar;
+                }
+                else
+                {
+                    // Player avatar from PlayerPrefs
+                    avatarImage.sprite = avatarSprites[playerAvatarIndex];
+                }
             }
             else
             {
+                // ✅ AI ROW (unchanged)
                 int ind = Random.Range(0, aiNames.Count);
                 nameText.text = aiNames[ind];
                 aiNames.RemoveAt(ind);
@@ -198,6 +223,7 @@ public class Menu : MonoBehaviour
             }
         }
     }
+
 
     // ================= NAVIGATION =================
     public void GarageBtnClicked()
@@ -211,17 +237,17 @@ public class Menu : MonoBehaviour
         LevelPanel.SetActive(true);
     }
 
-    //Play button 
     public void PlayButtonClicked()
     {
-        SceneManager.LoadScene(1); // Level selection scene
+        SceneManager.LoadScene(1);
     }
+
     public void BackBtnClicked()
     {
         DisableAllPanels();
         MainMenuPanel.SetActive(true);
     }
-    // Close button in level selection
+
     public void CloseBtnClicked()
     {
         LevelPanel.SetActive(false);
@@ -249,10 +275,6 @@ public class Menu : MonoBehaviour
         OptionPanel.SetActive(false);
         LeaderboardPanel.SetActive(false);
     }
-    
-    
-
-
 
     // ================= DEBUG =================
     public void DebugPlayerPrefsLocation()

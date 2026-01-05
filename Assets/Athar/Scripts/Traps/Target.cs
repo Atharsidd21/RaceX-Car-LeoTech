@@ -10,8 +10,8 @@ public class Target : MonoBehaviour
             // Call coin and target logic from GameManager
             if (GameManager.Instance != null)
             {
-                GameManager.Instance.CollectCoin();
-                GameManager.Instance.TargetDestroyed();
+              //  GameManager.Instance.CollectCoin();
+               // GameManager.Instance.TargetDestroyed();
             }
             // Play hit effect
             ParticleSystem ps = Instantiate(hiteffectPrefab, collision.transform.position, Quaternion.identity);

@@ -21,7 +21,7 @@ public class UpDown : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.Instance.DamageCar(); // Damage the car when touched
+          //  GameManager.Instance.DamageCar(); // Damage the car when touched
         }
     }
 }

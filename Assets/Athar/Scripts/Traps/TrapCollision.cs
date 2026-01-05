@@ -6,7 +6,7 @@ public class TrapCollision : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            GameManager.Instance.DamageCar();
+           // GameManager.Instance.DamageCar();
             Destroy(gameObject,1.2f);
         }
     }

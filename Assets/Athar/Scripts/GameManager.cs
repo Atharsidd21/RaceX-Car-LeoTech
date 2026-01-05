@@ -9,6 +9,13 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 
+    // already exists
+
+    // ADD THESE (Inspector fields)
+    [SerializeField] private Sprite[] avatarSprites;      // same avatars used in Menu
+    [SerializeField] private string fixedGuestName = "Guest";
+    [SerializeField] private Sprite fixedGuestAvatar;
+
     public static GameManager Instance;
     [Header("Control UI")]
     private GameObject playerControlsUI;
@@ -86,6 +93,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        
         coinScore = PlayerPrefs.GetInt(CurrencyKey, 0);
         username = PlayerPrefs.GetString(Menu.nameStr);
 
@@ -370,8 +378,10 @@ public class GameManager : MonoBehaviour
         if (controller != null)
             controller.OnGameOver();
 
-        LevelCompletePanel.SetActive(true);
-        LeaderboardPanel.SetActive(false);
+        //LevelCompletePanel.SetActive(true);
+        ShowLeaderboard(PlayerPrefs.GetInt(Menu.LeaderboardRank));
+        LeaderboardPanel.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void OnClickPauseBtn()
@@ -433,6 +443,7 @@ public class GameManager : MonoBehaviour
 
     #region LEADERBOARD
 
+
     public void ShowLeaderboard(int rank)
     {
         List<string> names = new List<string>(Menu.playerName);
@@ -441,7 +452,7 @@ public class GameManager : MonoBehaviour
         {
             if (i == rank)
             {
-              
+
                 playerListLeaderboard[i].transform.GetChild(2).GetChild(0).GetComponent<Text>().text = username;
             }
             else
@@ -452,13 +463,17 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    // adding a new method 
-    public string GetPlayerName()
+
+
+
+
+// adding a new method 
+public string GetPlayerName()
     {
-        string name = PlayerPrefs.GetString(Menu.nameStr,"");
+        string name = PlayerPrefs.GetString(Menu.nameStr, "");
         if (string.IsNullOrEmpty(name))
         {
-           // name = "Player";
+            // name = "Player";
 
             name = "username" + Random.Range(100000, 999999);
             PlayerPrefs.SetString(Menu.nameStr, name);

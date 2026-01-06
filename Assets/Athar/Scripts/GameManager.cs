@@ -8,13 +8,27 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    
 
-    // already exists
+    // Coins for Reward
+    [Header("Race Rewards")]
+    [SerializeField] private int[] coinsByRank; //Setting coins based on rank
+   // Setting up reward panel 
+    [Header("Reward Panel")]
+    [SerializeField] private GameObject rewardPanel;
+    [SerializeField] private string rewardPrefix = "You earned";
+    [SerializeField] private TextMeshProUGUI rewardText;
+    [SerializeField] private string rewardSuffix = " coins earned!";
+    [SerializeField] private TextMeshProUGUI totalCoinsText;
+
+    [Header("Leaderboard")]
+    [SerializeField] private List<GameObject> playerListLeaderboard;
+    [SerializeField] private Sprite[] avatarSprites;
+    [SerializeField] private Sprite guestAvatar;
+    [SerializeField] private string fixedGuestName = "Guest";
 
     // ADD THESE (Inspector fields)
-    [SerializeField] private Sprite[] avatarSprites;      // same avatars used in Menu
-    [SerializeField] private string fixedGuestName = "Guest";
-    [SerializeField] private Sprite fixedGuestAvatar;
+   // [SerializeField] private Sprite[] avatarSprites;      // same avatars used in Menu
 
     public static GameManager Instance;
     [Header("Control UI")]
@@ -42,7 +56,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI coinText;
     public GameObject LeaderboardPanel;
-    public List<GameObject> playerListLeaderboard;
+    //public List<GameObject> playerListLeaderboard;
 
     [Header("Race Start Countdown")]
     [SerializeField] private Image countdownImage;
@@ -93,7 +107,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        
+        StartCoroutine(RaceStartCountdown());
+
+
         coinScore = PlayerPrefs.GetInt(CurrencyKey, 0);
         username = PlayerPrefs.GetString(Menu.nameStr);
 
@@ -102,10 +118,10 @@ public class GameManager : MonoBehaviour
 
         // Start countdown directly
         currentState = GameState.Countdown;
-        StartRaceAfterCutscene(); // reuse existing countdown coroutine
+       // StartRaceAfterCutscene(); // reuse existing countdown coroutine
 
         // Setup RCC camera for cinematic countdown
-        StartCoroutine(SetupRCCCameraForCountdown());
+       StartCoroutine(SetupRCCCameraForCountdown());
     }
 
 
@@ -126,7 +142,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region
-    private IEnumerator SetupRCCCameraForCountdown()
+   private IEnumerator SetupRCCCameraForCountdown()
     {
         // Wait until RCC Camera exists
         while (rccCamera == null)
@@ -145,7 +161,7 @@ public class GameManager : MonoBehaviour
         // Switch to CINEMATIC during countdown
         rccCamera.ChangeCamera(RCC_Camera.CameraMode.CINEMATIC);
     }
-
+  
 
 
     public void ShowControlsUI()
@@ -184,10 +200,10 @@ public class GameManager : MonoBehaviour
 
 
 
-    public void StartRaceAfterCutscene()
+    /*public void StartRaceAfterCutscene()
     {
-        StartCoroutine(RaceStartCountdown());
-    }
+       // StartCoroutine(RaceStartCountdown());
+    }*/
 
     private IEnumerator RaceStartCountdown()
     {
@@ -226,8 +242,8 @@ public class GameManager : MonoBehaviour
 
 
         // Adding a small delay befroe showing controls UI
-        if (playerControlsUI != null)
-            playerControlsUI.SetActive(true);
+       // if (playerControlsUI != null)
+         //   playerControlsUI.SetActive(true);
 
     }
 
@@ -241,7 +257,7 @@ public class GameManager : MonoBehaviour
         lastPosition = player.transform.position;
         // Find controls UI inside spawned car
 
-        Transform controls = player.transform.Find("ControlsUI");
+       /* Transform controls = player.transform.Find("ControlsUI");
 
         if (controls == null)
         {
@@ -255,7 +271,7 @@ public class GameManager : MonoBehaviour
             // HIDE IMMEDIATELY
             playerControlsUI.SetActive(false);
             //Debug.Log("Controls UI cached and hidden");
-        }
+        }*/
 
     }
 
@@ -316,6 +332,58 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt(CurrencyKey, coinScore);
         PlayerPrefs.Save();
         UpdateScoreUI();
+    }
+
+    //Rewarding coins based on rank
+    public void RewardPlayerByRank(int rank)
+    {
+        int rewardCoins = 0;
+
+        if (rank >= 0 && rank < coinsByRank.Length)
+        {
+            rewardCoins = coinsByRank[rank];
+        }
+
+        // Load existing currency
+        int currentCoins = PlayerPrefs.GetInt(CurrencyKey, 0);
+        
+        // Add reward
+        currentCoins += rewardCoins;
+
+        // Save currency
+        PlayerPrefs.SetInt(CurrencyKey, currentCoins);
+        PlayerPrefs.Save();
+
+        // Update reward UI text
+        rewardText.text = $"{rewardPrefix} {rewardCoins} {rewardSuffix}";
+        totalCoinsText.text = $"Total Coins: {currentCoins}";
+
+        // Show reward panel
+        rewardPanel.SetActive(true);
+    }
+    //Adding Buttons of Reward Panel
+    public void OnClickViewLeaderboardFromReward()
+    {
+        // Hide reward panel
+        if (rewardPanel != null)
+            rewardPanel.SetActive(false);
+
+        // Show leaderboard using saved rank
+        int rank = PlayerPrefs.GetInt(Menu.LeaderboardRank, 0);
+        ShowLeaderboardUI(rank);
+    }
+    public void OnClickContinueFromReward()
+    {
+        // Reset time
+        Time.timeScale = 1f;
+
+        // Clean up reward panel
+        if (rewardPanel != null)
+            rewardPanel.SetActive(false);
+
+        // Go back to Main Menu
+        PlayerPrefs.SetInt(Menu.GotoHome, 1);
+        SceneManager.LoadScene(0);
     }
 
     public void DamageCar()
@@ -379,8 +447,8 @@ public class GameManager : MonoBehaviour
             controller.OnGameOver();
 
         //LevelCompletePanel.SetActive(true);
-        ShowLeaderboard(PlayerPrefs.GetInt(Menu.LeaderboardRank));
-        LeaderboardPanel.SetActive(true);
+       // ShowLeaderboard(PlayerPrefs.GetInt(Menu.LeaderboardRank));
+        //LeaderboardPanel.SetActive(true);
         Time.timeScale = 0f;
     }
 
@@ -443,23 +511,64 @@ public class GameManager : MonoBehaviour
 
     #region LEADERBOARD
 
+    #region PLAYER PROFILE (FROM MENU)
 
+    string playerName;
+    int avatarIndex;
+    bool isGuest;
+
+    void LoadPlayerProfile()
+    {
+        playerName = PlayerPrefs.GetString(Menu.nameStr, "Guest");
+        avatarIndex = PlayerPrefs.GetInt(Menu.PlayerAvatarKey, 0);
+        isGuest = PlayerPrefs.GetInt(Menu.IsGuestKey, 0) == 1;
+    }
+
+    #endregion
     public void ShowLeaderboard(int rank)
     {
-        List<string> names = new List<string>(Menu.playerName);
+        LoadPlayerProfile();
 
-        for (int i = 0; i < 5; i++)
+        List<string> aiNames = new List<string>
+    {
+        "Liam","Rado","Kenny","William","Rachel","Joey","Rocky"
+    };
+
+        string playerName = PlayerPrefs.GetString(Menu.nameStr, "Guest");
+        int avatarIndex = PlayerPrefs.GetInt(Menu.PlayerAvatarKey, 0);
+        bool isGuest = PlayerPrefs.GetInt(Menu.IsGuestKey, 0) == 1;
+
+        for (int i = 0; i < playerListLeaderboard.Count; i++)
         {
+            GameObject row = playerListLeaderboard[i];
+
+            Text nameText = row.transform
+                .GetChild(2)
+                .GetChild(0)
+                .GetComponent<Text>();
+
+            Image avatarImage = row.transform
+                .GetChild(1)
+                .GetComponent<Image>();
+
             if (i == rank)
             {
+                // PLAYER ROW
+                nameText.text = playerName;
 
-                playerListLeaderboard[i].transform.GetChild(2).GetChild(0).GetComponent<Text>().text = username;
+                avatarImage.sprite = isGuest
+                    ? guestAvatar
+                    : avatarSprites[Mathf.Clamp(avatarIndex, 0, avatarSprites.Length - 1)];
             }
             else
             {
-                int ind = Random.Range(0, names.Count);
-                playerListLeaderboard[i].transform.GetChild(2).GetChild(0).GetComponent<Text>().text = names[ind];
-                names.RemoveAt(ind);
+                // AI ROW
+                int rnd = Random.Range(0, aiNames.Count);
+                nameText.text = aiNames[rnd];
+                aiNames.RemoveAt(rnd);
+
+                avatarImage.sprite =
+                    avatarSprites[Random.Range(0, avatarSprites.Length)];
             }
         }
     }
@@ -467,8 +576,9 @@ public class GameManager : MonoBehaviour
 
 
 
-// adding a new method 
-public string GetPlayerName()
+
+    // adding a new method 
+    public string GetPlayerName()
     {
         string name = PlayerPrefs.GetString(Menu.nameStr, "");
         if (string.IsNullOrEmpty(name))

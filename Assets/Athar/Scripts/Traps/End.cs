@@ -102,10 +102,12 @@ public class End : MonoBehaviour
                 Debug.Log("PLAYER FINISH RANK = " + rank);
 
                 PlayerPrefs.SetInt(Menu.LeaderboardRank, rank);
-                PlayerPrefs.SetInt(Menu.ShowLeaderBoard, 1);
+               // PlayerPrefs.SetInt(Menu.ShowLeaderBoard, 1);
                 PlayerPrefs.Save();
 
-                GameManager.Instance.ShowLeaderboardUI(rank);
+                GameManager.Instance.RewardPlayerByRank(rank);
+
+               // GameManager.Instance.ShowLeaderboardUI(rank);
                 CarSpawn.instance.owncar.GetComponent<Controller>().OnGameOver();
             }
 

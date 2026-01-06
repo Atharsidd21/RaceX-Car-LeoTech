@@ -14,6 +14,7 @@ public class Menu : MonoBehaviour
     public static string PlayerAvatarKey = "PLAYER_AVATAR_INDEX";
     public static string IsGuestKey = "IS_GUEST";
     public static string ProfileCompletedKey = "PROFILE_COMPLETED";
+    private static bool splashPlayedThisSession = false;
 
     // ================= NAVIGATION KEYS =================
     public static string ShowLeaderBoard = "ShowLeaderBoard";
@@ -42,15 +43,19 @@ public class Menu : MonoBehaviour
     public GameObject LevelPanel;
     public GameObject EnterNamePanel;
     public GameObject AvatarSelectionPanel;
-    public GameObject LeaderboardPanel;
+  //  public GameObject LeaderboardPanel;
 
     // ================= UI ELEMENTS =================
     [Header("UI Elements")]
     public RectTransform logo;
     public Slider loadingBar;
     public Text loadingPercentageTextObj;
+    [SerializeField] private float logoAnimDuration = 0.6f;
+    [SerializeField] private float loadingDuration = 2.5f;
+
     public InputField enterNameInputFieldNameScreen;
-    public List<GameObject> playerListLeaderboard;
+
+   // public List<GameObject> playerListLeaderboard;
     public AudioSource backGroundMusic;
 
     [Header("Timings")]
@@ -81,34 +86,154 @@ public class Menu : MonoBehaviour
 
     private void Start()
     {
-    //PlayerPrefs.DeleteAll();
-
+       //PlayerPrefs.DeleteAll();
+        // ALWAYS show splash first
+       // StartCoroutine(SplashFlow());
         MusicManager.Instance.PlayMusic();
+
+        Time.timeScale = 1f;
+
+        // Always hide panels initially
+        SplashScreen.SetActive(false);
+        MainMenuPanel.SetActive(false);
+        LevelPanel.SetActive(false);
+
         loadingBar.gameObject.SetActive(false);
 
+        // ✅ Play splash ONLY once per app launch
+        if (!splashPlayedThisSession)
+        {
+            splashPlayedThisSession = true;
+            SplashScreen.SetActive(true);
+            StartCoroutine(SplashFlow());
+            return;
+        }
+
+        // 🔹 Normal navigation (NO splash)
+        HandlePostSplashNavigation();
+
+        // loadingBar.gameObject.SetActive(false);
+
         // 1️⃣ RETURNING FROM SELECT CAR → LEVEL SELECT
+        /*if (PlayerPrefs.GetInt(GotoLevelSelection, 0) == 1)
+         {
+             PlayerPrefs.SetInt(GotoLevelSelection, 0);
+             DisableAllPanels();
+             LevelPanel.SetActive(true);
+             return;
+         }
+
+
+         // 2️⃣ SHOW LEADERBOARD (AFTER RACE)
+         /* if (PlayerPrefs.GetInt(ShowLeaderBoard, 0) == 1)
+          {
+              PlayerPrefs.SetInt(ShowLeaderBoard, 0);
+              int rank = PlayerPrefs.GetInt(LeaderboardRank, 0);
+              DisableAllPanels();
+              LeaderboardPanel.SetActive(true);
+              ShowLeaderboard(rank);
+              return;
+          }*/
+       // Time.timeScale = 1f;
+
+        /* Hide everything initially
+        SplashScreen.SetActive(true);
+        MainMenuPanel.SetActive(false);
+        LevelPanel.SetActive(false);
+
+        loadingBar.gameObject.SetActive(false);
+
+        // 3️⃣ NORMAL ENTRY
+      //  LoadPlayerProfile();*/
+    }
+    //Splash Screen
+    private IEnumerator SplashFlow()
+    {
+        Debug.Log("SplashFlow started");
+
+        // 🔒 Safety reset
+        Time.timeScale = 1f;
+
+        // --- Initial State ---
+        SplashScreen.SetActive(true);
+        MainMenuScreen.SetActive(false);
+
+        loadingBar.gameObject.SetActive(true);
+        loadingBar.value = 0f;
+        loadingPercentageTextObj.text = "0%";
+
+        // Logo starts hidden
+        logo.localScale = Vector3.zero;
+
+        // --- Step 1: Logo scale-in animation ---
+        float t = 0f;
+        while (t < logoAnimDuration)
+        {
+            t += Time.deltaTime;
+            float progress = t / logoAnimDuration;
+
+            // Smooth ease-out
+            float eased = Mathf.Sin(progress * Mathf.PI * 0.5f);
+            logo.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, eased);
+
+            yield return null;
+        }
+
+        logo.localScale = Vector3.one;
+
+        // --- Small pause ---
+        yield return new WaitForSeconds(0.3f);
+
+        // --- Step 2: Fake loading bar ---
+        float timer = 0f;
+        while (timer < loadingDuration)
+        {
+            timer += Time.deltaTime;
+            float normalized = Mathf.Clamp01(timer / loadingDuration);
+
+            loadingBar.value = normalized;
+            loadingPercentageTextObj.text = Mathf.RoundToInt(normalized * 100f) + "%";
+
+            yield return null;
+        }
+
+        loadingBar.value = 1f;
+        loadingPercentageTextObj.text = "100%";
+
+        // --- Step 3: Switch to Main Menu ---
+        yield return new WaitForSeconds(0.2f);
+
+        SplashScreen.SetActive(false);
+        HandlePostSplashNavigation();
+
+    }
+
+    private void HandlePostSplashNavigation()
+    {
+        if (PlayerPrefs.GetInt(GotoHome, 0) == 1)
+        {
+            PlayerPrefs.SetInt(GotoHome, 0);
+            MainMenuPanel.SetActive(true);
+            backGroundMusic.Play();
+            LoadPlayerProfile();
+            
+            return;
+        }
+
         if (PlayerPrefs.GetInt(GotoLevelSelection, 0) == 1)
         {
             PlayerPrefs.SetInt(GotoLevelSelection, 0);
-            DisableAllPanels();
             LevelPanel.SetActive(true);
+            backGroundMusic.Play();
             return;
         }
 
-        // 2️⃣ SHOW LEADERBOARD (AFTER RACE)
-        if (PlayerPrefs.GetInt(ShowLeaderBoard, 0) == 1)
-        {
-            PlayerPrefs.SetInt(ShowLeaderBoard, 0);
-            int rank = PlayerPrefs.GetInt(LeaderboardRank, 0);
-            DisableAllPanels();
-            LeaderboardPanel.SetActive(true);
-            ShowLeaderboard(rank);
-            return;
-        }
-
-        // 3️⃣ NORMAL ENTRY
+        // Default
+        MainMenuPanel.SetActive(true);
+       // backGroundMusic.Play();
         LoadPlayerProfile();
     }
+
 
     // ================= PROFILE FLOW =================
     public void OnEnterNameYes()
@@ -170,7 +295,7 @@ public class Menu : MonoBehaviour
     }
 
     //================ LEADERBOARD =================
-    public void ShowLeaderboard(int rank)
+  /*  public void ShowLeaderboard(int rank)
     {
         List<string> aiNames = new List<string>(playerName);
         List<Sprite> avatars = new List<Sprite>(avatarSprites);
@@ -222,7 +347,7 @@ public class Menu : MonoBehaviour
                 ];
             }
         }
-    }
+    }*/
 
 
     // ================= NAVIGATION =================
@@ -273,7 +398,7 @@ public class Menu : MonoBehaviour
         MainMenuPanel.SetActive(false);
         LevelPanel.SetActive(false);
         OptionPanel.SetActive(false);
-        LeaderboardPanel.SetActive(false);
+      //  LeaderboardPanel.SetActive(false);
     }
 
     // ================= DEBUG =================

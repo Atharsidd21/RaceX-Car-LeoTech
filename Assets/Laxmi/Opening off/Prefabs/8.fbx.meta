@@ -1,9 +1,24 @@
 fileFormatVersion: 2
-guid: 112dc7c7c6c9a6a4d870c6cb035c3c82
+guid: b9a2c91069f63b942914302be7fc03c7
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: DefaultMaterial_Base_color
+    second: {fileID: 2800000, guid: 3e3552e18801efa458815a0c5449ec36, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: garages
+    second: {fileID: 2800000, guid: 65c2a4aeedfcdce4ea575d860e7e8e33, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: metal_fence
+    second: {fileID: 2800000, guid: 3c7ad65320d01c34fa0afee5bca240e6, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

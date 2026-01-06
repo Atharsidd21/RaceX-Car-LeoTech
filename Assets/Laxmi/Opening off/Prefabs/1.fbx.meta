@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: abe7ac15c5070374e8b2c61a7f48245e
+guid: b79ac42d96c247b418dc7ed7b96ce395
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Material.016_Base_color
+    second: {fileID: 2800000, guid: 80cc356f127627149bdbe713c69870d9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: garages
+    second: {fileID: 2800000, guid: 840e86f094ec02d40b35bbd9c839e428, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

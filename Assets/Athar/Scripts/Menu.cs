@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -24,15 +25,28 @@ public class Menu : MonoBehaviour
     public static string GotoLevelSelection = "IsGoLevelSelection";
 
     // ================= PROFILE UI =================
-    [Header("Player Profile")]
+    [Header("Player Profile UI")]
     public Image avatarPreview;
     public Sprite[] avatarSprites;
     private int selectedAvatarIndex = 0;
-
+    [SerializeField] private Image profileAvatarImage;
+    [SerializeField] private TextMeshProUGUI profileNameText;
+    [SerializeField] private TextMeshProUGUI profileCoinsText;
     // ================= FIXED GUEST =================
-    [Header("Fixed Guest Profile")]
+    [Header("Fixed Guest Profile UI")]
     [SerializeField] private string fixedGuestName = "Guest";
     [SerializeField] private Sprite fixedGuestAvatar;
+    //Edit Player Profile
+    [Header("Edit Profile UI")]
+    [SerializeField] private GameObject EditProfilePanel;
+    [SerializeField] private Image editProfileAvatarImage;
+    [SerializeField] private TMP_InputField editNameInputField;
+    [SerializeField] private TextMeshProUGUI coinsText;
+    [SerializeField] private TextMeshProUGUI carsOwnedText;
+    [SerializeField] private TextMeshProUGUI racesWonText;
+    [SerializeField] private TextMeshProUGUI racesLostText;
+    private int savedAvatarIndex;
+    private string savedPlayerName;
 
     // ================= PANELS =================
     [Header("Panels")]
@@ -41,6 +55,7 @@ public class Menu : MonoBehaviour
     public GameObject OptionPanel;
     public GameObject MainMenuPanel;
     public GameObject LevelPanel;
+   // public GameObject PlayerProfilePanel;
     public GameObject EnterNamePanel;
     public GameObject AvatarSelectionPanel;
   //  public GameObject LeaderboardPanel;
@@ -96,6 +111,8 @@ public class Menu : MonoBehaviour
         // Always hide panels initially
         SplashScreen.SetActive(false);
         MainMenuPanel.SetActive(false);
+       // PlayerProfilePanel.SetActive(false);
+
         LevelPanel.SetActive(false);
 
         loadingBar.gameObject.SetActive(false);
@@ -214,6 +231,8 @@ public class Menu : MonoBehaviour
         {
             PlayerPrefs.SetInt(GotoHome, 0);
             MainMenuPanel.SetActive(true);
+            //PlayerProfilePanel.SetActive(true);
+
             backGroundMusic.Play();
             LoadPlayerProfile();
             
@@ -232,6 +251,8 @@ public class Menu : MonoBehaviour
         MainMenuPanel.SetActive(true);
        // backGroundMusic.Play();
         LoadPlayerProfile();
+        UpdatePlayerProfileUI();
+
     }
 
 
@@ -242,6 +263,8 @@ public class Menu : MonoBehaviour
             return;
 
         PlayerPrefs.SetString(nameStr, enterNameInputFieldNameScreen.text);
+        PlayerPrefs.SetInt(IsGuestKey, 0);// IMPORTANT
+        PlayerPrefs.Save();
 
         EnterNamePanel.SetActive(false);
         AvatarSelectionPanel.SetActive(true);
@@ -260,8 +283,13 @@ public class Menu : MonoBehaviour
         PlayerPrefs.SetInt(ProfileCompletedKey, 1);
         PlayerPrefs.Save();
 
+        savedAvatarIndex = selectedAvatarIndex; // sync saved state
+
         AvatarSelectionPanel.SetActive(false);
         MainMenuPanel.SetActive(true);
+        UpdatePlayerProfileUI();   // REQUIRED
+        EditProfilePanel.SetActive(true);  
+        LoadEditProfileData();              
     }
 
     public void PlayAsGuest()
@@ -273,6 +301,7 @@ public class Menu : MonoBehaviour
 
         DisableAllPanels();
         MainMenuPanel.SetActive(true);
+        UpdatePlayerProfileUI();
     }
 
     void LoadPlayerProfile()
@@ -285,6 +314,8 @@ public class Menu : MonoBehaviour
         }
 
         username = PlayerPrefs.GetString(nameStr, fixedGuestName);
+       // username = PlayerPrefs.GetString(nameStr, "");
+
         selectedAvatarIndex = PlayerPrefs.GetInt(PlayerAvatarKey, 0);
 
         enterNameInputFieldNameScreen.text = username;
@@ -293,61 +324,170 @@ public class Menu : MonoBehaviour
         DisableAllPanels();
         MainMenuPanel.SetActive(true);
     }
-
-    //================ LEADERBOARD =================
-  /*  public void ShowLeaderboard(int rank)
+    //Player Profile Display
+    private void UpdatePlayerProfileUI()
     {
-        List<string> aiNames = new List<string>(playerName);
-        List<Sprite> avatars = new List<Sprite>(avatarSprites);
+        // Player name
+        string playerName = PlayerPrefs.GetString(nameStr, "Guest");
+        profileNameText.text = playerName;
 
+        // Coins
+        int coins = PlayerPrefs.GetInt("Currency", 0);
+        profileCoinsText.text = coins.ToString();
+
+        // Avatar
+        bool isGuest = PlayerPrefs.GetInt(IsGuestKey, 0) == 1;
+        int avatarIndex = PlayerPrefs.GetInt(PlayerAvatarKey, 0);
+
+        if (isGuest)
+        {
+            profileAvatarImage.sprite = fixedGuestAvatar;
+        }
+        else
+        {
+            avatarIndex = Mathf.Clamp(avatarIndex, 0, avatarSprites.Length - 1);
+            profileAvatarImage.sprite = avatarSprites[avatarIndex];
+        }
+    }
+    //Edit Player Profile
+    public void OnProfileAvatarClicked()
+    {
+       // DisableAllPanels();
+        EditProfilePanel.SetActive(true);
+        LoadEditProfileData();
+      
+    }
+    private void LoadEditProfileData()
+    {
+        // Save current profile state
+        savedPlayerName = PlayerPrefs.GetString(nameStr, fixedGuestName);
+        savedAvatarIndex = PlayerPrefs.GetInt(PlayerAvatarKey, 0);
+
+        // Apply to edit UI
+        editNameInputField.text = savedPlayerName;
+        editNameInputField.interactable = false;
+
+        selectedAvatarIndex = savedAvatarIndex;
 
         bool isGuest = PlayerPrefs.GetInt(IsGuestKey, 0) == 1;
+        editProfileAvatarImage.sprite = isGuest
+            ? fixedGuestAvatar
+            : avatarSprites[Mathf.Clamp(savedAvatarIndex, 0, avatarSprites.Length - 1)];
 
-        string playerUsername = PlayerPrefs.GetString(nameStr, fixedGuestName);
-        int playerAvatarIndex = PlayerPrefs.GetInt(PlayerAvatarKey, 0);
+        // Stats
+        coinsText.text = PlayerPrefs.GetInt("Currency", 0).ToString();
+        carsOwnedText.text = PlayerPrefs.GetInt("CarsOwned", 0).ToString();
+        racesWonText.text = PlayerPrefs.GetInt("RacesWon", 0).ToString();
+        racesLostText.text = PlayerPrefs.GetInt("RacesLost", 0).ToString();
+    }
 
-        for (int i = 0; i < playerListLeaderboard.Count; i++)
+    //Inside Edit Profile Panel
+    public void OnEditNameClicked()
+    {
+        editNameInputField.interactable = true;
+        editNameInputField.ActivateInputField();
+    }
+    public void OnSaveProfileChanges()
+    {
+        string newName = editNameInputField.text;
+
+        if (newName.Length > 2)
         {
-            GameObject row = playerListLeaderboard[i];
-
-            Text nameText = row.transform
-                .GetChild(2)
-                .GetChild(0)
-                .GetComponent<Text>();
-
-            Image avatarImage = row.transform
-                .GetChild(1)
-                .GetComponent<Image>();
-
-            if (i == rank)
-            {
-                // ✅ PLAYER / GUEST ROW
-                nameText.text = playerUsername;
-
-                if (isGuest)
-                {
-                    // FIXED guest avatar
-                    avatarImage.sprite = fixedGuestAvatar;
-                }
-                else
-                {
-                    // Player avatar from PlayerPrefs
-                    avatarImage.sprite = avatarSprites[playerAvatarIndex];
-                }
-            }
-            else
-            {
-                // ✅ AI ROW (unchanged)
-                int ind = Random.Range(0, aiNames.Count);
-                nameText.text = aiNames[ind];
-                aiNames.RemoveAt(ind);
-
-                avatarImage.sprite = avatarSprites[
-                    Random.Range(0, avatarSprites.Length)
-                ];
-            }
+            PlayerPrefs.SetString(nameStr, newName);
+            PlayerPrefs.SetInt(PlayerAvatarKey, selectedAvatarIndex);
+            PlayerPrefs.SetInt(IsGuestKey, 0);
+            PlayerPrefs.Save();
         }
-    }*/
+
+        UpdatePlayerProfileUI();
+        EditProfilePanel.SetActive(false);
+
+    }
+
+    public void OnCancelEditProfile()
+    {
+        // Revert name
+        editNameInputField.text = savedPlayerName;
+        editNameInputField.interactable = false;
+
+        // Revert avatar
+        selectedAvatarIndex = savedAvatarIndex;
+        editProfileAvatarImage.sprite =
+            avatarSprites[Mathf.Clamp(savedAvatarIndex, 0, avatarSprites.Length - 1)];
+
+       
+
+        EditProfilePanel.SetActive(false);
+        LoadEditProfileData();
+    }
+   
+
+    public void OnEditAvatarClicked()
+    {
+        EditProfilePanel.SetActive(false);
+        AvatarSelectionPanel.SetActive(true);
+    }
+    public void OnCloseEditProfile()
+    {
+        EditProfilePanel.SetActive(false);
+        MainMenuPanel.SetActive(true);
+        UpdatePlayerProfileUI();
+    }
+
+    //================ LEADERBOARD =================
+    /*  public void ShowLeaderboard(int rank)
+      {
+          List<string> aiNames = new List<string>(playerName);
+          List<Sprite> avatars = new List<Sprite>(avatarSprites);
+
+
+          bool isGuest = PlayerPrefs.GetInt(IsGuestKey, 0) == 1;
+
+          string playerUsername = PlayerPrefs.GetString(nameStr, fixedGuestName);
+          int playerAvatarIndex = PlayerPrefs.GetInt(PlayerAvatarKey, 0);
+
+          for (int i = 0; i < playerListLeaderboard.Count; i++)
+          {
+              GameObject row = playerListLeaderboard[i];
+
+              Text nameText = row.transform
+                  .GetChild(2)
+                  .GetChild(0)
+                  .GetComponent<Text>();
+
+              Image avatarImage = row.transform
+                  .GetChild(1)
+                  .GetComponent<Image>();
+
+              if (i == rank)
+              {
+                  // ✅ PLAYER / GUEST ROW
+                  nameText.text = playerUsername;
+
+                  if (isGuest)
+                  {
+                      // FIXED guest avatar
+                      avatarImage.sprite = fixedGuestAvatar;
+                  }
+                  else
+                  {
+                      // Player avatar from PlayerPrefs
+                      avatarImage.sprite = avatarSprites[playerAvatarIndex];
+                  }
+              }
+              else
+              {
+                  // ✅ AI ROW (unchanged)
+                  int ind = Random.Range(0, aiNames.Count);
+                  nameText.text = aiNames[ind];
+                  aiNames.RemoveAt(ind);
+
+                  avatarImage.sprite = avatarSprites[
+                      Random.Range(0, avatarSprites.Length)
+                  ];
+              }
+          }
+      }*/
 
 
     // ================= NAVIGATION =================

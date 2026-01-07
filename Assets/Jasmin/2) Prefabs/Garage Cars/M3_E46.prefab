@@ -24074,6 +24074,7 @@ GameObject:
   - component: {fileID: 8799075692723707583}
   - component: {fileID: 8799075692723707580}
   - component: {fileID: 269875756}
+  - component: {fileID: 6535867256952127765}
   m_Layer: 8
   m_Name: M3_E46
   m_TagString: Player
@@ -24521,6 +24522,21 @@ MonoBehaviour:
   - light: {fileID: 5727295652980988378}
     intensity: 2
     renderMode: 0
+--- !u!114 &6535867256952127765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8799075692723707581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fad92a8cbfa70548864903e49c5b702, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarController
+  CarName: M3_E46
+  CarPrice: 1800
+  rotationSpeed: 50
 --- !u!1 &8799075692731553154
 GameObject:
   m_ObjectHideFlags: 0

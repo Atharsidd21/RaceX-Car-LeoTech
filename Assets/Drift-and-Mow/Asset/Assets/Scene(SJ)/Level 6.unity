@@ -13490,7 +13490,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1530368997140045569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25577,7 +25577,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &2772505557085774688
 GameObject:
   m_ObjectHideFlags: 0
@@ -27842,7 +27842,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &2989490090320665983
 GameObject:
   m_ObjectHideFlags: 0
@@ -31865,7 +31865,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &3486364416550245621
 GameObject:
   m_ObjectHideFlags: 0
@@ -44046,7 +44046,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &4855644000080419599
 Animator:
   serializedVersion: 7
@@ -71868,12 +71868,12 @@ MonoBehaviour:
   - {fileID: 1083162489200225441}
   - {fileID: 5597287505134616482}
   avatarSprites:
-  - {fileID: 1964947542, guid: 352e517fb68587f4285f840e8aa4aabb, type: 3}
-  - {fileID: 1506719451, guid: fe7550ee260745e43b6eeb9c913ae715, type: 3}
-  - {fileID: -1137588936, guid: 490de32124ca6df4795b83fda011f121, type: 3}
-  - {fileID: 1515772189, guid: d1ba9f99027d4134ba87be3abea20350, type: 3}
-  - {fileID: 1452262206, guid: 3a3a4caf64e886040a4e354650f0ce67, type: 3}
-  - {fileID: 274247569, guid: e5f18c251818d9049a5de9803bc8c2df, type: 3}
+  - {fileID: -135901013, guid: 352e517fb68587f4285f840e8aa4aabb, type: 3}
+  - {fileID: -1433670515, guid: fe7550ee260745e43b6eeb9c913ae715, type: 3}
+  - {fileID: 1122707024, guid: 490de32124ca6df4795b83fda011f121, type: 3}
+  - {fileID: -2049519267, guid: d1ba9f99027d4134ba87be3abea20350, type: 3}
+  - {fileID: -2055771775, guid: 3a3a4caf64e886040a4e354650f0ce67, type: 3}
+  - {fileID: -126135831, guid: e5f18c251818d9049a5de9803bc8c2df, type: 3}
   guestAvatar: {fileID: 56968065, guid: ac718a3c95bb5b140838bd1fe3d1a8d4, type: 3}
   fixedGuestName: Guest
   controlsUIDelay: 0.4
@@ -77230,17 +77230,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AICarSpawner
   aiCarPrefabs:
-  - {fileID: 1931229705285219658, guid: 3852049015c474943bc4ae8629a0fc8d, type: 3}
-  - {fileID: 3380741278707781451, guid: 67c45e72a5cf6344f8cfe27b118ea9c6, type: 3}
-  - {fileID: 6581627753695165113, guid: b4fd64d45a1e0a7408c51b83c79cfed1, type: 3}
-  - {fileID: 8196725764428711984, guid: ee6da4b166ff1fe48b73a4ff126b344e, type: 3}
-  - {fileID: 595751999246237936, guid: fea39127f5e1f7946b247765d212c73e, type: 3}
+  - {fileID: 3454032159800958376, guid: a7db34c8732efb744844f838c053ada4, type: 3}
+  - {fileID: 1710203364050535989, guid: 19e53b772971d264db69bdc92729caac, type: 3}
+  - {fileID: 1167964935409321111, guid: 621f7dd2f9a87184084fa6106404cf61, type: 3}
+  - {fileID: 8144701162520380953, guid: dc6c0a1eb4837104ebeef626883918d2, type: 3}
+  - {fileID: 891441542612362325, guid: dac1c90adf3f75344b7b2c53e01948f7, type: 3}
   spawnPoints:
   - {fileID: 3229697048497392451}
   - {fileID: 6463544097188021987}
   - {fileID: 7065364546936569402}
   - {fileID: 2114240450787690459}
-  vehicleList: {fileID: 5616184956348850481, guid: 76ded6e3c0cf05942ba42682c1f901b9,
+  vehicleList: {fileID: 5616184956348850481, guid: 0d50ed2f3d9da43469fe0fc87543b761,
     type: 3}
 --- !u!23 &8332860798484171921
 MeshRenderer:

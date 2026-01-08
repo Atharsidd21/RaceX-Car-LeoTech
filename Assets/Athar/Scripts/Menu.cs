@@ -61,13 +61,13 @@ public class Menu : MonoBehaviour
     [Header("Panels")]
     public GameObject SplashScreen;
     public GameObject MainMenuScreen;
-   // public GameObject OptionPanel;
+    // public GameObject OptionPanel;
     public GameObject MainMenuPanel;
     public GameObject LevelPanel;
-   // public GameObject PlayerProfilePanel;
+    // public GameObject PlayerProfilePanel;
     public GameObject EnterNamePanel;
     public GameObject AvatarSelectionPanel;
-  //  public GameObject LeaderboardPanel;
+    //  public GameObject LeaderboardPanel;
 
     // ================= UI ELEMENTS =================
     [Header("UI Elements")]
@@ -79,7 +79,7 @@ public class Menu : MonoBehaviour
 
     public InputField enterNameInputFieldNameScreen;
 
-   // public List<GameObject> playerListLeaderboard;
+    // public List<GameObject> playerListLeaderboard;
     public AudioSource backGroundMusic;
 
     [Header("Timings")]
@@ -105,34 +105,40 @@ public class Menu : MonoBehaviour
         else
             Destroy(gameObject);
         DebugPlayerPrefsLocation();
-        Debug.unityLogger.logEnabled = false;
+      //  Debug.unityLogger.logEnabled = false;
     }
 
     private void Start()
     {
-       //PlayerPrefs.DeleteAll();
+        Debug.Log("Menu Start");
+        PlayerPrefs.DeleteAll();
         // ALWAYS show splash first
-       // StartCoroutine(SplashFlow());
+        // StartCoroutine(SplashFlow());
         MusicManager.Instance.PlayMusic();
 
-        Time.timeScale = 0f;
+     //   Time.timeScale = 1f;
 
         // Always hide panels initially
-       // SplashScreen.SetActive(false);
-      //  MainMenuPanel.SetActive(false);
-       // PlayerProfilePanel.SetActive(false);
+        // SplashScreen.SetActive(false);
+        //  MainMenuPanel.SetActive(false);
+        // PlayerProfilePanel.SetActive(false);
 
-       // LevelPanel.SetActive(false);
+        // LevelPanel.SetActive(false);
 
-       // loadingBar.gameObject.SetActive(false);
+        // loadingBar.gameObject.SetActive(false);
 
         // ✅ Play splash ONLY once per app launch
         if (!splashPlayedThisSession)
         {
+            Debug.Log("Playing splash screen");
             splashPlayedThisSession = true;
             SplashScreen.SetActive(true);
             StartCoroutine(SplashFlow());
             return;
+        }
+        else
+        {
+            Debug.Log("Skipping splash screen");
         }
 
         // 🔹 Normal navigation (NO splash)
@@ -160,7 +166,7 @@ public class Menu : MonoBehaviour
               ShowLeaderboard(rank);
               return;
           }*/
-       // Time.timeScale = 1f;
+        // Time.timeScale = 1f;
 
         /* Hide everything initially
         SplashScreen.SetActive(true);
@@ -175,6 +181,7 @@ public class Menu : MonoBehaviour
     //Splash Screen
     private IEnumerator SplashFlow()
     {
+
         Debug.Log("SplashFlow started");
 
         // 🔒 Safety reset
@@ -233,14 +240,15 @@ public class Menu : MonoBehaviour
         HandlePostSplashNavigation();
 
     }
-    
+
     private void HandlePostSplashNavigation()
     {
-       // DisableAllPanels();
+        // DisableAllPanels();
 
         // 1️⃣ If profile not completed → force name entry
         if (PlayerPrefs.GetInt(ProfileCompletedKey, 0) != 1)
         {
+            Debug.Log("Profile not completed, showing Enter Name panel");
             EnterNamePanel.SetActive(true);
             return;
         }
@@ -267,7 +275,7 @@ public class Menu : MonoBehaviour
         UpdatePlayerProfileUI();
 
     }
-   
+
     // ================= PROFILE FLOW =================
     public void OnEnterNameYes()
     {
@@ -300,8 +308,9 @@ public class Menu : MonoBehaviour
         AvatarSelectionPanel.SetActive(false);
         MainMenuPanel.SetActive(true);
         UpdatePlayerProfileUI();   // REQUIRED
-        EditProfilePanel.SetActive(true);  
-        LoadEditProfileData();              
+        EditProfilePanel.SetActive(true);
+        LoadPlayerProfile();
+        LoadEditProfileData();
     }
 
     public void PlayAsGuest()
@@ -326,7 +335,7 @@ public class Menu : MonoBehaviour
         }
 
         username = PlayerPrefs.GetString(nameStr, fixedGuestName);
-       // username = PlayerPrefs.GetString(nameStr, "");
+        // username = PlayerPrefs.GetString(nameStr, "");
 
         selectedAvatarIndex = PlayerPrefs.GetInt(PlayerAvatarKey, 0);
 
@@ -439,10 +448,10 @@ public class Menu : MonoBehaviour
     //Edit Player Profile
     public void OnProfileAvatarClicked()
     {
-       // DisableAllPanels();
+        // DisableAllPanels();
         EditProfilePanel.SetActive(true);
         LoadEditProfileData();
-      
+
     }
     private void LoadEditProfileData()
     {
@@ -502,12 +511,12 @@ public class Menu : MonoBehaviour
         editProfileAvatarImage.sprite =
             avatarSprites[Mathf.Clamp(savedAvatarIndex, 0, avatarSprites.Length - 1)];
 
-       
+
 
         EditProfilePanel.SetActive(false);
         LoadEditProfileData();
     }
-   
+
 
     public void OnEditAvatarClicked()
     {
@@ -585,9 +594,9 @@ public class Menu : MonoBehaviour
 
     public void LevelsBtnClicked()
     {
-       // DisableAllPanels();
+        // DisableAllPanels();
         LevelPanel.SetActive(true);
-       // PlayerProfileController.Instance?.RefreshProfile(levelMenuProfileView);
+        // PlayerProfileController.Instance?.RefreshProfile(levelMenuProfileView);
 
     }
 
@@ -617,7 +626,7 @@ public class Menu : MonoBehaviour
     public void OptionBtnClicked()
     {
         DisableAllPanels();
-      //  OptionPanel.SetActive(true);
+        //  OptionPanel.SetActive(true);
     }
 
     public void QuitBtnClicked()
@@ -632,8 +641,8 @@ public class Menu : MonoBehaviour
         AvatarSelectionPanel.SetActive(false);
         MainMenuPanel.SetActive(false);
         LevelPanel.SetActive(false);
-       // OptionPanel.SetActive(false);
-      //  LeaderboardPanel.SetActive(false);
+        // OptionPanel.SetActive(false);
+        //  LeaderboardPanel.SetActive(false);
     }
 
     // ================= DEBUG =================

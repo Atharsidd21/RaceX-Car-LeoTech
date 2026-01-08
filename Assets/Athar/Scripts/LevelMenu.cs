@@ -67,34 +67,33 @@ public class LevelMenu : MonoBehaviour
         for (int i = 0; i < levelButtons.Length; i++)
         {
             int levelIndex = firstLevelBuildIndex + i;
-
             Button btn = levelButtons[i];
-
-            // Fade BG assumed as first child
-            Transform fadeBG = btn.transform.Find("FadeBG");
 
             bool isUnlocked = levelIndex <= unlockedLevel;
 
-            // Button interaction
+            // 🔒 HARD DISABLE BUTTON
             btn.interactable = isUnlocked;
 
-            // Fade + lock visibility
-            if (fadeBG != null)
-                fadeBG.gameObject.SetActive(!isUnlocked);
-
-            // Assign click only if unlocked
+            // Remove previous listeners
             btn.onClick.RemoveAllListeners();
+
+            // Assign click ONLY if unlocked
             if (isUnlocked)
             {
-                int indexCopy = levelIndex; // IMPORTANT (closure fix)
+                int indexCopy = levelIndex; // closure fix
                 btn.onClick.AddListener(() => OpenLevel(indexCopy));
             }
+
+            // 🔒 Fade BG (raycast blocker)
+            Transform fadeBG = btn.transform.Find("FadeBG");
+            if (fadeBG != null)
+                fadeBG.gameObject.SetActive(!isUnlocked);
         }
     }
     public void OpenLevel(int levelId)
     {
         // Save selected level (used by other systems if needed)
-        PlayerPrefs.SetInt(Menu.SelectedLevel, levelId);
+    //    PlayerPrefs.SetInt(Menu.SelectedLevel, levelId);
 
         // Stop menu music before gameplay
         if (MusicManager.Instance != null)

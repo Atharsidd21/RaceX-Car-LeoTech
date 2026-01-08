@@ -99,6 +99,8 @@ public class End : MonoBehaviour
                     finishOrder.Add(gm.name);
 
                 int rank = finishOrder.IndexOf(gm.name);
+                GameManager.Instance.RecordRaceResult(rank);
+
                 Debug.Log("PLAYER FINISH RANK = " + rank);
 
                 PlayerPrefs.SetInt(Menu.LeaderboardRank, rank);

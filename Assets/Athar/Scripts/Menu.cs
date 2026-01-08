@@ -32,6 +32,15 @@ public class Menu : MonoBehaviour
     [SerializeField] private Image profileAvatarImage;
     [SerializeField] private TextMeshProUGUI profileNameText;
     [SerializeField] private TextMeshProUGUI profileCoinsText;
+    [Header("Level Menu Profile UI")]
+    [SerializeField] private TextMeshProUGUI levelProfileNameText;
+    [SerializeField] private Image levelProfileAvatarImage;
+    [SerializeField] private TextMeshProUGUI levelProfileCoinsText;
+    [Header("Player Profile Views")]
+    [SerializeField] private PlayerProfileView mainMenuProfileView;
+    [SerializeField] private PlayerProfileView levelMenuProfileView;
+
+
     // ================= FIXED GUEST =================
     [Header("Fixed Guest Profile UI")]
     [SerializeField] private string fixedGuestName = "Guest";
@@ -52,7 +61,7 @@ public class Menu : MonoBehaviour
     [Header("Panels")]
     public GameObject SplashScreen;
     public GameObject MainMenuScreen;
-    public GameObject OptionPanel;
+   // public GameObject OptionPanel;
     public GameObject MainMenuPanel;
     public GameObject LevelPanel;
    // public GameObject PlayerProfilePanel;
@@ -106,16 +115,16 @@ public class Menu : MonoBehaviour
        // StartCoroutine(SplashFlow());
         MusicManager.Instance.PlayMusic();
 
-        Time.timeScale = 1f;
+        Time.timeScale = 0f;
 
         // Always hide panels initially
-        SplashScreen.SetActive(false);
-        MainMenuPanel.SetActive(false);
+       // SplashScreen.SetActive(false);
+      //  MainMenuPanel.SetActive(false);
        // PlayerProfilePanel.SetActive(false);
 
-        LevelPanel.SetActive(false);
+       // LevelPanel.SetActive(false);
 
-        loadingBar.gameObject.SetActive(false);
+       // loadingBar.gameObject.SetActive(false);
 
         // ✅ Play splash ONLY once per app launch
         if (!splashPlayedThisSession)
@@ -224,38 +233,41 @@ public class Menu : MonoBehaviour
         HandlePostSplashNavigation();
 
     }
-
+    
     private void HandlePostSplashNavigation()
     {
+       // DisableAllPanels();
+
+        // 1️⃣ If profile not completed → force name entry
+        if (PlayerPrefs.GetInt(ProfileCompletedKey, 0) != 1)
+        {
+            EnterNamePanel.SetActive(true);
+            return;
+        }
+
+        // 2️⃣ Return from race → Main Menu
         if (PlayerPrefs.GetInt(GotoHome, 0) == 1)
         {
             PlayerPrefs.SetInt(GotoHome, 0);
             MainMenuPanel.SetActive(true);
-            //PlayerProfilePanel.SetActive(true);
-
-            backGroundMusic.Play();
-            LoadPlayerProfile();
-            
+            UpdatePlayerProfileUI();
             return;
         }
 
+        // 3️⃣ Return from car selection → Level menu
         if (PlayerPrefs.GetInt(GotoLevelSelection, 0) == 1)
         {
             PlayerPrefs.SetInt(GotoLevelSelection, 0);
             LevelPanel.SetActive(true);
-            backGroundMusic.Play();
             return;
         }
 
-        // Default
+        // 4️⃣ Default → Main Menu
         MainMenuPanel.SetActive(true);
-       // backGroundMusic.Play();
-        LoadPlayerProfile();
         UpdatePlayerProfileUI();
 
     }
-
-
+   
     // ================= PROFILE FLOW =================
     public void OnEnterNameYes()
     {
@@ -325,30 +337,105 @@ public class Menu : MonoBehaviour
         MainMenuPanel.SetActive(true);
     }
     //Player Profile Display
+    /* private void UpdatePlayerProfileUI()
+     {
+         // Player name
+         string playerName = PlayerPrefs.GetString(nameStr, "Guest");
+         profileNameText.text = playerName;
+
+         // Coins
+         int coins = PlayerPrefs.GetInt("Currency", 0);
+         profileCoinsText.text = coins.ToString();
+
+         // Avatar
+         bool isGuest = PlayerPrefs.GetInt(IsGuestKey, 0) == 1;
+         int avatarIndex = PlayerPrefs.GetInt(PlayerAvatarKey, 0);
+
+         if (isGuest)
+         {
+             profileAvatarImage.sprite = fixedGuestAvatar;
+         }
+         else
+         {
+             avatarIndex = Mathf.Clamp(avatarIndex, 0, avatarSprites.Length - 1);
+             profileAvatarImage.sprite = avatarSprites[avatarIndex];
+         }
+         // --- Main Menu Profile UI ---
+         if (profileNameText != null)
+             profileNameText.text = playerName;
+
+         if (profileCoinsText != null)
+             profileCoinsText.text = coins.ToString();
+
+         if (profileAvatarImage != null)
+             profileAvatarImage.sprite = avatarSprite;
+
+         // --- Level Menu Profile UI ---
+         if (levelProfileNameText != null)
+             levelProfileNameText.text = playerName;
+
+         if (levelProfileCoinsText != null)
+             levelProfileCoinsText.text = coins.ToString();
+
+         if (levelProfileAvatarImage != null)
+             levelProfileAvatarImage.sprite = avatarSprite;
+     }*/
+    /* private void UpdatePlayerProfileUI()
+      {
+          // --- Read data once ---
+          string playerName = PlayerPrefs.GetString(nameStr, "Guest");
+          int coins = PlayerPrefs.GetInt("Currency", 0);
+          bool isGuest = PlayerPrefs.GetInt(IsGuestKey, 0) == 1;
+          int avatarIndex = PlayerPrefs.GetInt(PlayerAvatarKey, 0);
+
+          Sprite avatarSprite;
+          if (isGuest)
+          {
+              avatarSprite = fixedGuestAvatar;
+          }
+          else
+          {
+              avatarIndex = Mathf.Clamp(avatarIndex, 0, avatarSprites.Length - 1);
+              avatarSprite = avatarSprites[avatarIndex];
+          }
+
+          // --- Main Menu Profile UI ---
+          if (profileNameText != null)
+              profileNameText.text = playerName;
+
+          if (profileCoinsText != null)
+              profileCoinsText.text = coins.ToString();
+
+          if (profileAvatarImage != null)
+              profileAvatarImage.sprite = avatarSprite;
+
+          // --- Level Menu Profile UI ---
+          if (levelProfileNameText != null)
+              levelProfileNameText.text = playerName;
+
+          if (levelProfileCoinsText != null)
+              levelProfileCoinsText.text = coins.ToString();
+
+          if (levelProfileAvatarImage != null)
+              levelProfileAvatarImage.sprite = avatarSprite;
+      }*/
+
     private void UpdatePlayerProfileUI()
     {
-        // Player name
         string playerName = PlayerPrefs.GetString(nameStr, "Guest");
-        profileNameText.text = playerName;
-
-        // Coins
         int coins = PlayerPrefs.GetInt("Currency", 0);
-        profileCoinsText.text = coins.ToString();
-
-        // Avatar
         bool isGuest = PlayerPrefs.GetInt(IsGuestKey, 0) == 1;
         int avatarIndex = PlayerPrefs.GetInt(PlayerAvatarKey, 0);
 
-        if (isGuest)
-        {
-            profileAvatarImage.sprite = fixedGuestAvatar;
-        }
-        else
-        {
-            avatarIndex = Mathf.Clamp(avatarIndex, 0, avatarSprites.Length - 1);
-            profileAvatarImage.sprite = avatarSprites[avatarIndex];
-        }
+        Sprite avatarSprite = isGuest
+            ? fixedGuestAvatar
+            : avatarSprites[Mathf.Clamp(avatarIndex, 0, avatarSprites.Length - 1)];
+
+        mainMenuProfileView?.Refresh(playerName, coins, avatarSprite);
+        levelMenuProfileView?.Refresh(playerName, coins, avatarSprite);
     }
+
+
     //Edit Player Profile
     public void OnProfileAvatarClicked()
     {
@@ -498,8 +585,10 @@ public class Menu : MonoBehaviour
 
     public void LevelsBtnClicked()
     {
-        DisableAllPanels();
+       // DisableAllPanels();
         LevelPanel.SetActive(true);
+       // PlayerProfileController.Instance?.RefreshProfile(levelMenuProfileView);
+
     }
 
     public void PlayButtonClicked()
@@ -511,18 +600,24 @@ public class Menu : MonoBehaviour
     {
         DisableAllPanels();
         MainMenuPanel.SetActive(true);
+        UpdatePlayerProfileUI();
+
     }
 
     public void CloseBtnClicked()
     {
         LevelPanel.SetActive(false);
-        OptionPanel.SetActive(true);
+        MainMenuPanel.SetActive(true);
+        UpdatePlayerProfileUI();
+
+
+        // OptionPanel.SetActive(true);
     }
 
     public void OptionBtnClicked()
     {
         DisableAllPanels();
-        OptionPanel.SetActive(true);
+      //  OptionPanel.SetActive(true);
     }
 
     public void QuitBtnClicked()
@@ -537,7 +632,7 @@ public class Menu : MonoBehaviour
         AvatarSelectionPanel.SetActive(false);
         MainMenuPanel.SetActive(false);
         LevelPanel.SetActive(false);
-        OptionPanel.SetActive(false);
+       // OptionPanel.SetActive(false);
       //  LeaderboardPanel.SetActive(false);
     }
 

@@ -4446,7 +4446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarController
   CarName: Sedan
   CarPrice: 2000
-  rotationSpeed: 50
+  rotationSpeed: 0
 --- !u!1 &3416858561876512069
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,18 +9,21 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    
+
 
     // Coins for Reward
     [Header("Race Rewards")]
     [SerializeField] private int[] coinsByRank; //Setting coins based on rank
-   // Setting up reward panel 
+                                                // Setting up reward panel 
     [Header("Reward Panel")]
     [SerializeField] private GameObject rewardPanel;
     [SerializeField] private string rewardPrefix = "You earned";
     [SerializeField] private TextMeshProUGUI rewardText;
     [SerializeField] private string rewardSuffix = " coins earned!";
     [SerializeField] private TextMeshProUGUI totalCoinsText;
+    //Win/Loss Record
+    private const string RACES_WON_KEY = "RacesWon";
+    private const string RACES_LOST_KEY = "RacesLost";
 
     [Header("Leaderboard")]
     [SerializeField] private List<GameObject> playerListLeaderboard;
@@ -28,7 +32,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private string fixedGuestName = "Guest";
 
     // ADD THESE (Inspector fields)
-   // [SerializeField] private Sprite[] avatarSprites;      // same avatars used in Menu
+    // [SerializeField] private Sprite[] avatarSprites;      // same avatars used in Menu
 
     public static GameManager Instance;
     [Header("Control UI")]
@@ -118,10 +122,10 @@ public class GameManager : MonoBehaviour
 
         // Start countdown directly
         currentState = GameState.Countdown;
-       // StartRaceAfterCutscene(); // reuse existing countdown coroutine
+        // StartRaceAfterCutscene(); // reuse existing countdown coroutine
 
         // Setup RCC camera for cinematic countdown
-       StartCoroutine(SetupRCCCameraForCountdown());
+        StartCoroutine(SetupRCCCameraForCountdown());
     }
 
 
@@ -142,7 +146,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region
-   private IEnumerator SetupRCCCameraForCountdown()
+    private IEnumerator SetupRCCCameraForCountdown()
     {
         // Wait until RCC Camera exists
         while (rccCamera == null)
@@ -161,7 +165,7 @@ public class GameManager : MonoBehaviour
         // Switch to CINEMATIC during countdown
         rccCamera.ChangeCamera(RCC_Camera.CameraMode.CINEMATIC);
     }
-  
+
 
 
     public void ShowControlsUI()
@@ -242,8 +246,8 @@ public class GameManager : MonoBehaviour
 
 
         // Adding a small delay befroe showing controls UI
-       // if (playerControlsUI != null)
-         //   playerControlsUI.SetActive(true);
+        // if (playerControlsUI != null)
+        //   playerControlsUI.SetActive(true);
 
     }
 
@@ -257,21 +261,21 @@ public class GameManager : MonoBehaviour
         lastPosition = player.transform.position;
         // Find controls UI inside spawned car
 
-       /* Transform controls = player.transform.Find("ControlsUI");
+        /* Transform controls = player.transform.Find("ControlsUI");
 
-        if (controls == null)
-        {
-            controls = player.transform.GetComponentInChildren<Canvas>(true)?.transform;
-        }
+         if (controls == null)
+         {
+             controls = player.transform.GetComponentInChildren<Canvas>(true)?.transform;
+         }
 
-        if (controls != null)
-        {
-            playerControlsUI = controls.gameObject;
+         if (controls != null)
+         {
+             playerControlsUI = controls.gameObject;
 
-            // HIDE IMMEDIATELY
-            playerControlsUI.SetActive(false);
-            //Debug.Log("Controls UI cached and hidden");
-        }*/
+             // HIDE IMMEDIATELY
+             playerControlsUI.SetActive(false);
+             //Debug.Log("Controls UI cached and hidden");
+         }*/
 
     }
 
@@ -346,7 +350,7 @@ public class GameManager : MonoBehaviour
 
         // Load existing currency
         int currentCoins = PlayerPrefs.GetInt(CurrencyKey, 0);
-        
+
         // Add reward
         currentCoins += rewardCoins;
 
@@ -447,7 +451,7 @@ public class GameManager : MonoBehaviour
             controller.OnGameOver();
 
         //LevelCompletePanel.SetActive(true);
-       // ShowLeaderboard(PlayerPrefs.GetInt(Menu.LeaderboardRank));
+        // ShowLeaderboard(PlayerPrefs.GetInt(Menu.LeaderboardRank));
         //LeaderboardPanel.SetActive(true);
         Time.timeScale = 0f;
     }
@@ -505,7 +509,23 @@ public class GameManager : MonoBehaviour
     {
         AddCoins(5); // Coins per target
     }
+    //recording win/loss
+    public void RecordRaceResult(int rank)
+    {
+        // Top 3 = WIN
+        if (rank <= 2)
+        {
+            int wins = PlayerPrefs.GetInt(RACES_WON_KEY, 0);
+            PlayerPrefs.SetInt(RACES_WON_KEY, wins + 1);
+        }
+        else
+        {
+            int losses = PlayerPrefs.GetInt(RACES_LOST_KEY, 0);
+            PlayerPrefs.SetInt(RACES_LOST_KEY, losses + 1);
+        }
 
+        PlayerPrefs.Save();
+    }
 
     #endregion
 

@@ -8,7 +8,7 @@ public class CarController : MonoBehaviour
     public int CarPrice;
 
     [Header("Rotation Settings")]
-    [SerializeField] private float rotationSpeed = 50f;
+    [SerializeField] private float rotationSpeed = 0f;
 
     private void Update()
     {

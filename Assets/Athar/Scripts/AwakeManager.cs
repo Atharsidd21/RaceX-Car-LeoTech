@@ -14,9 +14,9 @@ public class AwakeManager : MonoBehaviour
     public int VehiclePointer = 0;
     // For transitioning when selecting cars
     //[SerializeField] float slideDistance = 4f;
-   // [SerializeField] float slideDuration = 0.5f;
+    // [SerializeField] float slideDuration = 0.5f;
 
-  //  bool isTransitioning = false;
+    //  bool isTransitioning = false;
 
     public TMP_Text Currencytext;
     public TMP_Text CarInfo;
@@ -24,13 +24,16 @@ public class AwakeManager : MonoBehaviour
     //public GameObject StartBtnBtn;
     public GameObject Player;
     public GameObject CurrentCar;
-    
+  //  [SerializeField] private PlayerProfileView selectCarProfileView;
+
 
 
     private const string CurrencyKey = "Currency";
 
     private void Awake()
     {
+       // PlayerProfileController.Instance?.RefreshProfile(selectCarProfileView);
+
         // Play background music
         MusicManager.Instance.PlayMusic();
 
@@ -111,7 +114,7 @@ public class AwakeManager : MonoBehaviour
     public void GetCarInfo()
     {
         int currency = PlayerPrefs.GetInt(CurrencyKey, 0);
-        Currencytext.text = " $ : " + currency;
+        Currencytext.text = " " + currency;
 
         CarController car = GetCurrentCar();
         string carName = car.CarName;

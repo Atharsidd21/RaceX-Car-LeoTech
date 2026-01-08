@@ -124,12 +124,12 @@ public class RCC_Camera : MonoBehaviour {
     [Range(-45f, 45f)] public float TPSPitch = 10f;                                     // Pitch angle.
 
     //	Target tilt angle.
-    private float TPSTiltAngle = 0f;                                // Current tilt angle.
+    private float TPSTiltAngle = 20f;                                // Current tilt angle.
 
     public bool TPSAutoFocus = true;                                // Auto focus to player vehicle. Adjusts distance and height depends on vehicle bounds.
     public bool TPSAutoReverse = true;                          // Auto reverse when player vehicle is at reverse gear.
     public bool TPSCollision = true;                                    // Collision effect when player vehicle crashes.
-    public Vector3 TPSOffset = new Vector3(0f, 0f, .2f);   // TPS position offset.
+    public Vector3 TPSOffset = new Vector3(0f, 0.8f, .2f);   // TPS position offset.
     public Vector3 TPSStartRotation = new Vector3(0f, 0f, 0f);   // Rotation of the camera will be this when game starts.
     private Quaternion TPSLastRotation;
 

@@ -6,9 +6,15 @@ public class MusicManager : MonoBehaviour
 {
     public static MusicManager Instance;
     private AudioSource audioSource;
+    [Header("UI Sounds")]
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip buttonClickClip;
+
 
     private void Awake()
     {
+
+
         // Singleton pattern
         if (Instance != null && Instance != this)
         {
@@ -51,6 +57,18 @@ public class MusicManager : MonoBehaviour
         audioSource.volume = 0f;
         audioSource.Play();
         audioSource.DOFade(1f, duration);
+
+
+
+    }
+    //For Buttons 
+    public void PlayButtonClick()
+    {
+        if (buttonClickClip == null || sfxSource == null)
+            return;
+
+        sfxSource.PlayOneShot(buttonClickClip);
     }
 
+   
 }

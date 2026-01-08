@@ -111,7 +111,7 @@ public class Menu : MonoBehaviour
     private void Start()
     {
         Debug.Log("Menu Start");
-        PlayerPrefs.DeleteAll();
+       // PlayerPrefs.DeleteAll();
         // ALWAYS show splash first
         // StartCoroutine(SplashFlow());
         MusicManager.Instance.PlayMusic();

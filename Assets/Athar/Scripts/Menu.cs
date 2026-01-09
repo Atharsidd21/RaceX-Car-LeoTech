@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class Menu : MonoBehaviour
 {
     public static Menu Instance;
+    private bool isEditingProfile = false;
 
     // ================= PROFILE KEYS =================
     public static string nameStr = "username";
@@ -110,15 +111,10 @@ public class Menu : MonoBehaviour
 
     private void Start()
     {
-        // ✅ FIRST LEVEL DEFAULT UNLOCK (RUNS ONCE)
-        if (!PlayerPrefs.HasKey("LevelOpened_2"))
-        {
-            PlayerPrefs.SetInt("LevelOpened_2", 1);
-            PlayerPrefs.Save();
-        }
+     
 
         Debug.Log("Menu Start");
-       // PlayerPrefs.DeleteAll();
+      // PlayerPrefs.DeleteAll();
         // ALWAYS show splash first
         // StartCoroutine(SplashFlow());
         MusicManager.Instance.PlayMusic();
@@ -312,13 +308,25 @@ public class Menu : MonoBehaviour
         PlayerPrefs.Save();
 
         savedAvatarIndex = selectedAvatarIndex; // sync saved state
-
         AvatarSelectionPanel.SetActive(false);
-        MainMenuPanel.SetActive(true);
+        if (isEditingProfile)
+        {
+            // 🟢 EDIT MODE
+            isEditingProfile = false;
+            EditProfilePanel.SetActive(true);
+            LoadEditProfileData();   // refresh avatar + name
+        }
+        else
+        {
+            // 🟢 FIRST-TIME PROFILE CREATION
+            MainMenuPanel.SetActive(true);
+            UpdatePlayerProfileUI();
+        }
+      /*  MainMenuPanel.SetActive(true);
         UpdatePlayerProfileUI();   // REQUIRED
-        EditProfilePanel.SetActive(true);
+        EditProfilePanel.SetActive(false);
         LoadPlayerProfile();
-        LoadEditProfileData();
+        LoadEditProfileData();*/
     }
 
     public void PlayAsGuest()
@@ -528,6 +536,7 @@ public class Menu : MonoBehaviour
 
     public void OnEditAvatarClicked()
     {
+        isEditingProfile = true;
         EditProfilePanel.SetActive(false);
         AvatarSelectionPanel.SetActive(true);
     }

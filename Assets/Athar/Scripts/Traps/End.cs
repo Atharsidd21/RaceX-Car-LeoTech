@@ -89,7 +89,7 @@ public class End : MonoBehaviour
                 // NOT final lap ? just continue race
                 if (playerLapCount < totalLaps)
                 {
-                    Debug.Log($"Lap {playerLapCount}/{totalLaps}");
+                    Debug.Log($" {playerLapCount}/{totalLaps}");
                     return;
                 }
 

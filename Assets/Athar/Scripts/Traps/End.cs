@@ -56,7 +56,7 @@ public class End : MonoBehaviour
     void UpdateLapUI()
     {
         if (lapText != null)
-            lapText.text = $"LAP {playerLapCount + 1} / {totalLaps}";
+            lapText.text = $" {playerLapCount + 1} / {totalLaps}";
     }
 
 

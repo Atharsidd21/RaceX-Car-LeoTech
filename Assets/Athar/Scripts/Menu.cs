@@ -267,6 +267,7 @@ public class Menu : MonoBehaviour
         {
             PlayerPrefs.SetInt(GotoLevelSelection, 0);
             LevelPanel.SetActive(true);
+            UpdatePlayerProfileUI();
             return;
         }
 

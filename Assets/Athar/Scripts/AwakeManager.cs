@@ -19,7 +19,9 @@ public class AwakeManager : MonoBehaviour
     //  bool isTransitioning = false;
 
     public TMP_Text Currencytext;
-    public TMP_Text CarInfo;
+    public TMP_Text CarNameText;
+    public TMPro.TMP_Text CarPriceText;
+    public Image CurrencyIcon;
     public GameObject BuyBtn;
     //public GameObject StartBtnBtn;
     public GameObject Player;
@@ -114,26 +116,34 @@ public class AwakeManager : MonoBehaviour
     public void GetCarInfo()
     {
         int currency = PlayerPrefs.GetInt(CurrencyKey, 0);
-        Currencytext.text = " " + currency;
+        Currencytext.text = currency.ToString();
 
         CarController car = GetCurrentCar();
-        string carName = car.CarName;
 
-        if (PlayerPrefs.GetInt(carName, 0) == 1)
+        // ✅ CAR NAME — ALWAYS SET
+        CarNameText.text = car.CarName;
+
+        bool isOwned = PlayerPrefs.GetInt(car.CarName, 0) == 1;
+
+        if (isOwned)
         {
-            CarInfo.text = " ";
+            // ✅ OWNED STATE
+            CarPriceText.text = "Owned";
+            CurrencyIcon.gameObject.SetActive(false);
             BuyBtn.SetActive(false);
-            //StartBtnBtn.SetActive(true);
         }
         else
         {
-            CarInfo.text = $"{carName} - ${car.CarPrice}";
+            // 🔒 LOCKED STATE
+            CarPriceText.text = car.CarPrice.ToString();
+            CurrencyIcon.gameObject.SetActive(true);
             BuyBtn.SetActive(true);
-            //StartBtnBtn.SetActive(false);
 
-            BuyBtn.GetComponent<Button>().interactable = (currency >= car.CarPrice);
+            BuyBtn.GetComponent<Button>().interactable =
+                currency >= car.CarPrice;
         }
     }
+
     public void PlayButton()
     {
         int selectedIndex = PlayerPrefs.GetInt("Pointer", 0);

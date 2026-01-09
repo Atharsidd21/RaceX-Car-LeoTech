@@ -4,56 +4,15 @@ using UnityEngine.UI;
 
 public class LevelMenu : MonoBehaviour
 {
-    public Button[] Buttons;
-    public VehicleLiist ListOfVehicles; // Add reference to the car list
-    public Button[] levelButtons;
-    public int firstLevelBuildIndex = 1;
+    [System.Serializable]
+    public class LevelItem
+    {
+        public int levelBuildIndex;
+        public Button levelButton;
+        public Button lockButton;
+    }
 
-    /* public void OpenLevel(int Leveid)
-     {
-         int selectedIndex = PlayerPrefs.GetInt("Pointer", 0);
-         GameObject selectedCar = ListOfVehicles.Vehicals[selectedIndex];
-         string carName = selectedCar.GetComponent<CarController>().CarName;
-
-         int sceneIndex = 0;
-         PlayerPrefs.SetInt(Menu.SelectedLevel, Leveid);
-
-         // ✅ Only allow playing if the car is owned
-         if (PlayerPrefs.GetInt(carName, 0) == 1)
-         {
-             string LevelName = "Level " + Leveid;
-             SceneManager.LoadScene(Leveid);
-             //SceneManager.LoadScene(LevelName);
-         }
-         else
-         {
-             Debug.Log("Car is not unlocked! Cannot start game.");
-         }
-     }*/
-    /*  public void OpenLevel(int Leveid)
-      {
-          int selectedIndex = PlayerPrefs.GetInt("Pointer", 0);
-          GameObject selectedCar = ListOfVehicles.Vehicals[selectedIndex];
-          string carName = selectedCar.GetComponent<CarController>().CarName;
-
-          PlayerPrefs.SetInt(Menu.SelectedLevel, Leveid);
-
-          // ✅ Only allow playing if the car is owned
-          if (PlayerPrefs.GetInt(carName, 0) == 1)
-          {
-              // 🔊 STOP MENU MUSIC BEFORE GAMEPLAY
-              if (MusicManager.Instance != null)
-                  MusicManager.Instance.FadeOutAndStop();
-
-              SceneManager.LoadScene(Leveid);
-          }
-          else
-          {
-              Debug.Log("Car is not unlocked! Cannot start game.");
-          }
-      }*/
-
-
+    public LevelItem[] levels;
 
     private void Start()
     {
@@ -62,46 +21,60 @@ public class LevelMenu : MonoBehaviour
 
     void SetupLevels()
     {
-        int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", firstLevelBuildIndex);
-
-        for (int i = 0; i < levelButtons.Length; i++)
+        foreach (LevelItem item in levels)
         {
-            int levelIndex = firstLevelBuildIndex + i;
-            Button btn = levelButtons[i];
+            bool canUnlock = PlayerPrefs.GetInt($"LevelUnlocked_{item.levelBuildIndex}", 0) == 1;
+            bool isOpened = PlayerPrefs.GetInt($"LevelOpened_{item.levelBuildIndex}", 0) == 1;
 
-            bool isUnlocked = levelIndex <= unlockedLevel;
+            // Remove old listeners
+            item.levelButton.onClick.RemoveAllListeners();
+            item.lockButton.onClick.RemoveAllListeners();
 
-            // 🔒 HARD DISABLE BUTTON
-            btn.interactable = isUnlocked;
+            // DEFAULT STATE
+            item.levelButton.interactable = false;
+            item.lockButton.interactable = false;
 
-            // Remove previous listeners
-            btn.onClick.RemoveAllListeners();
-
-            // Assign click ONLY if unlocked
-            if (isUnlocked)
+            if (!isOpened)
             {
-                int indexCopy = levelIndex; // closure fix
-                btn.onClick.AddListener(() => OpenLevel(indexCopy));
-            }
+                // 🔒 Still locked
+                item.lockButton.gameObject.SetActive(true);
 
-            // 🔒 Fade BG (raycast blocker)
-            Transform fadeBG = btn.transform.Find("FadeBG");
-            if (fadeBG != null)
-                fadeBG.gameObject.SetActive(!isUnlocked);
+                if (canUnlock)
+                {
+                    // 🔓 Lock button is now clickable
+                    item.lockButton.interactable = true;
+
+                    int indexCopy = item.levelBuildIndex;
+                    item.lockButton.onClick.AddListener(() => UnlockLevel(indexCopy));
+                }
+            }
+            else
+            {
+                // ✅ Level already opened
+                item.lockButton.gameObject.SetActive(false);
+                item.levelButton.interactable = true;
+
+                int indexCopy = item.levelBuildIndex;
+                item.levelButton.onClick.AddListener(() => OpenLevel(indexCopy));
+            }
         }
     }
-    public void OpenLevel(int levelId)
-    {
-        // Save selected level (used by other systems if needed)
-    //    PlayerPrefs.SetInt(Menu.SelectedLevel, levelId);
 
-        // Stop menu music before gameplay
+    void UnlockLevel(int levelIndex)
+    {
+        // Mark level as opened
+        PlayerPrefs.SetInt($"LevelOpened_{levelIndex}", 1);
+        PlayerPrefs.Save();
+
+        // Refresh UI
+        SetupLevels();
+    }
+
+    void OpenLevel(int levelIndex)
+    {
         if (MusicManager.Instance != null)
             MusicManager.Instance.FadeOutAndStop();
 
-        // Load the level
-        SceneManager.LoadScene(levelId);
+        SceneManager.LoadScene(levelIndex);
     }
 }
-
-

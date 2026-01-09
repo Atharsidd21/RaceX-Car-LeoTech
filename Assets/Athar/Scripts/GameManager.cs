@@ -8,7 +8,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
-{
+{   //Locking AI Cars 
+    private bool forceLockCars = false;
+
 
 
     // Coins for Reward
@@ -127,7 +129,11 @@ public class GameManager : MonoBehaviour
         // Setup RCC camera for cinematic countdown
         StartCoroutine(SetupRCCCameraForCountdown());
     }
-
+    private void FixedUpdate()
+    {
+        if (forceLockCars)
+            LockAllCars(true);
+    }
 
 
     private void Update()
@@ -212,6 +218,8 @@ public class GameManager : MonoBehaviour
     private IEnumerator RaceStartCountdown()
     {
         // Ensure cars stay locked during countdown
+        forceLockCars = true;
+
         LockAllCars(true);
 
         countdownImage.gameObject.SetActive(true);
@@ -236,6 +244,8 @@ public class GameManager : MonoBehaviour
 
         // START RACE
         LockAllCars(false);
+        forceLockCars = false;
+
         raceStarted = true;
         currentState = GameState.Playing;
         // Switch RCC camera to TPS on race start
@@ -628,8 +638,22 @@ public class GameManager : MonoBehaviour
 
     #region UTILITIES
 
+    /*  public void LockAllCars(bool lockMovement)
+      {
+          if (player != null)
+          {
+              Controller controller = player.GetComponent<Controller>();
+              if (controller != null)
+                  controller.enabled = !lockMovement;
+          }
+
+          RCC_AICarController[] aiCars = FindObjectsOfType<RCC_AICarController>();
+          foreach (var ai in aiCars)
+              ai.enabled = !lockMovement;
+      }*/
     public void LockAllCars(bool lockMovement)
     {
+        // PLAYER
         if (player != null)
         {
             Controller controller = player.GetComponent<Controller>();
@@ -637,10 +661,40 @@ public class GameManager : MonoBehaviour
                 controller.enabled = !lockMovement;
         }
 
+        // AI CARS
         RCC_AICarController[] aiCars = FindObjectsOfType<RCC_AICarController>();
+
         foreach (var ai in aiCars)
+        {
             ai.enabled = !lockMovement;
+
+            RCC_CarControllerV3 car = ai.GetComponent<RCC_CarControllerV3>();
+            if (car != null)
+            {
+                if (lockMovement)
+                {
+                    // FULL STOP
+                    car.throttleInput = 0f;
+                    car.brakeInput = 1f;
+                    car.handbrakeInput = 1f;
+
+                    Rigidbody rb = car.GetComponent<Rigidbody>();
+                    if (rb != null)
+                    {
+                        rb.linearVelocity = Vector3.zero;
+                        rb.angularVelocity = Vector3.zero;
+                    }
+                }
+                else
+                {
+                    // RELEASE BRAKES
+                    car.brakeInput = 0f;
+                    car.handbrakeInput = 0f;
+                }
+            }
+        }
     }
+
 
     private void AnimateCountdownImage()
     {

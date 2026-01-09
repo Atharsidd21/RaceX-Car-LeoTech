@@ -106,7 +106,15 @@ public class End : MonoBehaviour
                 PlayerPrefs.SetInt(Menu.LeaderboardRank, rank);
                // PlayerPrefs.SetInt(Menu.ShowLeaderBoard, 1);
                 PlayerPrefs.Save();
+                // FOR LEVEL LOCK/UNLOCK THIS BLOCK HERE
+                if (rank <= 2)
+                {
+                    int currentLevel = SceneManager.GetActiveScene().buildIndex;
+                    int nextLevel = currentLevel + 1;
 
+                    PlayerPrefs.SetInt($"LevelUnlocked_{nextLevel}", 1);
+                    PlayerPrefs.Save();
+                }
                 GameManager.Instance.RewardPlayerByRank(rank);
 
                // GameManager.Instance.ShowLeaderboardUI(rank);

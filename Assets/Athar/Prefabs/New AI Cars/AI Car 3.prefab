@@ -10058,7 +10058,7 @@ GameObject:
   - component: {fileID: 415171546437684056}
   m_Layer: 8
   m_Name: AI Car 3
-  m_TagString: Player
+  m_TagString: AI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10517,7 +10517,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarController
   CarName: M3_E46
   CarPrice: 1800
-  rotationSpeed: 50
 --- !u!114 &415171546437684056
 MonoBehaviour:
   m_ObjectHideFlags: 0

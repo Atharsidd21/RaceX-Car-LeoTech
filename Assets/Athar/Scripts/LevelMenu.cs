@@ -70,7 +70,7 @@ public class LevelMenu : MonoBehaviour
         SetupLevels();
     }
 
-    void OpenLevel(int levelIndex)
+    public void OpenLevel(int levelIndex)
     {
         if (MusicManager.Instance != null)
             MusicManager.Instance.FadeOutAndStop();

@@ -15,20 +15,20 @@ EditorBuildSettings:
     path: Assets/Athar/Final Scenes/Level 1.unity
     guid: 06785d11cb134dd43a379face1471b45
   - enabled: 1
+    path: Assets/Athar/Final Scenes/Level 2.unity
+    guid: 74a5bb51c65195043a57b69af666dbda
+  - enabled: 1
     path: Assets/Athar/Final Scenes/Level 3.unity
     guid: 579e3d3efff76174ab1fdc5ae0e085c3
   - enabled: 1
     path: Assets/Athar/Final Scenes/Level 4.unity
     guid: cecb81830c91f344582dc675b88b821b
   - enabled: 1
-    path: Assets/Athar/Final Scenes/Level 6.unity
-    guid: cb1a3b07b5cb09e4e9901f35ddddec26
-  - enabled: 1
-    path: Assets/Athar/Final Scenes/Level 2.unity
-    guid: 74a5bb51c65195043a57b69af666dbda
-  - enabled: 1
     path: Assets/Athar/Final Scenes/Level 5.unity
     guid: 6351c226faf5d1a419104ba5f2e377ee
+  - enabled: 1
+    path: Assets/Athar/Final Scenes/Level 6.unity
+    guid: cb1a3b07b5cb09e4e9901f35ddddec26
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: aad8c7df7ba91584693cf3b5cef18c55,
       type: 2}

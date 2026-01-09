@@ -110,6 +110,13 @@ public class Menu : MonoBehaviour
 
     private void Start()
     {
+        // ✅ FIRST LEVEL DEFAULT UNLOCK (RUNS ONCE)
+        if (!PlayerPrefs.HasKey("LevelOpened_2"))
+        {
+            PlayerPrefs.SetInt("LevelOpened_2", 1);
+            PlayerPrefs.Save();
+        }
+
         Debug.Log("Menu Start");
        // PlayerPrefs.DeleteAll();
         // ALWAYS show splash first

@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7756f06ac1b082e4bb1697f768a5a41f, type: 3}
   m_Name: RCC_Settings
   m_EditorClassIdentifier: 
-  behaviorSelectedIndex: 0
-  overrideBehavior: 0
+  behaviorSelectedIndex: 1
+  overrideBehavior: 1
   overrideFPS: 1
   overrideFixedTimeStep: 1
-  fixedTimeStep: 0.02
+  fixedTimeStep: 0.01
   maxAngularVelocity: 8
   maxFPS: 60
   useFixedWheelColliders: 1
-  lockAndUnlockCursor: 0
+  lockAndUnlockCursor: 1
   behaviorTypes:
   - behaviorName: Simulator
     steeringHelper: 1
@@ -243,7 +243,7 @@ MonoBehaviour:
   mobileControllerEnabled: 1
   UIButtonSensitivity: 10
   UIButtonGravity: 10
-  gyroSensitivity: 2
+  gyroSensitivity: 5
   useLightsAsVertexLights: 1
   useLightProjectorForLightingEffect: 0
   setTagsAndLayers: 1
@@ -295,8 +295,8 @@ MonoBehaviour:
   wheelFlatClip: {fileID: 8300000, guid: 26b58ff4d9777244a9095f50b4179eb7, type: 3}
   indicatorClip: {fileID: 8300000, guid: 64545518873b33e49b90fdf05c6ea7a6, type: 3}
   bumpClip: {fileID: 8300000, guid: 948b55abd80345b4aab96053dbe0c2ba, type: 3}
-  NOSClip: {fileID: 8300000, guid: 671ef8e2c38263640974ec49dc696f10, type: 3}
-  turboClip: {fileID: 8300000, guid: 7f48c51367eb26f4bb55673f28ae5404, type: 3}
+  NOSClip: {fileID: 0}
+  turboClip: {fileID: 0}
   blowoutClip:
   - {fileID: 8300000, guid: fe7d483597e1b604a8f6f21f68b9df07, type: 3}
   exhaustFlameClips:

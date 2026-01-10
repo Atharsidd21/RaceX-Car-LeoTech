@@ -61,6 +61,16 @@ public class MusicManager : MonoBehaviour
 
 
     }
+    public void ApplyMusicState()
+    {
+        bool musicOn = PlayerPrefs.GetInt("MusicEnabled", 1) == 1;
+
+        if (musicOn)
+            PlayMusic();
+        else
+            StopMusic();
+    }
+
     //For Buttons 
     public void PlayButtonClick()
     {

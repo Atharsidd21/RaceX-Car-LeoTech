@@ -81,6 +81,12 @@ public class Menu : MonoBehaviour
     public InputField enterNameInputFieldNameScreen;
 
     // public List<GameObject> playerListLeaderboard;
+    [Header("Audio Button")]
+    [SerializeField] private Button musicButton;
+    [SerializeField] private Image musicButtonImage;
+    [SerializeField] private Sprite musicOnSprite;
+    [SerializeField] private Sprite musicOffSprite;
+
     public AudioSource backGroundMusic;
 
     [Header("Timings")]
@@ -114,9 +120,11 @@ public class Menu : MonoBehaviour
      
 
         Debug.Log("Menu Start");
-      // PlayerPrefs.DeleteAll();
+        // PlayerPrefs.DeleteAll();
         // ALWAYS show splash first
         // StartCoroutine(SplashFlow());
+        UpdateMusicButtonUI();//for audio button
+
         MusicManager.Instance.PlayMusic();
 
      //   Time.timeScale = 1f;
@@ -547,61 +555,7 @@ public class Menu : MonoBehaviour
         UpdatePlayerProfileUI();
     }
 
-    //================ LEADERBOARD =================
-    /*  public void ShowLeaderboard(int rank)
-      {
-          List<string> aiNames = new List<string>(playerName);
-          List<Sprite> avatars = new List<Sprite>(avatarSprites);
-
-
-          bool isGuest = PlayerPrefs.GetInt(IsGuestKey, 0) == 1;
-
-          string playerUsername = PlayerPrefs.GetString(nameStr, fixedGuestName);
-          int playerAvatarIndex = PlayerPrefs.GetInt(PlayerAvatarKey, 0);
-
-          for (int i = 0; i < playerListLeaderboard.Count; i++)
-          {
-              GameObject row = playerListLeaderboard[i];
-
-              Text nameText = row.transform
-                  .GetChild(2)
-                  .GetChild(0)
-                  .GetComponent<Text>();
-
-              Image avatarImage = row.transform
-                  .GetChild(1)
-                  .GetComponent<Image>();
-
-              if (i == rank)
-              {
-                  // ✅ PLAYER / GUEST ROW
-                  nameText.text = playerUsername;
-
-                  if (isGuest)
-                  {
-                      // FIXED guest avatar
-                      avatarImage.sprite = fixedGuestAvatar;
-                  }
-                  else
-                  {
-                      // Player avatar from PlayerPrefs
-                      avatarImage.sprite = avatarSprites[playerAvatarIndex];
-                  }
-              }
-              else
-              {
-                  // ✅ AI ROW (unchanged)
-                  int ind = Random.Range(0, aiNames.Count);
-                  nameText.text = aiNames[ind];
-                  aiNames.RemoveAt(ind);
-
-                  avatarImage.sprite = avatarSprites[
-                      Random.Range(0, avatarSprites.Length)
-                  ];
-              }
-          }
-      }*/
-
+   
 
     // ================= NAVIGATION =================
     public void GarageBtnClicked()
@@ -659,10 +613,29 @@ public class Menu : MonoBehaviour
         MainMenuPanel.SetActive(false);
         LevelPanel.SetActive(false);
         // OptionPanel.SetActive(false);
-        //  LeaderboardPanel.SetActive(false);
+    }
+    // For on/off music button
+    public void OnMusicButtonClicked()
+    {
+        bool isMusicOn = PlayerPrefs.GetInt("MusicEnabled", 1) == 1;
+
+        isMusicOn = !isMusicOn; // toggle
+
+        PlayerPrefs.SetInt("MusicEnabled", isMusicOn ? 1 : 0);
+        PlayerPrefs.Save();
+
+        MusicManager.Instance.ApplyMusicState();
+        UpdateMusicButtonUI();
+    }
+    private void UpdateMusicButtonUI()
+    {
+        bool isMusicOn = PlayerPrefs.GetInt("MusicEnabled", 1) == 1;
+
+        musicButtonImage.sprite = isMusicOn
+            ? musicOnSprite
+            : musicOffSprite;
     }
 
-    // ================= DEBUG =================
     public void DebugPlayerPrefsLocation()
     {
         Debug.Log($"PlayerPrefs Path (Editor): HKEY_CURRENT_USER\\Software\\Unity\\UnityEditor\\{Application.companyName}\\{Application.productName}");

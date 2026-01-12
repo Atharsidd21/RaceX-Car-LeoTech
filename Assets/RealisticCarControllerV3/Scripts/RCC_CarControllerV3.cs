@@ -553,12 +553,12 @@ public class RCC_CarControllerV3 : RCC_Core {
 
             case AudioType.TwoSource:
 
-                engineSoundHigh = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound High AudioSource", 5, 50, 0, engineClipHigh, true, true, false);
+                engineSoundHigh = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound High AudioSource", 5, 50, 0,engineClipHigh, true, true, false);
                 engineSoundLow = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound Low AudioSource", 5, 25, 0, engineClipLow, true, true, false);
 
                 if (autoCreateEngineOffSounds) {
 
-                    engineSoundHighOff = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound High Off AudioSource", 5, 50, 0, engineClipHigh, true, true, false);
+                    engineSoundHighOff = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound High Off AudioSource",  5, 50, 0, engineClipHigh, true, true, false);
                     engineSoundLowOff = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound Low Off AudioSource", 5, 25, 0, engineClipLow, true, true, false);
 
                     NewLowPassFilter(engineSoundHighOff, 3000f);
@@ -566,7 +566,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
                 } else {
 
-                    engineSoundHighOff = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound High Off AudioSource", 5, 50, 0, engineClipHighOff, true, true, false);
+                    engineSoundHighOff = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound High Off AudioSource",  5, 50, 0, engineClipHighOff, true, true, false);
                     engineSoundLowOff = NewAudioSource(RCC_Settings.Instance.audioMixer, gameObject, engineSoundPosition, "Engine Sound Low Off AudioSource", 5, 25, 0, engineClipLowOff, true, true, false);
 
                 }

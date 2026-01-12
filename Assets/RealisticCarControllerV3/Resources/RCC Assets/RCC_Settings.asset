@@ -297,8 +297,7 @@ MonoBehaviour:
   bumpClip: {fileID: 8300000, guid: 948b55abd80345b4aab96053dbe0c2ba, type: 3}
   NOSClip: {fileID: 0}
   turboClip: {fileID: 0}
-  blowoutClip:
-  - {fileID: 8300000, guid: fe7d483597e1b604a8f6f21f68b9df07, type: 3}
+  blowoutClip: []
   exhaustFlameClips:
   - {fileID: 8300000, guid: a8cfbfa0153a85c4da8402ee5479a3de, type: 3}
   - {fileID: 8300000, guid: abe24e1d59cd24e48ab2b17acb6b57ff, type: 3}

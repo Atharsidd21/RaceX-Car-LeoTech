@@ -1775,7 +1775,7 @@ GameObject:
   - component: {fileID: 5353621219552373469}
   m_Layer: 9
   m_Name: RCCExhaustFlame
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: -7310811918437815874, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7350,7 +7350,7 @@ GameObject:
   - component: {fileID: 4167940472369383405}
   m_Layer: 9
   m_Name: RCCExhaust
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12347,7 +12347,7 @@ GameObject:
   - component: {fileID: 1751570315915942161}
   m_Layer: 9
   m_Name: RCCExhaustFlame
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: -7310811918437815874, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17492,7 +17492,7 @@ GameObject:
   - component: {fileID: 6496970305155171241}
   m_Layer: 9
   m_Name: Chassis
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17976,7 +17976,7 @@ GameObject:
   - component: {fileID: 2785694173365967746}
   m_Layer: 9
   m_Name: HoodCamera
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19138,7 +19138,7 @@ GameObject:
   - component: {fileID: 3803035349525668658}
   m_Layer: 9
   m_Name: RCCExhaust
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24454,21 +24454,21 @@ MonoBehaviour:
   changingGear: 0
   direction: 1
   launched: 0
-  audioType: 2
+  audioType: 0
   autoCreateEngineOffSounds: 0
   engineStartClip: {fileID: 8300000, guid: 8d3ddfbc69660b342b48f88b496dedee, type: 3}
-  engineClipHigh: {fileID: 8300000, guid: 09992d57ed272e241954ca186b66de71, type: 3}
+  engineClipHigh: {fileID: 0}
   engineClipMed: {fileID: 8300000, guid: 11b8d68de272edd428b21db3ab991f36, type: 3}
   engineClipLow: {fileID: 8300000, guid: cd879aa0fe04e18478728c5d2777ef89, type: 3}
-  engineClipIdle: {fileID: 8300000, guid: 3bf3833d4b5c3a341aed92089f471bcd, type: 3}
-  engineClipHighOff: {fileID: 8300000, guid: dd31934351e19ce49a9953b1e10de387, type: 3}
+  engineClipIdle: {fileID: 0}
+  engineClipHighOff: {fileID: 0}
   engineClipMedOff: {fileID: 8300000, guid: e36a638ec1a8cb641840c735ffd4750b, type: 3}
   engineClipLowOff: {fileID: 8300000, guid: 9cc20a291fb4d3e44ad9684aa575e0a4, type: 3}
-  minEngineSoundPitch: 0.75
-  maxEngineSoundPitch: 1.75
-  minEngineSoundVolume: 0.05
-  maxEngineSoundVolume: 0.5
-  idleEngineSoundVolume: 0.5
+  minEngineSoundPitch: 0
+  maxEngineSoundPitch: 1
+  minEngineSoundVolume: 0
+  maxEngineSoundVolume: 0
+  idleEngineSoundVolume: 0
   engineSoundPosition: {x: 0, y: 0, z: 1.5}
   gearSoundPosition: {x: 0, y: -0.5, z: 0.5}
   turboSoundPosition: {x: 0, y: 0, z: 1.5}
@@ -24707,9 +24707,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fad92a8cbfa70548864903e49c5b702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarController
-  CarName: Car 3
+  CarName: M3_E46
   CarPrice: 0
-  rotationSpeed: 0
 --- !u!1 &7210384726281488634
 GameObject:
   m_ObjectHideFlags: 0

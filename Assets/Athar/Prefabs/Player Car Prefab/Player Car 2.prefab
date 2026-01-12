@@ -455,7 +455,7 @@ MonoBehaviour:
   changingGear: 0
   direction: 1
   launched: 0
-  audioType: 1
+  audioType: 0
   autoCreateEngineOffSounds: 1
   engineStartClip: {fileID: 8300000, guid: 8d3ddfbc69660b342b48f88b496dedee, type: 3}
   engineClipHigh: {fileID: 8300000, guid: 28496c4e545fa334f9c5c7e0d05fb127, type: 3}
@@ -618,7 +618,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarController
   CarName: Car 2
   CarPrice: 1500
-  rotationSpeed: 0
 --- !u!1 &377437617257554764
 GameObject:
   m_ObjectHideFlags: 0

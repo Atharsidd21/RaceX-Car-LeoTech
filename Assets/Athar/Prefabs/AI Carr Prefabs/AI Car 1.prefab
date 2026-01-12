@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5256204273452222863}
   - component: {fileID: 5859347815851548837}
   - component: {fileID: 2139804062391115965}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Right Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 6121955108690781918}
   - component: {fileID: 5781191974350404907}
   - component: {fileID: 116609621964685614}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Left Fender
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 8304793711995166203}
   - component: {fileID: 2361097415321664137}
   - component: {fileID: 508782406026291896}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Wheel_FL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -471,7 +471,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 373378937069350018}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -506,7 +506,7 @@ GameObject:
   - component: {fileID: 2578604519012616782}
   - component: {fileID: 8325807761254004513}
   - component: {fileID: 1641451633105078204}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Wheel_FR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -599,7 +599,7 @@ GameObject:
   - component: {fileID: 3689083167033936064}
   - component: {fileID: 4805172044739386835}
   - component: {fileID: 3083738280094881393}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Wheel_RR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -716,7 +716,7 @@ GameObject:
   - component: {fileID: 1306109884189955132}
   - component: {fileID: 6091802950438573610}
   - component: {fileID: 7296566874173985097}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Left Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -984,7 +984,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 422042220921161430}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: COM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1017,7 +1017,7 @@ GameObject:
   - component: {fileID: 700168856622021344}
   - component: {fileID: 8186024755904045915}
   - component: {fileID: 5786317756543625604}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Rear Sidewindows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1113,7 +1113,7 @@ GameObject:
   - component: {fileID: 1975821049599621737}
   - component: {fileID: 6537895328270635112}
   - component: {fileID: 3124150760457194784}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: AI Car 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1361,7 +1361,7 @@ MonoBehaviour:
   changingGear: 0
   direction: 1
   launched: 0
-  audioType: 1
+  audioType: 3
   autoCreateEngineOffSounds: 1
   engineStartClip: {fileID: 8300000, guid: 8d3ddfbc69660b342b48f88b496dedee, type: 3}
   engineClipHigh: {fileID: 8300000, guid: 9192d467dbc90404aa454b6323443019, type: 3}
@@ -1371,11 +1371,11 @@ MonoBehaviour:
   engineClipHighOff: {fileID: 0}
   engineClipMedOff: {fileID: 0}
   engineClipLowOff: {fileID: 0}
-  minEngineSoundPitch: 0.75
-  maxEngineSoundPitch: 1.75
-  minEngineSoundVolume: 0.05
-  maxEngineSoundVolume: 0.85
-  idleEngineSoundVolume: 0.85
+  minEngineSoundPitch: 0
+  maxEngineSoundPitch: 1
+  minEngineSoundVolume: 0
+  maxEngineSoundVolume: 0
+  idleEngineSoundVolume: 0
   engineSoundPosition: {x: 0, y: 0, z: 1.5}
   gearSoundPosition: {x: 0, y: -0.5, z: 0.5}
   turboSoundPosition: {x: 0, y: 0, z: 1.5}
@@ -1567,9 +1567,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fad92a8cbfa70548864903e49c5b702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarController
-  CarName: Car 1
+  CarName: Coupe
   CarPrice: 0
-  rotationSpeed: 0
 --- !u!1 &1977677387730880894
 GameObject:
   m_ObjectHideFlags: 0
@@ -1579,7 +1578,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9126916804933641423}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Wheel Models
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1617,9 +1616,9 @@ GameObject:
   - component: {fileID: 8560046421808469875}
   - component: {fileID: 2721655668084114128}
   - component: {fileID: 3194595542213830030}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: RCCExhaust
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6335,7 +6334,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1258339650545426070}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: COM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6369,9 +6368,9 @@ GameObject:
   - component: {fileID: 6284948325237245758}
   - component: {fileID: 3117215559417114065}
   - component: {fileID: 626678237715698838}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: HoodCamera
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6542,7 +6541,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7732603954425555566}
   - component: {fileID: 6677189669255372095}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: WheelCamera
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
@@ -6587,7 +6586,7 @@ GameObject:
   - component: {fileID: 8810069861040928727}
   - component: {fileID: 2408268888203292910}
   - component: {fileID: 3738340541931704270}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Brake Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6816,7 +6815,7 @@ GameObject:
   - component: {fileID: 5270642811503089446}
   - component: {fileID: 7551874433331400573}
   - component: {fileID: 8825824969347840962}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Front Bumper Lip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6907,7 +6906,7 @@ GameObject:
   - component: {fileID: 1945800925709586331}
   - component: {fileID: 5883621151727618325}
   - component: {fileID: 6364496486332285011}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Rear Sidemarkers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7139,7 +7138,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5581096644961765034}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: COM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7313,9 +7312,10 @@ GameObject:
   - component: {fileID: 1185459246718205925}
   - component: {fileID: 736567671076403237}
   - component: {fileID: 9201894261389394455}
-  m_Layer: 8
+  - component: {fileID: 2422172846035231243}
+  m_Layer: 9
   m_Name: RCCExhaustFlame
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: -7310811918437815874, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12087,6 +12087,35 @@ LensFlare:
     serializedVersion: 2
     m_Bits: 6
   m_Directional: 0
+--- !u!114 &2422172846035231243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4711461454103507012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_CustomShadowLayers: 0
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
 --- !u!1 &4797766108704308147
 GameObject:
   m_ObjectHideFlags: 0
@@ -12098,7 +12127,7 @@ GameObject:
   - component: {fileID: 7613210184772587117}
   - component: {fileID: 9045604646647556705}
   - component: {fileID: 5443773216120469279}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Wheel_FR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12498,7 +12527,7 @@ GameObject:
   - component: {fileID: 8381812675715365079}
   - component: {fileID: 1764233230885655795}
   - component: {fileID: 6244187392095171226}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Hood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12762,7 +12791,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5268056714465738682}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12797,7 +12826,7 @@ GameObject:
   - component: {fileID: 8597705905091905358}
   - component: {fileID: 8573637522370902242}
   - component: {fileID: 3976705678039718753}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Wheel_RR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12894,7 +12923,7 @@ GameObject:
   - component: {fileID: 6718994190115806781}
   - component: {fileID: 7350187691411547153}
   - component: {fileID: 275443796235927837}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Front Bumper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13163,7 +13192,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9078960137368029301}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13204,7 +13233,7 @@ GameObject:
   - component: {fileID: 7012185289603093846}
   - component: {fileID: 321674655565069398}
   - component: {fileID: 8739829874176106285}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Rear Bumper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13470,6 +13499,7 @@ GameObject:
   - component: {fileID: 388516602289772018}
   - component: {fileID: 2895786644579527356}
   - component: {fileID: 8103826759378117945}
+  - component: {fileID: 7504536857259166282}
   m_Layer: 0
   m_Name: ReverseLight_D
   m_TagString: Untagged
@@ -13597,6 +13627,35 @@ LensFlare:
     serializedVersion: 2
     m_Bits: 3334
   m_Directional: 0
+--- !u!114 &7504536857259166282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6217456962217362223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_CustomShadowLayers: 0
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
 --- !u!1 &6815194728406684088
 GameObject:
   m_ObjectHideFlags: 0
@@ -13750,7 +13809,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 953984649129787940}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: COM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13785,9 +13844,10 @@ GameObject:
   - component: {fileID: 7109175360456686885}
   - component: {fileID: 3860664731207989229}
   - component: {fileID: 7521567091625829015}
-  m_Layer: 8
+  - component: {fileID: 741335687249688703}
+  m_Layer: 9
   m_Name: RCCExhaustFlame
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: -7310811918437815874, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18559,6 +18619,35 @@ LensFlare:
     serializedVersion: 2
     m_Bits: 6
   m_Directional: 0
+--- !u!114 &741335687249688703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7088848597902490760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_CustomShadowLayers: 0
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
 --- !u!1 &7207959595957883270
 GameObject:
   m_ObjectHideFlags: 0
@@ -18568,7 +18657,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 939632482399250906}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Wheel Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18609,7 +18698,7 @@ GameObject:
   - component: {fileID: 6543880762056351078}
   - component: {fileID: 5387757748525817281}
   - component: {fileID: 3383404774712997538}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Trunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18878,7 +18967,7 @@ GameObject:
   - component: {fileID: 5662314139522480270}
   - component: {fileID: 8887165862724218965}
   - component: {fileID: 8790111303415452881}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Front Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18968,7 +19057,7 @@ GameObject:
   - component: {fileID: 6885972670940419203}
   - component: {fileID: 9211762366550038826}
   - component: {fileID: 6752302773558554401}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Wheel_RL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19062,7 +19151,7 @@ GameObject:
   - component: {fileID: 7705397917760057824}
   - component: {fileID: 5131502497698325974}
   - component: {fileID: 7043456759404011324}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19181,7 +19270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9042902822242296566}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Coupe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19228,7 +19317,7 @@ GameObject:
   - component: {fileID: 6620441245501363505}
   - component: {fileID: 8875445370735928324}
   - component: {fileID: 4424611894949328403}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Chrome Parts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19318,7 +19407,7 @@ GameObject:
   - component: {fileID: 4451935477681809043}
   - component: {fileID: 5791891236390887594}
   - component: {fileID: 8425399184941022619}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Wheel_RL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19432,6 +19521,7 @@ GameObject:
   - component: {fileID: 5726224616551969208}
   - component: {fileID: 5278456372369000090}
   - component: {fileID: 6909025392255259400}
+  - component: {fileID: 3971821177332695845}
   m_Layer: 0
   m_Name: ReverseLight
   m_TagString: Untagged
@@ -19559,6 +19649,35 @@ LensFlare:
     serializedVersion: 2
     m_Bits: 3334
   m_Directional: 0
+--- !u!114 &3971821177332695845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7952930696772606663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_CustomShadowLayers: 0
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
 --- !u!1 &8277708860146751145
 GameObject:
   m_ObjectHideFlags: 0
@@ -19568,7 +19687,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1988344004719293047}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Exhausts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19603,7 +19722,7 @@ GameObject:
   - component: {fileID: 212425960913933428}
   - component: {fileID: 8542535144934291602}
   - component: {fileID: 3242230268835425695}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Wheel_FL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19714,7 +19833,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8608337011839301116}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: COM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19748,9 +19867,9 @@ GameObject:
   - component: {fileID: 4678023635563670489}
   - component: {fileID: 3088749254944353533}
   - component: {fileID: 49105220683443871}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: RCCExhaust
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24468,7 +24587,7 @@ GameObject:
   - component: {fileID: 1227479392034901320}
   - component: {fileID: 5022273376507248397}
   - component: {fileID: 960215170546295411}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Right Fender
   m_TagString: Untagged
   m_Icon: {fileID: 0}

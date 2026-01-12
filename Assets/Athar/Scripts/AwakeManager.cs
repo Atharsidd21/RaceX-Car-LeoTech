@@ -26,7 +26,7 @@ public class AwakeManager : MonoBehaviour
     //public GameObject StartBtnBtn;
     public GameObject Player;
     public GameObject CurrentCar;
-  //  [SerializeField] private PlayerProfileView selectCarProfileView;
+    //  [SerializeField] private PlayerProfileView selectCarProfileView;
 
 
 
@@ -34,7 +34,7 @@ public class AwakeManager : MonoBehaviour
 
     private void Awake()
     {
-       // PlayerProfileController.Instance?.RefreshProfile(selectCarProfileView);
+        // PlayerProfileController.Instance?.RefreshProfile(selectCarProfileView);
 
         // Play background music
         MusicManager.Instance.PlayMusic();

@@ -112,12 +112,12 @@ public class Menu : MonoBehaviour
         else
             Destroy(gameObject);
         DebugPlayerPrefsLocation();
-      //  Debug.unityLogger.logEnabled = false;
+        //  Debug.unityLogger.logEnabled = false;
     }
 
     private void Start()
     {
-     
+
 
         Debug.Log("Menu Start");
         // PlayerPrefs.DeleteAll();
@@ -127,7 +127,7 @@ public class Menu : MonoBehaviour
 
         MusicManager.Instance.PlayMusic();
 
-     //   Time.timeScale = 1f;
+        //   Time.timeScale = 1f;
 
         // Always hide panels initially
         // SplashScreen.SetActive(false);
@@ -330,11 +330,11 @@ public class Menu : MonoBehaviour
             MainMenuPanel.SetActive(true);
             UpdatePlayerProfileUI();
         }
-      /*  MainMenuPanel.SetActive(true);
-        UpdatePlayerProfileUI();   // REQUIRED
-        EditProfilePanel.SetActive(false);
-        LoadPlayerProfile();
-        LoadEditProfileData();*/
+        /*  MainMenuPanel.SetActive(true);
+          UpdatePlayerProfileUI();   // REQUIRED
+          EditProfilePanel.SetActive(false);
+          LoadPlayerProfile();
+          LoadEditProfileData();*/
     }
 
     public void PlayAsGuest()
@@ -555,7 +555,7 @@ public class Menu : MonoBehaviour
         UpdatePlayerProfileUI();
     }
 
-   
+
 
     // ================= NAVIGATION =================
     public void GarageBtnClicked()

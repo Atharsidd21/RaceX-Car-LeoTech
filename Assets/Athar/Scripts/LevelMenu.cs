@@ -23,35 +23,26 @@ public class LevelMenu : MonoBehaviour
     {
         foreach (LevelItem item in levels)
         {
-            bool canUnlock = PlayerPrefs.GetInt($"LevelUnlocked_{item.levelBuildIndex}", 0) == 1;
             bool isOpened = PlayerPrefs.GetInt($"LevelOpened_{item.levelBuildIndex}", 0) == 1;
 
-            // Remove old listeners
+            // Clear old listeners
             item.levelButton.onClick.RemoveAllListeners();
-            item.lockButton.onClick.RemoveAllListeners();
 
             // DEFAULT STATE
             item.levelButton.interactable = false;
-            item.lockButton.interactable = false;
 
             if (!isOpened)
             {
-                // 🔒 Still locked
-                item.lockButton.gameObject.SetActive(true);
-
-                if (canUnlock)
-                {
-                    // 🔓 Lock button is now clickable
-                    item.lockButton.interactable = true;
-
-                    int indexCopy = item.levelBuildIndex;
-                    item.lockButton.onClick.AddListener(() => UnlockLevel(indexCopy));
-                }
+                // 🔒 Still locked → show lock
+                if (item.lockButton != null)
+                    item.lockButton.gameObject.SetActive(true);
             }
             else
             {
-                // ✅ Level already opened
-                item.lockButton.gameObject.SetActive(false);
+                // ✅ Level unlocked → remove lock & enable level
+                if (item.lockButton != null)
+                    Destroy(item.lockButton.gameObject);
+
                 item.levelButton.interactable = true;
 
                 int indexCopy = item.levelBuildIndex;
@@ -60,7 +51,8 @@ public class LevelMenu : MonoBehaviour
         }
     }
 
-    void UnlockLevel(int levelIndex)
+
+  /*  void UnlockLevel(int levelIndex)
     {
         // Mark level as opened
         PlayerPrefs.SetInt($"LevelOpened_{levelIndex}", 1);
@@ -68,7 +60,7 @@ public class LevelMenu : MonoBehaviour
 
         // Refresh UI
         SetupLevels();
-    }
+    }*/
 
     public void OpenLevel(int levelIndex)
     {

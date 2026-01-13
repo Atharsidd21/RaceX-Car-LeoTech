@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 
 public class MusicManager : MonoBehaviour
@@ -27,12 +28,30 @@ public class MusicManager : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
     }
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        ApplyMusicState();
+    }
+    /* public void PlayMusic()
+     {
+         if (!audioSource.isPlaying)
+             audioSource.Play();
+     }*/
     public void PlayMusic()
     {
-        if (!audioSource.isPlaying)
-            audioSource.Play();
+        ApplyMusicState();
     }
+
 
     public void StopMusic()
     {
@@ -61,15 +80,30 @@ public class MusicManager : MonoBehaviour
 
 
     }
+    /*  public void ApplyMusicState()
+      {
+          bool musicOn = PlayerPrefs.GetInt("MusicEnabled", 1) == 1;
+
+          if (musicOn)
+              PlayMusic();
+          else
+              StopMusic();
+      }*/
     public void ApplyMusicState()
     {
         bool musicOn = PlayerPrefs.GetInt("MusicEnabled", 1) == 1;
 
         if (musicOn)
-            PlayMusic();
+        {
+            if (!audioSource.isPlaying)
+                audioSource.Play();
+        }
         else
-            StopMusic();
+        {
+            audioSource.Stop();
+        }
     }
+
 
     //For Buttons 
     public void PlayButtonClick()

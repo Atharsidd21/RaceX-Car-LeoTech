@@ -4581,8 +4581,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scroller
   _img: {fileID: 1066609010}
-  _x: 0.01
-  _y: 0.01
+  _x: 0.02
+  _y: 0.02
 --- !u!225 &1066609009
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -11458,7 +11458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SceneTransition
   slideOverlay: {fileID: 1066609007}
   slideDuration: 0.35
-  holdTime: 3
+  holdTime: 1
 --- !u!1 &3013459172081280995
 GameObject:
   m_ObjectHideFlags: 0

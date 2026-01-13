@@ -560,7 +560,13 @@ public class Menu : MonoBehaviour
     // ================= NAVIGATION =================
     public void GarageBtnClicked()
     {
-        SceneManager.LoadScene("SelectCar");
+        //SceneManager.LoadScene("SelectCar");
+        //SceneTransition.LoadScene("SelectCar"); Transition 1
+         SceneTransition.Instance.LoadSceneSlide(1, true); //Transition 2
+       // SceneTransition.Instance.LoadSceneFast(1);
+
+
+
     }
 
     public void LevelsBtnClicked()

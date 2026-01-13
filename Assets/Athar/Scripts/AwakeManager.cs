@@ -156,7 +156,11 @@ public class AwakeManager : MonoBehaviour
             //int sceneInd = PlayerPrefs.GetInt(Menu.SelectedLevel, 2);
             //OnClickLetsPlayBtn();
             PlayerPrefs.SetInt(Menu.GotoLevelSelection, 1);
-            SceneManager.LoadScene(0);// sceneInd);
+            //SceneManager.LoadScene(0);// sceneInd);
+            //  SceneTransition.Instance.LoadScene(0); Transition 1
+            SceneTransition.Instance.LoadSceneSlide(0, true); //Transition 2
+
+
         }
     }
 
@@ -218,6 +222,10 @@ public class AwakeManager : MonoBehaviour
     public void OnClickBackBtn()
     {
         PlayerPrefs.SetInt(Menu.GotoHome, 1);
-        SceneManager.LoadScene(0);
+        // SceneManager.LoadScene(0);
+        // SceneTransition.Instance.LoadScene(0); Transition 1
+         SceneTransition.Instance.LoadSceneSlide(0, true); //Transition 2
+
+
     }
 }

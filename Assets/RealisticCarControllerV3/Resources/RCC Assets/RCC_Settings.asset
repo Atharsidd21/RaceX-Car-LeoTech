@@ -17,10 +17,10 @@ MonoBehaviour:
   overrideFPS: 1
   overrideFixedTimeStep: 1
   fixedTimeStep: 0.01
-  maxAngularVelocity: 8
+  maxAngularVelocity: 12
   maxFPS: 60
   useFixedWheelColliders: 1
-  lockAndUnlockCursor: 1
+  lockAndUnlockCursor: 0
   behaviorTypes:
   - behaviorName: Simulator
     steeringHelper: 1
@@ -83,7 +83,7 @@ MonoBehaviour:
     counterSteeringMinimum: 0.1
     counterSteeringMaximum: 0.5
     steeringSensitivityMinimum: 0.5
-    steeringSensitivityMaximum: 1
+    steeringSensitivityMaximum: 1.3
     steerHelperAngularVelStrengthMinimum: 0.25
     steerHelperAngularVelStrengthMaximum: 1
     steerHelperLinearVelStrengthMinimum: 0.25

@@ -16,7 +16,8 @@ public class End : MonoBehaviour
 
     [Header("Lap Safety")]
     [SerializeField] private float lapTriggerCooldown = 2f;
-    private float lastLapTime = -10f;
+    [SerializeField] private float lastLapTime = -10f;
+
 
 
 
@@ -84,12 +85,17 @@ public class End : MonoBehaviour
                     return;
 
                 playerLapCount++;
-                UpdateLapUI();
-
-                // NOT final lap ? just continue race
-                if (playerLapCount < totalLaps)
+                // If player just finished the FINAL lap
+                if (playerLapCount >= totalLaps)
                 {
-                    Debug.Log($" {playerLapCount}/{totalLaps}");
+                    // Clamp UI to max lap
+                    if (lapText != null)
+                        lapText.text = $"{totalLaps} / {totalLaps}";
+                }
+                else
+                {
+                    // Normal lap update
+                    UpdateLapUI();
                     return;
                 }
 
@@ -104,7 +110,7 @@ public class End : MonoBehaviour
                 Debug.Log("PLAYER FINISH RANK = " + rank);
 
                 PlayerPrefs.SetInt(Menu.LeaderboardRank, rank);
-               // PlayerPrefs.SetInt(Menu.ShowLeaderBoard, 1);
+                // PlayerPrefs.SetInt(Menu.ShowLeaderBoard, 1);
                 PlayerPrefs.Save();
                 // FOR LEVEL LOCK/UNLOCK THIS BLOCK HERE
                 if (rank <= 2)
@@ -117,7 +123,7 @@ public class End : MonoBehaviour
                 }
                 GameManager.Instance.RewardPlayerByRank(rank);
 
-               // GameManager.Instance.ShowLeaderboardUI(rank);
+                // GameManager.Instance.ShowLeaderboardUI(rank);
                 CarSpawn.instance.owncar.GetComponent<Controller>().OnGameOver();
             }
 

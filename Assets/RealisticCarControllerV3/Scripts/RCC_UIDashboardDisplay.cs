@@ -11,6 +11,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// Handles RCC Canvas dashboard elements.
@@ -30,7 +31,9 @@ public class RCC_UIDashboardDisplay : MonoBehaviour {
     public GameObject customizationMenu;
 
     public Text RPMLabel;
-    public Text KMHLabel;
+   // public Text KMHLabel;
+    public TMP_Text KMHLabel;
+
     public Text GearLabel;
     public Text recordingLabel;
 

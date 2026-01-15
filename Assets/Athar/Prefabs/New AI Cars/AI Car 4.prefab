@@ -22001,7 +22001,7 @@ MonoBehaviour:
   useCounterSteering: 1
   useSteeringSensitivity: 1
   counterSteeringFactor: 0.5
-  steeringSensitivityFactor: 1
+  steeringSensitivityFactor: 0.4
   oldSteeringInput: 0
   steeringDifference: 0
   useFuelConsumption: 1

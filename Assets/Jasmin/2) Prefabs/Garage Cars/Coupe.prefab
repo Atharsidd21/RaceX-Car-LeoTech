@@ -16269,7 +16269,7 @@ GameObject:
   - component: {fileID: 4493774594652649356}
   - component: {fileID: 4493774594652649357}
   - component: {fileID: 4493774594652649358}
-  - component: {fileID: 2163452409114872226}
+  - component: {fileID: 76508544201550278}
   m_Layer: 9
   m_Name: Coupe
   m_TagString: Player
@@ -16669,7 +16669,7 @@ MonoBehaviour:
   useNOS: 1
   useTurbo: 1
   attachedTrailer: {fileID: 0}
---- !u!114 &2163452409114872226
+--- !u!114 &76508544201550278
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

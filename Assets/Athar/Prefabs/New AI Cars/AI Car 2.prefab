@@ -6619,7 +6619,7 @@ MonoBehaviour:
   raycastAngle: 30
   obstacleLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 32768
   obstacle: {fileID: 0}
   useRaycasts: 1
   steerInput: 0

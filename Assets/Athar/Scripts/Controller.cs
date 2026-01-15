@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Controller : MonoBehaviour
 {
-    public AudioSource engineAudio;
+   public AudioSource engineAudio;
 
     [Header("Wheels")]
     [SerializeField] GameObject Fl_Wheel;
@@ -77,14 +77,14 @@ public class Controller : MonoBehaviour
 
     private bool isStopped = false;
 
-    /*Slow down method 
+    //Slow down method 
     [Header("Damage Speed Slow")]
     [SerializeField] float damagedMaxSpeed = 20f; // temporary speed after hit
     [SerializeField] float slowDuration = 2f;
 
     private bool isSpeedLimited = false;
     private float originalMaxSpeed;
-    */
+    
 
 
 
@@ -280,7 +280,7 @@ public class Controller : MonoBehaviour
 
     public void OnGameOver()
     {
-        hasGameEnded = true;
+      hasGameEnded = true;
 
         if (engineAudio != null) engineAudio.Stop();
         if (driftAudio != null) driftAudio.Stop();
@@ -326,7 +326,7 @@ public class Controller : MonoBehaviour
 
         isStopped = false;
     }
-    /*Slow Down Method Implementation
+   // Slow Down Method Implementation
     public void ApplySlowDown()
     {
         if (isSpeedLimited) return;
@@ -343,7 +343,7 @@ public class Controller : MonoBehaviour
 
         MaxSpeed = originalMaxSpeed;
         isSpeedLimited = false;
-    }*/
+    }
 
 
 

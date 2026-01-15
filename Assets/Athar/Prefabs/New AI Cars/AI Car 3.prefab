@@ -10235,7 +10235,7 @@ MonoBehaviour:
   useCounterSteering: 1
   useSteeringSensitivity: 1
   counterSteeringFactor: 0.5
-  steeringSensitivityFactor: 0.436
+  steeringSensitivityFactor: 1
   oldSteeringInput: 0
   steeringDifference: 0
   useFuelConsumption: 1
@@ -10417,7 +10417,7 @@ MonoBehaviour:
   tractionHelper: 1
   angularDragHelper: 0
   ABSThreshold: 0.35
-  TCSStrength: 0.5
+  TCSStrength: 1
   ESPThreshold: 0.5
   ESPStrength: 0.1
   steerHelperLinearVelStrength: 0.1
@@ -10510,7 +10510,7 @@ MonoBehaviour:
   raycastAngle: 30
   obstacleLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 32768
   obstacle: {fileID: 0}
   useRaycasts: 1
   steerInput: 0
@@ -10522,7 +10522,7 @@ MonoBehaviour:
   smoothedSteer: 1
   lap: 0
   stopLap: 10
-  stopAfterLap: 0
+  stopAfterLap: 1
   totalWaypointPassed: 0
   nextWaypointPassDistance: 20
   ignoreWaypointNow: 0

@@ -417,8 +417,8 @@ public class GameManager : MonoBehaviour
         player.transform.position += offset;
 
         Controller controller = player.GetComponent<Controller>();
-        if (controller != null)
-            controller.ApplyStop();
+        if (controller != null) ;
+           // controller.ApplyStop();
     }
 
     public void HealCar()

@@ -16363,8 +16363,8 @@ MonoBehaviour:
     stepsBelowThreshold: 5
     stepsAboveThreshold: 5
   SteeringWheel: {fileID: 0}
-  steeringWheelRotateAround: 0
-  steeringWheelAngleMultiplier: 11
+  steeringWheelRotateAround: 1
+  steeringWheelAngleMultiplier: 0
   wheelTypeChoise: 1
   externalController: 0
   steeringType: 0
@@ -16475,10 +16475,10 @@ MonoBehaviour:
   useExhaustFlame: 1
   engineRunning: 0
   useSteeringLimiter: 1
-  useCounterSteering: 1
+  useCounterSteering: 0
   useSteeringSensitivity: 1
   counterSteeringFactor: 0.5
-  steeringSensitivityFactor: 1
+  steeringSensitivityFactor: 0.12
   oldSteeringInput: 0
   steeringDifference: 0
   useFuelConsumption: 1

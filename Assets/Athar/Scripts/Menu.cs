@@ -323,6 +323,8 @@ public class Menu : MonoBehaviour
             isEditingProfile = false;
             EditProfilePanel.SetActive(true);
             LoadEditProfileData();   // refresh avatar + name
+          //  LoadPlayerProfile();
+
         }
         else
         {
@@ -579,7 +581,9 @@ public class Menu : MonoBehaviour
 
     public void PlayButtonClicked()
     {
-        SceneManager.LoadScene(1);
+       // SceneManager.LoadScene(1);
+        SceneTransition.Instance.LoadSceneSlide(1, true); //Transition 2
+
     }
 
     public void BackBtnClicked()

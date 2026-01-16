@@ -30420,7 +30420,7 @@ MonoBehaviour:
   gauges: {fileID: 4615829795987162746}
   customizationMenu: {fileID: 6109326918307608246}
   RPMLabel: {fileID: 648003541127616513}
-  KMHLabel: {fileID: 1373224452917436864}
+  KMHLabel: {fileID: 0}
   GearLabel: {fileID: 5525514028457317617}
   recordingLabel: {fileID: 4081396176414970545}
   ABS: {fileID: 3280316617910932708}
@@ -30913,8 +30913,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b477654864da34a91765acf42d757f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneTransition
-  fadeGroup: {fileID: 1486801043340653249}
-  fadeDuration: 0.6
+  slideOverlay: {fileID: 2686433992222246479}
+  slideDuration: 0.35
+  holdTime: 0.5
 --- !u!222 &4417530215059350436
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -37142,7 +37143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &5476974656520497819
 GameObject:
   m_ObjectHideFlags: 0
@@ -54461,7 +54462,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &9007762714688255176
 MonoBehaviour:
   m_ObjectHideFlags: 0

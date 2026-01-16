@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     //Win/Loss Record
     private const string RACES_WON_KEY = "RacesWon";
     private const string RACES_LOST_KEY = "RacesLost";
+    [Header("RCC Controls Canvas")]
+    [SerializeField] private GameObject rccControlsCanvas;
 
     [Header("Leaderboard")]
     [SerializeField] private List<GameObject> playerListLeaderboard;
@@ -44,6 +46,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] float PopUpValue = 40f;
     [SerializeField] float PopUpDistance = 0.35f;
     [SerializeField] private Ease PopEase = Ease.OutBack;
+
+    [Header("Pause Panel Animation")]
+    [SerializeField] private float pauseFadeDuration = 0.25f;
+    [SerializeField] private float pausePopScale = 1f;
+    [SerializeField] private float pauseStartScale = 0.85f;
+    [SerializeField] private Ease pauseEase = Ease.OutBack;
+
 
     private RCC_Camera rccCamera;
 
@@ -174,8 +183,40 @@ public class GameManager : MonoBehaviour
 
 
 
-    public void ShowControlsUI()
+    /* public void ShowControlsUI()
 
+     {
+         if (playerControlsUI == null) return;
+
+         playerControlsUI.SetActive(true);
+
+         Canvas canvas = playerControlsUI.GetComponentInChildren<Canvas>(true);
+         if (canvas == null) return;
+
+         RectTransform rt = canvas.GetComponent<RectTransform>();
+         CanvasGroup cg = canvas.GetComponent<CanvasGroup>();
+
+         if (rt == null || cg == null) return;
+
+         // Kill previous tweens
+         DOTween.Kill(rt);
+         DOTween.Kill(cg);
+
+         // Initial state
+         cg.alpha = 0f;
+
+         Vector3 startPos = rt.anchoredPosition;
+         rt.anchoredPosition = startPos + new Vector3(0, -PopUpDistance);
+
+         // Fade in
+         cg.DOFade(1f, FadeDuration).SetUpdate(true);
+
+         // Small upward pop (THIS replaces scale)
+         rt.DOAnchorPos(startPos, PopUpValue)
+           .SetEase(PopEase)
+           .SetUpdate(true);
+     }*/
+    public void ShowControlsUI()
     {
         if (playerControlsUI == null) return;
 
@@ -189,22 +230,30 @@ public class GameManager : MonoBehaviour
 
         if (rt == null || cg == null) return;
 
-        // Kill previous tweens
+        // Kill previous tweens (important)
         DOTween.Kill(rt);
         DOTween.Kill(cg);
 
-        // Initial state
+        // Initial invisible state
         cg.alpha = 0f;
+        cg.interactable = false;
+        cg.blocksRaycasts = false;
 
-        Vector3 startPos = rt.anchoredPosition;
-        rt.anchoredPosition = startPos + new Vector3(0, -PopUpDistance);
+        Vector2 startPos = rt.anchoredPosition;
+        rt.anchoredPosition = startPos + new Vector2(0, -40f);
 
-        // Fade in
-        cg.DOFade(1f, FadeDuration).SetUpdate(true);
+        // Fade in (unscaled time)
+        cg.DOFade(1f, 0.25f)
+          .SetUpdate(true)
+          .OnComplete(() =>
+          {
+              cg.interactable = true;
+              cg.blocksRaycasts = true;
+          });
 
-        // Small upward pop (THIS replaces scale)
-        rt.DOAnchorPos(startPos, PopUpValue)
-          .SetEase(PopEase)
+        // Pop-up movement
+        rt.DOAnchorPos(startPos, 0.35f)
+          .SetEase(Ease.OutBack)
           .SetUpdate(true);
     }
 
@@ -234,6 +283,8 @@ public class GameManager : MonoBehaviour
 
         countdownImage.sprite = sprite1;
         AnimateCountdownImage();
+        // SHOW CONTROLS SMOOTHLY HERE
+        ShowControlsUI();
         yield return new WaitForSeconds(countdownDelay);
 
         countdownImage.sprite = spriteGo;
@@ -269,6 +320,14 @@ public class GameManager : MonoBehaviour
     {
         player = car;
         lastPosition = player.transform.position;
+
+        // Use RCC canvas as player controls UI
+        playerControlsUI = rccControlsCanvas;
+
+        if (playerControlsUI != null)
+        {
+            playerControlsUI.SetActive(false); // ensure hidden at start
+        }
         // Find controls UI inside spawned car
 
         /* Transform controls = player.transform.Find("ControlsUI");
@@ -417,8 +476,8 @@ public class GameManager : MonoBehaviour
         player.transform.position += offset;
 
         Controller controller = player.GetComponent<Controller>();
-        if (controller != null) ;
-           // controller.ApplyStop();
+        if (controller != null) 
+           controller.ApplyStop();
     }
 
     public void HealCar()
@@ -466,26 +525,117 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
+    //showing pause menu
+    private void ShowPausePanel()
+    {
+        if (PausePanel == null) return;
+
+        PausePanel.SetActive(true);
+
+        CanvasGroup cg = PausePanel.GetComponent<CanvasGroup>();
+        RectTransform rt = PausePanel.GetComponent<RectTransform>();
+
+        if (cg == null || rt == null) return;
+
+        // Kill previous tweens
+        DOTween.Kill(cg);
+        DOTween.Kill(rt);
+
+        // Initial state
+        cg.alpha = 0f;
+        cg.interactable = false;
+        cg.blocksRaycasts = false;
+
+        rt.localScale = Vector3.one * 0.75f;
+
+        // Fade in (unscaled time)
+        cg.DOFade(1f, 0.25f)
+          .SetUpdate(true)
+          .OnComplete(() =>
+          {
+              cg.interactable = true;
+              cg.blocksRaycasts = true;
+          });
+
+        // Pop effect
+        rt.DOScale(1f, 0.4f)
+          .SetEase(Ease.OutBack)
+          .SetUpdate(true);
+    }
+
+    //hiding pause menu
+    private void HidePausePanel()
+    {
+        if (PausePanel == null) return;
+
+        CanvasGroup cg = PausePanel.GetComponent<CanvasGroup>();
+        RectTransform rt = PausePanel.GetComponent<RectTransform>();
+
+        if (cg == null || rt == null) return;
+
+        DOTween.Kill(cg);
+        DOTween.Kill(rt);
+
+        cg.interactable = false;
+        cg.blocksRaycasts = false;
+
+        cg.DOFade(0f, 0.2f)
+          .SetUpdate(true);
+
+        rt.DOScale(0.85f, 0.2f)
+          .SetEase(Ease.InBack)
+          .SetUpdate(true)
+          .OnComplete(() =>
+          {
+              PausePanel.SetActive(false);
+          });
+    }
     public void OnClickPauseBtn()
     {
-        PausePanel.SetActive(true);
         PauseBtn.SetActive(false);
+
         player?.GetComponent<Controller>()?.OnPause();
+
         Time.timeScale = 0f;
+
         if (playerControlsUI != null)
             playerControlsUI.SetActive(false);
 
+        ShowPausePanel(); // ✅ animate ROOT
     }
-
     public void OnClickResumeBtn()
     {
-        PausePanel.SetActive(false);
+        HidePausePanel(); // ✅ animate ROOT
+
         PauseBtn.SetActive(true);
         Time.timeScale = 1f;
+
         player?.GetComponent<Controller>()?.OnResume();
-        if (playerControlsUI != null)
-            playerControlsUI.SetActive(true);
+
+        ShowControlsUI();
     }
+
+    /* public void OnClickPauseBtn()
+     {
+        PausePanel.SetActive(true);
+         PauseBtn.SetActive(false);
+         player?.GetComponent<Controller>()?.OnPause();
+         Time.timeScale = 0f;
+         if (playerControlsUI != null)
+             playerControlsUI.SetActive(false);
+
+     }
+
+     public void OnClickResumeBtn()
+     {
+
+       PausePanel.SetActive(false);
+         PauseBtn.SetActive(true);
+         Time.timeScale = 1f;
+         player?.GetComponent<Controller>()?.OnResume();
+         if (playerControlsUI != null)
+             playerControlsUI.SetActive(true);
+     }*/
 
     public void OnClickRestartBtn()
     {
@@ -495,8 +645,12 @@ public class GameManager : MonoBehaviour
 
     public void ExitBtn()
     {
+        Time.timeScale = 1f;
+
         PlayerPrefs.SetInt(Menu.GotoHome, 1);
-        SceneManager.LoadSceneAsync(0);
+      //  SceneManager.LoadSceneAsync(0);
+        SceneTransition.Instance.LoadSceneSlide(0, true); //Transition 2
+
     }
 
     public void OnClickNextLevelBtn()

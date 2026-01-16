@@ -52,10 +52,9 @@ public class SceneTransition : MonoBehaviour
         slideOverlay.gameObject.SetActive(true);
 
         float dir = slideLeft ? 1f : -1f;
-
         Vector2 startPos = new Vector2(-screenWidth * dir, 0);
         Vector2 endPos = Vector2.zero;
-        Vector2 exitPos = new Vector2(screenWidth * dir, 0);
+        Vector2 exitPos = new Vector2(-screenWidth * dir,0);
 
         // Start offscreen
         slideOverlay.anchoredPosition = startPos;

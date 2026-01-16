@@ -23,6 +23,9 @@ public class LevelMenu : MonoBehaviour
     {
         foreach (LevelItem item in levels)
         {
+            Debug.Log($"Level {item.levelBuildIndex} Opened = " +
+          PlayerPrefs.GetInt($"LevelOpened_{item.levelBuildIndex}", 0));
+
             bool isOpened = PlayerPrefs.GetInt($"LevelOpened_{item.levelBuildIndex}", 0) == 1;
 
             // Clear old listeners

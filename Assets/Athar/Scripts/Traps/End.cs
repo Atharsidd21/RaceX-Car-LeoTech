@@ -118,7 +118,7 @@ public class End : MonoBehaviour
                     int currentLevel = SceneManager.GetActiveScene().buildIndex;
                     int nextLevel = currentLevel + 1;
 
-                    PlayerPrefs.SetInt($"LevelUnlocked_{nextLevel}", 1);
+                    PlayerPrefs.SetInt($"LevelOpened_{nextLevel}", 1);
                     PlayerPrefs.Save();
                 }
                 GameManager.Instance.RewardPlayerByRank(rank);

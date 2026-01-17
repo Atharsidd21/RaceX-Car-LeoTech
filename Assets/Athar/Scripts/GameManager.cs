@@ -476,8 +476,8 @@ public class GameManager : MonoBehaviour
         player.transform.position += offset;
 
         Controller controller = player.GetComponent<Controller>();
-        if (controller != null) 
-           controller.ApplyStop();
+        if (controller != null)
+            controller.ApplyStop();
     }
 
     public void HealCar()
@@ -648,7 +648,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
 
         PlayerPrefs.SetInt(Menu.GotoHome, 1);
-      //  SceneManager.LoadSceneAsync(0);
+        //  SceneManager.LoadSceneAsync(0);
         SceneTransition.Instance.LoadSceneSlide(0, true); //Transition 2
 
     }
@@ -776,6 +776,8 @@ public class GameManager : MonoBehaviour
     }
     public void ShowLeaderboardUI(int rank)
     {
+        Debug.Log("[GAMEMANAGER] Showing leaderboard with rank = " + rank);
+
         LeaderboardPanel.SetActive(true);
         ShowLeaderboard(rank);
         Time.timeScale = 0f;

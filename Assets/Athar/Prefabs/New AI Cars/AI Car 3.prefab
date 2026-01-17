@@ -10058,7 +10058,7 @@ GameObject:
   - component: {fileID: 415171546437684056}
   m_Layer: 9
   m_Name: AI Car 3
-  m_TagString: Untagged
+  m_TagString: ai
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10521,7 +10521,7 @@ MonoBehaviour:
   maximumSpeed: 100
   smoothedSteer: 1
   lap: 0
-  stopLap: 10
+  stopLap: 1
   stopAfterLap: 1
   totalWaypointPassed: 0
   nextWaypointPassDistance: 20

@@ -224,7 +224,7 @@ public class AwakeManager : MonoBehaviour
         PlayerPrefs.SetInt(Menu.GotoHome, 1);
         // SceneManager.LoadScene(0);
         // SceneTransition.Instance.LoadScene(0); Transition 1
-         SceneTransition.Instance.LoadSceneSlide(0, true); //Transition 2
+        SceneTransition.Instance.LoadSceneSlide(0, true); //Transition 2
 
 
     }

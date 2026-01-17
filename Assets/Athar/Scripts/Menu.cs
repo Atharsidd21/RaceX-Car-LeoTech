@@ -323,7 +323,7 @@ public class Menu : MonoBehaviour
             isEditingProfile = false;
             EditProfilePanel.SetActive(true);
             LoadEditProfileData();   // refresh avatar + name
-          //  LoadPlayerProfile();
+                                     //  LoadPlayerProfile();
 
         }
         else
@@ -564,8 +564,8 @@ public class Menu : MonoBehaviour
     {
         //SceneManager.LoadScene("SelectCar");
         //SceneTransition.LoadScene("SelectCar"); Transition 1
-         SceneTransition.Instance.LoadSceneSlide(1, true); //Transition 2
-       // SceneTransition.Instance.LoadSceneFast(1);
+        SceneTransition.Instance.LoadSceneSlide(1, true); //Transition 2
+                                                          // SceneTransition.Instance.LoadSceneFast(1);
 
 
 
@@ -581,7 +581,7 @@ public class Menu : MonoBehaviour
 
     public void PlayButtonClicked()
     {
-       // SceneManager.LoadScene(1);
+        // SceneManager.LoadScene(1);
         SceneTransition.Instance.LoadSceneSlide(1, true); //Transition 2
 
     }

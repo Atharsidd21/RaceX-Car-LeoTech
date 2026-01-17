@@ -1,35 +1,30 @@
-using NUnit.Framework;
-using TMPro;
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using TMPro;
+
 public class End : MonoBehaviour
 {
-    [Header("Lap Syatem")]
+    [Header("Lap System")]
     public int totalLaps = 3;
     private int playerLapCount = 0;
     public TextMeshProUGUI lapText;
-    private bool raceFinished = false;
+    [SerializeField] private int totalCheckpoints = 3;
 
     [Header("Lap Safety")]
     [SerializeField] private float lapTriggerCooldown = 2f;
-    [SerializeField] private float lastLapTime = -10f;
+    private Dictionary<GameObject, float> lastLapTriggerTime = new Dictionary<GameObject, float>();
 
-
-
-
-    public GameObject gameOver;
-    public Transform player;
-    public Transform ai;
-    public Transform finishLine;
-
-    private List<string> finishOrder = new List<string>();
+    [Header("Cars")]
     public List<GameObject> raceCar = new List<GameObject>();
-
     public int totalCars;
+
+    private bool finalLapStarted = false;
+    private bool playerFinished = false;
+
+    // ? FINAL LAP: Track finish order (only cars that completed all checkpoints)
+    private List<GameObject> finalLapFinishOrder = new List<GameObject>();
 
     private void Start()
     {
@@ -43,157 +38,174 @@ public class End : MonoBehaviour
 
         if (raceCar.Count == 0)
         {
-            GameObject[] cars = GameObject.FindGameObjectsWithTag("AI");
-            raceCar.AddRange(cars);
+            GameObject[] aiCars = GameObject.FindGameObjectsWithTag("AI");
+            raceCar.AddRange(aiCars);
         }
 
         raceCar.Add(CarSpawn.instance.owncar);
-
-
         totalCars = raceCar.Count;
+
+        Debug.Log($"?? Total cars in race: {totalCars}");
     }
 
-    // Update the lap UI 
-    void UpdateLapUI()
+    private void UpdateLapUI()
     {
         if (lapText != null)
-            lapText.text = $" {playerLapCount + 1} / {totalLaps}";
+            lapText.text = $"{Mathf.Min(playerLapCount + 1, totalLaps)} / {totalLaps}";
     }
 
-
-
+    // =========================
+    // FINISH LINE TRIGGER
+    // =========================
     private void OnTriggerEnter(Collider other)
     {
-        GameObject gm = other.transform.root.gameObject;
-        //Debug.Log("Car Trigger" + gm.name + " " + gameObject.name);
+        GameObject car = other.transform.root.gameObject;
 
-        if (gm.CompareTag("Player") || (gm.CompareTag("AI") && !finishOrder.Contains(gm.name)))
+        if (!car.CompareTag("Player") && !car.CompareTag("AI"))
+            return;
 
+        // ? Cooldown check per car
+        if (lastLapTriggerTime.ContainsKey(car) &&
+            Time.time - lastLapTriggerTime[car] < lapTriggerCooldown)
+            return;
+
+        lastLapTriggerTime[car] = Time.time;
+
+        // ================= PLAYER =================
+        if (car.CompareTag("Player"))
         {
-            // ? Prevent double trigger
-            if (Time.time - lastLapTime < lapTriggerCooldown)
-                return;
-
-            lastLapTime = Time.time;
-
-            finishOrder.Add(gm.name);
-            int position = finishOrder.Count;
-
-            if (gm.CompareTag("Player"))
-            {
-                if (raceFinished)
-                    return;
-
-                playerLapCount++;
-                // If player just finished the FINAL lap
-                if (playerLapCount >= totalLaps)
-                {
-                    // Clamp UI to max lap
-                    if (lapText != null)
-                        lapText.text = $"{totalLaps} / {totalLaps}";
-                }
-                else
-                {
-                    // Normal lap update
-                    UpdateLapUI();
-                    return;
-                }
-
-                // FINAL LAP ? original race finish logic
-                raceFinished = true;
-                if (!finishOrder.Contains(gm.name))
-                    finishOrder.Add(gm.name);
-
-                int rank = finishOrder.IndexOf(gm.name);
-                GameManager.Instance.RecordRaceResult(rank);
-
-                Debug.Log("PLAYER FINISH RANK = " + rank);
-
-                PlayerPrefs.SetInt(Menu.LeaderboardRank, rank);
-                // PlayerPrefs.SetInt(Menu.ShowLeaderBoard, 1);
-                PlayerPrefs.Save();
-                // FOR LEVEL LOCK/UNLOCK THIS BLOCK HERE
-                if (rank <= 2)
-                {
-                    int currentLevel = SceneManager.GetActiveScene().buildIndex;
-                    int nextLevel = currentLevel + 1;
-
-                    PlayerPrefs.SetInt($"LevelOpened_{nextLevel}", 1);
-                    PlayerPrefs.Save();
-                }
-                GameManager.Instance.RewardPlayerByRank(rank);
-
-                // GameManager.Instance.ShowLeaderboardUI(rank);
-                CarSpawn.instance.owncar.GetComponent<Controller>().OnGameOver();
-            }
-
-            //Debug.Log("Car Trigger ++++++++++" + gm.name);
-            if (gm.CompareTag("AI"))
-            {
-                EndcarMovement(gm.gameObject);
-            }
-            else
-            {
-                CarSpawn.instance.owncar.GetComponent<Controller>().MaxSpeed = 1;
-            }
-            if (position == totalCars)
-            {
-                CoResult();
-            }
-
+            HandlePlayerCrossing(car);
+        }
+        // ================= AI =================
+        else if (car.CompareTag("AI"))
+        {
+            HandleAICrossing(car);
         }
     }
 
-
-    private void EndcarMovement(GameObject gm)
+    // =========================
+    // PLAYER CROSSING LOGIC
+    // =========================
+    private void HandlePlayerCrossing(GameObject player)
     {
-        gm.GetComponent<AICarController>().enabled = false;
+        if (playerFinished)
+            return;
+
+        playerLapCount++;
+        Debug.Log($"?? Player completed lap {playerLapCount}/{totalLaps}");
+
+        // Start final lap
+        if (playerLapCount == totalLaps - 1)
+        {
+            StartFinalLap();
+        }
+
+        // Normal laps (not final lap yet)
+        if (playerLapCount < totalLaps)
+        {
+            UpdateLapUI();
+            return;
+        }
+
+        // ? FINAL LAP FINISH ATTEMPT
+        if (playerLapCount == totalLaps)
+        {
+            // Check if player crossed all checkpoints
+            bool hasAllCheckpoints = Checkpoint.HasCrossedAll(player, totalCheckpoints);
+
+            if (hasAllCheckpoints)
+            {
+                // ? Valid finish!
+                playerFinished = true;
+
+                if (!finalLapFinishOrder.Contains(player))
+                {
+                    finalLapFinishOrder.Add(player);
+                    int rank = finalLapFinishOrder.Count - 1; // 0-based rank
+
+                    Debug.Log($"?? PLAYER FINISHED!");
+                    Debug.Log($"? All checkpoints completed: YES");
+                    Debug.Log($"?? Final Rank: {rank} (Position {rank + 1})");
+                    Debug.Log($"?? Finish Order: {string.Join(", ", finalLapFinishOrder.ConvertAll(c => c.tag))}");
+
+                    // Save rank and reward player
+                    PlayerPrefs.SetInt(Menu.LeaderboardRank, rank);
+                    PlayerPrefs.Save();
+
+                    GameManager.Instance.RecordRaceResult(rank);
+                    GameManager.Instance.RewardPlayerByRank(rank);
+
+                    player.GetComponent<Controller>()?.OnGameOver();
+                }
+            }
+            else
+            {
+                // ? Invalid finish - missing checkpoints
+                Debug.LogWarning("?? PLAYER crossed finish line but MISSING CHECKPOINTS!");
+                Debug.LogWarning("Player must complete all checkpoints before finishing!");
+
+                // Don't count this lap, reset to continue racing
+                playerLapCount--;
+                UpdateLapUI();
+            }
+        }
     }
 
-    private void CoResult()
+    // =========================
+    // AI CROSSING LOGIC
+    // =========================
+    private void HandleAICrossing(GameObject aiCar)
     {
-        GameManager.Instance.ShowLevelComplete();
+        // Only track AI finishes during final lap
+        if (!finalLapStarted)
+            return;
+
+        // Check if already finished
+        if (finalLapFinishOrder.Contains(aiCar))
+            return;
+
+        // ? Check if AI completed all checkpoints
+        bool hasAllCheckpoints = Checkpoint.HasCrossedAll(aiCar, totalCheckpoints);
+
+        if (hasAllCheckpoints)
+        {
+            // ? Valid finish!
+            finalLapFinishOrder.Add(aiCar);
+            int position = finalLapFinishOrder.Count;
+
+            Debug.Log($"?? AI '{aiCar.name}' FINISHED in position {position}!");
+            Debug.Log($"? All checkpoints completed: YES");
+
+            // Disable AI
+            RCC_AICarController ai = aiCar.GetComponent<RCC_AICarController>();
+            if (ai != null)
+            {
+                ai.enabled = false;
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"?? AI '{aiCar.name}' crossed finish but MISSING CHECKPOINTS!");
+        }
     }
 
-    private bool gameEnded = false;
-
-    // Optional UI text
-    public Text resultText;
-
-    void Update()
+    // =========================
+    // START FINAL LAP
+    // =========================
+    private void StartFinalLap()
     {
-        //if (gameEnded) return;
+        finalLapStarted = true;
+        finalLapFinishOrder.Clear();
 
-        //float playerDist = Vector3.Distance(player.position, finishLine.position);
-        //float aiDist = Vector3.Distance(ai.position, finishLine.position);
+        // ? Reset all checkpoint trackers for final lap
+        foreach (GameObject car in raceCar)
+        {
+            Checkpoint.ResetCar(car);
+        }
 
-        //// You can tweak this threshold as needed
-        //float winThreshold = 1.0f;
+        Debug.Log("?????? FINAL LAP STARTED! ??????");
+        Debug.Log("All checkpoint progress reset - must cross all checkpoints to finish!");
 
-        //if (playerDist < winThreshold)
-        //{
-        //    gameEnded = true;
-        //    Win();
-        //}
-        //else if (aiDist < winThreshold)
-        //{
-        //    gameEnded = true;
-        //    Lose();
-        //}
-    }
-
-    void Win()
-    {
-        GameManager.Instance.ShowLevelComplete();
-    }
-
-    void Lose()
-    {
-        gameOver.SetActive(true);
-    }
-
-    void Restart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        UpdateLapUI();
     }
 }

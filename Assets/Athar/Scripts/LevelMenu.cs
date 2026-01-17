@@ -55,15 +55,15 @@ public class LevelMenu : MonoBehaviour
     }
 
 
-  /*  void UnlockLevel(int levelIndex)
-    {
-        // Mark level as opened
-        PlayerPrefs.SetInt($"LevelOpened_{levelIndex}", 1);
-        PlayerPrefs.Save();
+    /*  void UnlockLevel(int levelIndex)
+      {
+          // Mark level as opened
+          PlayerPrefs.SetInt($"LevelOpened_{levelIndex}", 1);
+          PlayerPrefs.Save();
 
-        // Refresh UI
-        SetupLevels();
-    }*/
+          // Refresh UI
+          SetupLevels();
+      }*/
 
     public void OpenLevel(int levelIndex)
     {

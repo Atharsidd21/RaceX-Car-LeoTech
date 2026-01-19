@@ -10521,8 +10521,8 @@ MonoBehaviour:
   maximumSpeed: 100
   smoothedSteer: 1
   lap: 0
-  stopLap: 1
-  stopAfterLap: 1
+  stopLap: 2
+  stopAfterLap: 0
   totalWaypointPassed: 0
   nextWaypointPassDistance: 20
   ignoreWaypointNow: 0

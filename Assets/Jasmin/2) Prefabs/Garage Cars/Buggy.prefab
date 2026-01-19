@@ -16413,7 +16413,7 @@ GameObject:
   - component: {fileID: 5787129503545928318}
   m_Layer: 9
   m_Name: Buggy
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

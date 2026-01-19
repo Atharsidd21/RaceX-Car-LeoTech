@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {   //Locking AI Cars 
     private bool forceLockCars = false;
+    private bool raceFinished = false;
 
 
 
@@ -28,6 +29,9 @@ public class GameManager : MonoBehaviour
     private const string RACES_LOST_KEY = "RacesLost";
     [Header("RCC Controls Canvas")]
     [SerializeField] private GameObject rccControlsCanvas;
+
+   
+
 
     [Header("Leaderboard")]
     [SerializeField] private List<GameObject> playerListLeaderboard;
@@ -156,6 +160,7 @@ public class GameManager : MonoBehaviour
             return;
 
         HandleTimer();
+
     }
 
     #endregion
@@ -394,6 +399,8 @@ public class GameManager : MonoBehaviour
         coinText.text = $": {coinScore}";
         healthText.text = $"Health: {currentHealth}";
     }
+    
+   
 
     #endregion
 
@@ -410,6 +417,8 @@ public class GameManager : MonoBehaviour
     //Rewarding coins based on rank
     public void RewardPlayerByRank(int rank)
     {
+        Debug.Log("🟢 GAMEMANAGER RECEIVED RANK: " + rank);
+
         int rewardCoins = 0;
 
         if (rank >= 0 && rank < coinsByRank.Length)

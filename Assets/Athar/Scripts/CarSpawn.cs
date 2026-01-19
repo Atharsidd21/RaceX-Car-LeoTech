@@ -8,6 +8,7 @@ public class CarSpawn : MonoBehaviour
     public GameObject[] vehiclePrefabs; // Assign car prefabs in Inspector
     public Transform spawnPoint;        // Assign spawn location
 
+  
 
     private void Awake()
     {
@@ -23,11 +24,13 @@ public class CarSpawn : MonoBehaviour
         {
             GameObject car = Instantiate(vehiclePrefabs[selectedIndex], spawnPoint.position, spawnPoint.rotation);
             GameManager.Instance.AssignPlayer(car); //  Send the car to GameManager directly
-            owncar = car;
+
+           
+
         }
 
     }
-
+ 
 
 
 }

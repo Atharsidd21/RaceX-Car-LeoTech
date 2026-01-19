@@ -9,6 +9,7 @@ TagManager:
   - AI
   - Car
   - ai
+  - 'TrackDirection '
   layers:
   - Default
   - TransparentFX

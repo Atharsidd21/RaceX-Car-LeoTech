@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Vehicals:
-  - {fileID: 4493774594652649359, guid: 4805691e5463bd84087236090328c1e3, type: 3}
+  - {fileID: 4309340824244197867, guid: 4805691e5463bd84087236090328c1e3, type: 3}
   - {fileID: 102514, guid: a0459a5bc3faf7c4fb192da6da5c673c, type: 3}
   - {fileID: 8799075692723707581, guid: be95e3b5b23c76f4dbc57623b4299d19, type: 3}
   - {fileID: 1609731031090814, guid: 6282ab3f8f5b78f419bd87d69029b461, type: 3}

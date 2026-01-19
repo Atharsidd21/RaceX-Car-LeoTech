@@ -77,5 +77,6 @@ public class Checkpoint : MonoBehaviour
         {
             Debug.Log($"?? {car.name} crossed checkpoint {checkpointIndex} again (already counted)");
         }
+
     }
 }

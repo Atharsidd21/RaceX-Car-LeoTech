@@ -19,6 +19,7 @@ public class AICarSpawner : MonoBehaviour
 
     void SpawnUniqueAICarsExcludingPlayer()
     {
+   
         if (aiCarPrefabs.Length == 0 || spawnPoints.Length == 0)
         {
             Debug.LogWarning("AI Spawner: Missing prefabs or spawn points");
@@ -31,8 +32,7 @@ public class AICarSpawner : MonoBehaviour
 
         // ?? Build available AI list excluding player car
         List<GameObject> availablePrefabs = new List<GameObject>();
-        CarController playerCar =
-    playerCarPrefab.GetComponent<CarController>();
+        CarController playerCar =  playerCarPrefab.GetComponent<CarController>();
 
         foreach (GameObject prefab in aiCarPrefabs)
         {
@@ -68,6 +68,16 @@ public class AICarSpawner : MonoBehaviour
             );
 
             ai.tag = "AI"; // REQUIRED by End.cs
+                           // ? REGISTER AI CAR FOR RANKING
+            RaceProgressTracker tracker = ai.GetComponent<RaceProgressTracker>();
+
+            if (tracker == null)
+            {
+                tracker = ai.AddComponent<RaceProgressTracker>();
+            }
+
+            RaceRankManager.Instance.RegisterCar(tracker);
+
 
             if (ai.GetComponent<RCC_AICarController>() == null)
             {
@@ -77,5 +87,7 @@ public class AICarSpawner : MonoBehaviour
             // ? Remove so it can't spawn again
             availablePrefabs.RemoveAt(randomIndex);
         }
+
+
     }
 }

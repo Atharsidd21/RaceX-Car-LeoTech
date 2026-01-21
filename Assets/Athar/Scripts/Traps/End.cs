@@ -1,70 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
 public class End : MonoBehaviour
 {
-    // =========================
-    // LAP SYSTEM
-    // =========================
-    [Header("Lap System")]
+    [Header("Lap Settings")]
     public int totalLaps = 3;
-    private int playerLapCount = 0;
     public TextMeshProUGUI lapText;
-    private bool finalLapStarted = false;
-
 
     [Header("Lap Safety")]
     [SerializeField] private float lapTriggerCooldown = 2f;
-    private Dictionary<GameObject, float> lastLapTriggerTime =
-        new Dictionary<GameObject, float>();
+    private float lastLapTime = -10f;
 
-    // =========================
-    // CARS
-    // =========================
-    [Header("Cars")]
-    public List<GameObject> raceCar = new List<GameObject>();
-    public int totalCars;
+    private bool raceFinished = false;
 
-    // =========================
-    // UNITY
-    // =========================
     private void Start()
     {
-        StartCoroutine(SetupRaceCars());
-        UpdateLapUI();
-        
-    }
-
-    private IEnumerator SetupRaceCars()
-    {
-        yield return new WaitForEndOfFrame();
-
-        if (raceCar.Count == 0)
-        {
-            GameObject[] aiCars = GameObject.FindGameObjectsWithTag("AI");
-            raceCar.AddRange(aiCars);
-        }
-
-        raceCar.Add(CarSpawn.instance.owncar);
-        totalCars = raceCar.Count;
-
-        Debug.Log($"?? Total cars in race: {totalCars}");
-        
-
-    }
-
-    // =========================
-    // UI
-    // =========================
-    private void UpdateLapUI()
-    {
-        if (lapText != null)
-        {
-            lapText.text = $"{Mathf.Min(playerLapCount + 1, totalLaps)} / {totalLaps}";
-        }
+        UpdateLapUI(0);
     }
 
     // =========================
@@ -72,103 +24,84 @@ public class End : MonoBehaviour
     // =========================
     private void OnTriggerEnter(Collider other)
     {
+        if (raceFinished) return;
+
         GameObject car = other.transform.root.gameObject;
 
         if (!car.CompareTag("Player") && !car.CompareTag("AI"))
             return;
 
-        // Cooldown per car
-        if (lastLapTriggerTime.ContainsKey(car) &&
-            Time.time - lastLapTriggerTime[car] < lapTriggerCooldown)
+        // Prevent double-trigger
+        if (Time.time - lastLapTime < lapTriggerCooldown)
             return;
 
-        lastLapTriggerTime[car] = Time.time;
+        lastLapTime = Time.time;
 
+        RaceProgressTracker tracker = car.GetComponent<RaceProgressTracker>();
+        if (tracker == null || tracker.finished)
+            return;
+
+        // ? Increment lap for BOTH Player & AI
+        tracker.currentLap++;
+
+        Debug.Log($"{car.name} completed lap {tracker.currentLap}");
+
+        // =========================
+        // PLAYER-ONLY LOGIC
+        // =========================
         if (car.CompareTag("Player"))
         {
-            HandlePlayerCrossing(car);
+            UpdateLapUI(tracker.currentLap);
+
+            if (tracker.currentLap >= totalLaps)
+            {
+                FinishPlayer(tracker);
+            }
         }
-        else
-        {
-            HandleAICrossing(car);
-        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        OnTriggerEnter(other);
     }
 
     // =========================
-    // PLAYER CROSSING
+    // FINISH PLAYER
     // =========================
-    private void HandlePlayerCrossing(GameObject player)
+    private void FinishPlayer(RaceProgressTracker tracker)
     {
-        playerLapCount++;
+        if (raceFinished) return;
+        raceFinished = true;
 
-        Debug.Log($"?? Player lap {playerLapCount}/{totalLaps}");
-        
-        if (!finalLapStarted && playerLapCount == totalLaps - 1)
-        {
-            finalLapStarted = true;
+        tracker.finished = true;
 
-            Debug.Log("?? END.CS FINAL LAP STARTED");
+        int rank = RaceRankManager.Instance.GetRank(tracker);
 
-            FinalLapRankManager.Instance.StartFinalLap(raceCar);
-        }
-        // ?? FINAL LAP START
-        /* if (playerLapCount == totalLaps - 1)
-         {
-             FinalLapRankManager.Instance.StartFinalLap(raceCar);
-         }*/
-
-
-        // NORMAL LAPS
-        if (playerLapCount < totalLaps)
-        {
-            UpdateLapUI();
-            return;
-        }
-
-        // =========================
-        // FINAL LAP FINISH
-        // =========================
-        FinalLapRankManager.Instance.TryRegisterFinish(player);
-
-        if (!FinalLapRankManager.Instance.HasFinished(player))
-        {
-            playerLapCount--;
-            UpdateLapUI();
-            return;
-        }
-
-        int rank = FinalLapRankManager.Instance.GetRank(player);
-
-
-        Debug.Log("?? END.CS RECEIVED STORED RANK: " + rank);
-
-        UnlockNextLevel(rank);
+        Debug.Log("?? PLAYER FINISHED WITH RANK: " + (rank + 1));
 
         PlayerPrefs.SetInt(Menu.LeaderboardRank, rank);
         PlayerPrefs.Save();
 
         GameManager.Instance.RecordRaceResult(rank);
         GameManager.Instance.RewardPlayerByRank(rank);
-
+        UnlockNextLevel(rank);
     }
 
     // =========================
-    // AI CROSSING
+    // LAP UI (ORIGINAL LOGIC)
     // =========================
-    private void HandleAICrossing(GameObject aiCar)
+    private void UpdateLapUI(int completedLaps)
     {
-        // AI rank is handled entirely by RankManager
-        FinalLapRankManager.Instance.TryRegisterFinish(aiCar);
-        Debug.Log("?? AI HIT FINISH: " + aiCar.name);
+        if (lapText == null) return;
 
+        int displayLap = Mathf.Min(completedLaps + 1, totalLaps);
+        lapText.text = $"{displayLap} / {totalLaps}";
     }
 
     // =========================
-    // LEVEL UNLOCK LOGIC
+    // LEVEL UNLOCK
     // =========================
     private void UnlockNextLevel(int rank)
     {
-        // Example rule: Top 3 unlock next level
         if (rank <= 2)
         {
             int currentLevel = SceneManager.GetActiveScene().buildIndex;
@@ -177,11 +110,7 @@ public class End : MonoBehaviour
             PlayerPrefs.SetInt("LevelOpened_" + nextLevel, 1);
             PlayerPrefs.Save();
 
-            Debug.Log($"?? Level {nextLevel} unlocked!");
-        }
-        else
-        {
-            Debug.Log("? Level not unlocked (rank too low)");
+            Debug.Log($"?? Level {nextLevel} unlocked");
         }
     }
 }

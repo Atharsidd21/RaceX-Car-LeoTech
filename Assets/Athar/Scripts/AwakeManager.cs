@@ -166,6 +166,12 @@ public class AwakeManager : MonoBehaviour
 
     public void BuyBUtton()
     {
+        // 🔊 BUY BUTTON SOUND (ONLY HERE)
+        if (MusicManager.Instance != null)
+        {
+            MusicManager.Instance.PlayBuySound();
+        }
+
         CarController car = GetCurrentCar();
         int price = car.CarPrice;
         int currency = PlayerPrefs.GetInt(CurrencyKey, 0);

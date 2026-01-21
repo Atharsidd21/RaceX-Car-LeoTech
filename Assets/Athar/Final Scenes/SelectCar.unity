@@ -31017,6 +31017,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIButtonSound
   playOnClick: 1
+  isBuyButton: 0
 --- !u!224 &4440328257257508214
 RectTransform:
   m_ObjectHideFlags: 0
@@ -54083,18 +54084,6 @@ MonoBehaviour:
       - m_Target: {fileID: 3542375426868438799}
         m_TargetAssemblyTypeName: AwakeManager, Assembly-CSharp
         m_MethodName: BuyBUtton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4439736003867847552}
-        m_TargetAssemblyTypeName: UIButtonSound, Assembly-CSharp
-        m_MethodName: PlayClickSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

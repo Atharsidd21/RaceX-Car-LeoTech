@@ -9,9 +9,15 @@ public class WrongWayDetector : MonoBehaviour
     [SerializeField] private float checkInterval = 0.2f;
     [SerializeField] private float minSpeedToCheck = 5f;
 
+    [Header("Grace Settings")]
+    [SerializeField] private float directionChangeGraceTime = 0.6f;
+
+    private float lastDirectionUpdateTime;
+
     private Rigidbody rb;
     private Vector3 lastValidForward;
     private bool isWrongWay = false;
+    private TrackSegment currentSegment;
 
     private void Awake()
     {
@@ -26,33 +32,36 @@ public class WrongWayDetector : MonoBehaviour
 
     private void CheckDirection()
     {
-        if (rb.linearVelocity.magnitude < minSpeedToCheck)
+        if (currentSegment == null)
             return;
 
-        Vector3 moveDir = rb.linearVelocity.normalized;
-        float dot = Vector3.Dot(moveDir, lastValidForward);
+        if (!currentSegment.allowWrongWayDetection)
+            return;
 
-        Debug.Log($"DOT = {dot}");
+        float angle = Vector3.Angle(transform.forward, currentSegment.Forward);
 
-        bool wrongNow = dot < 0.2f; // ? FIX
+        bool wrongNow = angle > 120f;
 
         if (wrongNow != isWrongWay)
         {
             isWrongWay = wrongNow;
-            Debug.Log("?? WRONG WAY STATE = " + isWrongWay);
             OnWrongWayChanged?.Invoke(isWrongWay);
         }
     }
 
 
+
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("TRIGGER ENTERED BY: " + other.name);
-
-        if (!other.CompareTag("TrackDirection"))
+        TrackSegment segment = other.GetComponent<TrackSegment>();
+        if (segment == null)
             return;
 
-        // Update correct forward direction
-        lastValidForward = other.transform.forward;
+        currentSegment = segment;
+
+        // ?? HARD RESET when changing segment
+        isWrongWay = false;
+        OnWrongWayChanged?.Invoke(false);
     }
+
 }

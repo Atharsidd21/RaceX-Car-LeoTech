@@ -10,6 +10,7 @@ public class MusicManager : MonoBehaviour
     [Header("UI Sounds")]
     [SerializeField] private AudioSource sfxSource;
     [SerializeField] private AudioClip buttonClickClip;
+    [SerializeField] private AudioClip BuySFX;
 
 
     private void Awake()
@@ -113,6 +114,12 @@ public class MusicManager : MonoBehaviour
 
         sfxSource.PlayOneShot(buttonClickClip);
     }
+    public void PlayBuySound()
+    {
+        if (BuySFX != null)
+            audioSource.PlayOneShot(BuySFX);
+    }
+
 
 
 }

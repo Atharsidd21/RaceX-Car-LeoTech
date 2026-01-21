@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI rewardText;
     [SerializeField] private string rewardSuffix = " coins earned!";
     [SerializeField] private TextMeshProUGUI totalCoinsText;
+    [SerializeField] private TextMeshProUGUI resultTitleText;
+
     //Win/Loss Record
     private const string RACES_WON_KEY = "RacesWon";
     private const string RACES_LOST_KEY = "RacesLost";
@@ -160,6 +162,10 @@ public class GameManager : MonoBehaviour
             return;
 
         HandleTimer();
+        if (player == null) return;
+
+        RaceProgressTracker tracker = player.GetComponent<RaceProgressTracker>();
+        if (tracker == null || tracker.finished) return;
 
     }
 
@@ -325,6 +331,7 @@ public class GameManager : MonoBehaviour
     {
         player = car;
         lastPosition = player.transform.position;
+        RaceRankManager.Instance.RegisterCar(car.GetComponent<RaceProgressTracker>());
 
         // Use RCC canvas as player controls UI
         playerControlsUI = rccControlsCanvas;
@@ -415,7 +422,7 @@ public class GameManager : MonoBehaviour
     }
 
     //Rewarding coins based on rank
-    public void RewardPlayerByRank(int rank)
+    /*public void RewardPlayerByRank(int rank)
     {
         Debug.Log("🟢 GAMEMANAGER RECEIVED RANK: " + rank);
 
@@ -442,7 +449,46 @@ public class GameManager : MonoBehaviour
 
         // Show reward panel
         rewardPanel.SetActive(true);
+    }*/
+    public void RewardPlayerByRank(int rank)
+    {
+        Debug.Log("GAMEMANAGER RECEIVED RANK: " + rank);
+
+        // Calculate coins
+        int rewardCoins = 0;
+        if (rank >= 0 && rank < coinsByRank.Length)
+            rewardCoins = coinsByRank[rank];
+
+        // Update currency
+        int currentCoins = PlayerPrefs.GetInt(CurrencyKey, 0);
+        currentCoins += rewardCoins;
+        PlayerPrefs.SetInt(CurrencyKey, currentCoins);
+        PlayerPrefs.Save();
+
+        // --------------------
+        // WIN / LOSE LOGIC
+        // --------------------
+        bool isWin = rank <= 2;
+
+        if (isWin)
+        {
+            resultTitleText.text = "YOU WIN!";
+         //   resultTitleText.color = Color.yellow;
+        }
+        else
+        {
+            resultTitleText.text = "YOU LOSE";
+          //  resultTitleText.color = Color.yellow;
+        }
+
+        // Reward text
+        rewardText.text = $"{rewardPrefix} {rewardCoins} {rewardSuffix}";
+        totalCoinsText.text = $"Total Coins: {currentCoins}";
+
+        // Show panel
+        rewardPanel.SetActive(true);
     }
+
     //Adding Buttons of Reward Panel
     public void OnClickViewLeaderboardFromReward()
     {
@@ -464,8 +510,10 @@ public class GameManager : MonoBehaviour
             rewardPanel.SetActive(false);
 
         // Go back to Main Menu
-        PlayerPrefs.SetInt(Menu.GotoHome, 1);
-        SceneManager.LoadScene(0);
+        PlayerPrefs.SetInt(Menu.GotoLevelSelection, 1);
+        //SceneManager.LoadScene(0);
+        SceneTransition.Instance.LoadSceneSlide(0, true); //Transition 2
+
     }
 
     public void DamageCar()

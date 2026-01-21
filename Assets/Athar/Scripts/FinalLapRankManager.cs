@@ -35,6 +35,22 @@ public class FinalLapRankManager : MonoBehaviour
     // =========================
     // FINAL LAP CONTROL
     // =========================
+    /* public void StartFinalLap(List<GameObject> allCars)
+     {
+         finalLapActive = true;
+         finishOrder.Clear();
+         carRanks.Clear();
+         eligibleCars.Clear();
+
+         foreach (GameObject car in allCars)
+         {
+             Checkpoint.ResetCar(car);
+             eligibleCars.Add(car); // ? only these cars can rank
+
+         }
+
+         Debug.Log("?? FINAL LAP STARTED — Rank tracking enabled");
+     }*/
     public void StartFinalLap(List<GameObject> allCars)
     {
         finalLapActive = true;
@@ -42,14 +58,16 @@ public class FinalLapRankManager : MonoBehaviour
         carRanks.Clear();
         eligibleCars.Clear();
 
+        // ?? AUTO-CALCULATE CHECKPOINT COUNT
+        //totalCheckpoints = FindObjectsOfType<Checkpoint>().Length;
+
         foreach (GameObject car in allCars)
         {
-            Checkpoint.ResetCar(car);
-            eligibleCars.Add(car); // ? only these cars can rank
-
+           // Checkpoint.ResetCar(car);
+            eligibleCars.Add(car);
         }
 
-        Debug.Log("?? FINAL LAP STARTED — Rank tracking enabled");
+        Debug.Log($"FINAL LAP STARTED — Total checkpoints = {totalCheckpoints}");
     }
 
     // =========================
@@ -66,13 +84,13 @@ public class FinalLapRankManager : MonoBehaviour
 
         if (carRanks.ContainsKey(car))
             return;
-        Debug.Log($"?? {car.name} CP COUNT = {Checkpoint.GetCheckpointCount(car)}");
+        //Debug.Log($"?? {car.name} CP COUNT = {Checkpoint.GetCheckpointCount(car)}");
 
-        if (!Checkpoint.HasCrossedAll(car, totalCheckpoints))
+       /* if (!Checkpoint.HasCrossedAll(car, totalCheckpoints))
         {
             Debug.LogWarning($"? {car.name} missing checkpoints in final lap");
             return;
-        }
+        }*/
 
         /* finishOrder.Add(car);
 

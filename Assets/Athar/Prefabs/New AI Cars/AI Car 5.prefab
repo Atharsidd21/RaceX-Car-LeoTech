@@ -811,9 +811,10 @@ GameObject:
   - component: {fileID: 8964158972075379933}
   - component: {fileID: 3256783980964169146}
   - component: {fileID: 4834092979728617640}
+  - component: {fileID: 6793738974798128566}
   m_Layer: 9
   m_Name: AI Car 5
-  m_TagString: ai
+  m_TagString: AI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -870,7 +871,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &525890470465904356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1322,6 +1323,21 @@ MonoBehaviour:
   brakeZones: []
   targetChase: {fileID: 0}
   targetBrake: {fileID: 0}
+--- !u!114 &6793738974798128566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891441542612362325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b61ad226ec59d6a4cabb039442225ad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RaceProgressTracker
+  currentLap: 0
+  trackProgress: 0
+  finished: 0
 --- !u!1 &922327240036987678
 GameObject:
   m_ObjectHideFlags: 0

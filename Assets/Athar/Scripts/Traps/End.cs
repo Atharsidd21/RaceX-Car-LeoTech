@@ -13,6 +13,7 @@ public class End : MonoBehaviour
     private float lastLapTime = -10f;
 
     private bool raceFinished = false;
+    private bool raceStarted = false;
 
     private void Start()
     {
@@ -22,6 +23,43 @@ public class End : MonoBehaviour
     // =========================
     // FINISH LINE TRIGGER
     // =========================
+    /* private void OnTriggerEnter(Collider other)
+     {
+         if (raceFinished) return;
+
+         GameObject car = other.transform.root.gameObject;
+
+         if (!car.CompareTag("Player") && !car.CompareTag("AI"))
+             return;
+
+         // Prevent double-trigger
+         if (Time.time - lastLapTime < lapTriggerCooldown)
+             return;
+
+         lastLapTime = Time.time;
+
+         RaceProgressTracker tracker = car.GetComponent<RaceProgressTracker>();
+         if (tracker == null || tracker.finished)
+             return;
+
+         // ? Increment lap for BOTH Player & AI
+         tracker.currentLap++;
+
+         Debug.Log($"{car.name} completed lap {tracker.currentLap}");
+
+         // =========================
+         // PLAYER-ONLY LOGIC
+         // =========================
+         if (car.CompareTag("Player"))
+         {
+             UpdateLapUI(tracker.currentLap);
+
+             if (tracker.currentLap >= totalLaps)
+             {
+                 FinishPlayer(tracker);
+             }
+         }
+     }*/
     private void OnTriggerEnter(Collider other)
     {
         if (raceFinished) return;
@@ -31,7 +69,7 @@ public class End : MonoBehaviour
         if (!car.CompareTag("Player") && !car.CompareTag("AI"))
             return;
 
-        // Prevent double-trigger
+        // Cooldown to prevent double trigger
         if (Time.time - lastLapTime < lapTriggerCooldown)
             return;
 
@@ -41,14 +79,20 @@ public class End : MonoBehaviour
         if (tracker == null || tracker.finished)
             return;
 
-        // ? Increment lap for BOTH Player & AI
+        // ?? IGNORE FIRST CROSSING (RACE START)
+        if (!raceStarted)
+        {
+            raceStarted = true;
+            Debug.Log("?? Race started — ignoring first finish line crossing");
+            return;
+        }
+
+        // ? VALID LAP COMPLETION
         tracker.currentLap++;
 
         Debug.Log($"{car.name} completed lap {tracker.currentLap}");
 
-        // =========================
-        // PLAYER-ONLY LOGIC
-        // =========================
+        // PLAYER LOGIC
         if (car.CompareTag("Player"))
         {
             UpdateLapUI(tracker.currentLap);
@@ -59,6 +103,7 @@ public class End : MonoBehaviour
             }
         }
     }
+
     private void OnTriggerStay(Collider other)
     {
         OnTriggerEnter(other);

@@ -16450,7 +16450,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3380741278707781451}
   serializedVersion: 5
-  m_Mass: 1350
+  m_Mass: 1800
   m_LinearDamping: 0.01
   m_AngularDamping: 0.5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -16801,7 +16801,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3380741278707781451}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4524a01d9615771478418d3e824f1ecd, type: 3}
   m_Name: 

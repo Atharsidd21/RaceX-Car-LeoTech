@@ -24115,7 +24115,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8799075692723707581}
   serializedVersion: 5
-  m_Mass: 1350
+  m_Mass: 1800
   m_LinearDamping: 0.01
   m_AngularDamping: 0.5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -24537,7 +24537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarController
   CarName: M3_E46
-  CarPrice: 1800
+  CarPrice: 1600
 --- !u!114 &3900463904593235723
 MonoBehaviour:
   m_ObjectHideFlags: 0

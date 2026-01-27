@@ -472,7 +472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3400764109dcd448bc0bc3fa3b11ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RCC_Waypoint
-  targetSpeed: 200
+  targetSpeed: 170
 --- !u!4 &177520993
 Transform:
   m_ObjectHideFlags: 0
@@ -3079,7 +3079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3400764109dcd448bc0bc3fa3b11ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RCC_Waypoint
-  targetSpeed: 200
+  targetSpeed: 170
 --- !u!4 &1577179382
 Transform:
   m_ObjectHideFlags: 0
@@ -3406,7 +3406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3400764109dcd448bc0bc3fa3b11ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RCC_Waypoint
-  targetSpeed: 200
+  targetSpeed: 170
 --- !u!4 &1630207498
 Transform:
   m_ObjectHideFlags: 0
@@ -3586,7 +3586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3400764109dcd448bc0bc3fa3b11ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RCC_Waypoint
-  targetSpeed: 200
+  targetSpeed: 170
 --- !u!4 &1737654547
 Transform:
   m_ObjectHideFlags: 0
@@ -4049,7 +4049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3400764109dcd448bc0bc3fa3b11ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RCC_Waypoint
-  targetSpeed: 200
+  targetSpeed: 170
 --- !u!4 &1946744823
 Transform:
   m_ObjectHideFlags: 0
@@ -80837,7 +80837,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalLaps: 2
   lapText: {fileID: 6331834923613302653}
-  lapTriggerCooldown: 2
+  lapTriggerCooldown: 0.6
 --- !u!114 &7287523626231278418
 MonoBehaviour:
   m_ObjectHideFlags: 0

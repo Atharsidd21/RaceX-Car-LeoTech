@@ -1,0 +1,4 @@
+com.example.unityandroidpermissions.BuildConfig
+com.unity3d.plugin.PermissionFragment
+com.unity3d.plugin.UnityAndroidPermissions
+com.unity3d.plugin.UnityAndroidPermissions$IPermissionRequestResult

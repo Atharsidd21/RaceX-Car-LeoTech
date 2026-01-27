@@ -1,0 +1,11 @@
+com.google.androidgamesdk.BuildConfig
+com.google.androidgamesdk.GameActivity
+com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView
+com.google.androidgamesdk.gametextinput.GameTextInput
+com.google.androidgamesdk.gametextinput.GameTextInput$Pair
+com.google.androidgamesdk.gametextinput.InputConnection
+com.google.androidgamesdk.gametextinput.InputConnection$1
+com.google.androidgamesdk.gametextinput.InputConnection$SingeLineFilter
+com.google.androidgamesdk.gametextinput.Listener
+com.google.androidgamesdk.gametextinput.Settings
+com.google.androidgamesdk.gametextinput.State

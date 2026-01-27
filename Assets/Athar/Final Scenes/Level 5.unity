@@ -1913,7 +1913,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3400764109dcd448bc0bc3fa3b11ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RCC_Waypoint
-  targetSpeed: 200
+  targetSpeed: 170
 --- !u!1 &27324264649906299
 GameObject:
   m_ObjectHideFlags: 0
@@ -8486,7 +8486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3400764109dcd448bc0bc3fa3b11ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RCC_Waypoint
-  targetSpeed: 200
+  targetSpeed: 175
 --- !u!224 &595166051778356994
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18377,7 +18377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3400764109dcd448bc0bc3fa3b11ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RCC_Waypoint
-  targetSpeed: 200
+  targetSpeed: 175
 --- !u!114 &1485457643120039346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27241,7 +27241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3400764109dcd448bc0bc3fa3b11ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RCC_Waypoint
-  targetSpeed: 200
+  targetSpeed: 170
 --- !u!1 &2304149198898219561
 GameObject:
   m_ObjectHideFlags: 0
@@ -36763,7 +36763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3400764109dcd448bc0bc3fa3b11ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RCC_Waypoint
-  targetSpeed: 200
+  targetSpeed: 170
 --- !u!222 &3151429410599076584
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -59185,7 +59185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalLaps: 2
   lapText: {fileID: 5612944253089005303}
-  lapTriggerCooldown: 2
+  lapTriggerCooldown: 0.6
 --- !u!33 &5100015453334973376
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -61372,7 +61372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3400764109dcd448bc0bc3fa3b11ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RCC_Waypoint
-  targetSpeed: 200
+  targetSpeed: 170
 --- !u!4 &5307324421878122284
 Transform:
   m_ObjectHideFlags: 0
@@ -67054,7 +67054,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3400764109dcd448bc0bc3fa3b11ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RCC_Waypoint
-  targetSpeed: 200
+  targetSpeed: 170
 --- !u!1 &5852440163227311140
 GameObject:
   m_ObjectHideFlags: 0
@@ -69811,7 +69811,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3400764109dcd448bc0bc3fa3b11ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RCC_Waypoint
-  targetSpeed: 200
+  targetSpeed: 175
 --- !u!23 &6093724550762593178
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -73941,7 +73941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3400764109dcd448bc0bc3fa3b11ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RCC_Waypoint
-  targetSpeed: 200
+  targetSpeed: 175
 --- !u!114 &6437535138880396501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74377,7 +74377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3400764109dcd448bc0bc3fa3b11ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RCC_Waypoint
-  targetSpeed: 200
+  targetSpeed: 170
 --- !u!4 &6468308248339209494
 Transform:
   m_ObjectHideFlags: 0
@@ -78663,8 +78663,8 @@ BoxCollider:
   m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 7, y: 1, z: 0.16846107}
+  m_Center: {x: -0.000000001014131, y: 0, z: -0.015769443}
 --- !u!4 &6879432356608124401
 Transform:
   m_ObjectHideFlags: 0
@@ -79698,7 +79698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3400764109dcd448bc0bc3fa3b11ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RCC_Waypoint
-  targetSpeed: 200
+  targetSpeed: 170
 --- !u!224 &6979395154304097133
 RectTransform:
   m_ObjectHideFlags: 0
@@ -79749,7 +79749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3400764109dcd448bc0bc3fa3b11ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RCC_Waypoint
-  targetSpeed: 200
+  targetSpeed: 175
 --- !u!33 &6985166872125074748
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -82563,7 +82563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3400764109dcd448bc0bc3fa3b11ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RCC_Waypoint
-  targetSpeed: 200
+  targetSpeed: 170
 --- !u!114 &7275952369033830248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82762,13 +82762,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 279785116344552053}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.1564345, z: -0, w: 0.98768836}
+  m_LocalRotation: {x: 0, y: -0.5933487, z: 0, w: 0.8049456}
   m_LocalPosition: {x: -515.2, y: 142, z: 216}
   m_LocalScale: {x: 5, y: 10, z: 40}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 18, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -72.79, z: 0}
 --- !u!54 &7294145165464753215
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -84070,7 +84070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3400764109dcd448bc0bc3fa3b11ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RCC_Waypoint
-  targetSpeed: 200
+  targetSpeed: 170
 --- !u!224 &7416103031745009921
 RectTransform:
   m_ObjectHideFlags: 0
@@ -86649,7 +86649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3400764109dcd448bc0bc3fa3b11ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RCC_Waypoint
-  targetSpeed: 200
+  targetSpeed: 170
 --- !u!33 &7634449876170405435
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -90814,7 +90814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3400764109dcd448bc0bc3fa3b11ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RCC_Waypoint
-  targetSpeed: 200
+  targetSpeed: 175
 --- !u!4 &7974495406760207009
 Transform:
   m_ObjectHideFlags: 0
@@ -93601,7 +93601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3400764109dcd448bc0bc3fa3b11ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RCC_Waypoint
-  targetSpeed: 200
+  targetSpeed: 170
 --- !u!114 &8252888617639148944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94518,7 +94518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3400764109dcd448bc0bc3fa3b11ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RCC_Waypoint
-  targetSpeed: 200
+  targetSpeed: 170
 --- !u!114 &8365853754640033174
 MonoBehaviour:
   m_ObjectHideFlags: 0

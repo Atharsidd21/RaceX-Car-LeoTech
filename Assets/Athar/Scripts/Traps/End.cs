@@ -1,9 +1,12 @@
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
 
 public class End : MonoBehaviour
 {
+    private Dictionary<GameObject, float> lastDot = new Dictionary<GameObject, float>();
+
     [Header("Lap Settings")]
     public int totalLaps = 3;
     public TextMeshProUGUI lapText;
@@ -14,6 +17,7 @@ public class End : MonoBehaviour
 
     private bool raceFinished = false;
     private bool raceStarted = false;
+
 
     private void Start()
     {
@@ -60,53 +64,64 @@ public class End : MonoBehaviour
              }
          }
      }*/
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
         if (raceFinished) return;
 
-        GameObject car = other.transform.root.gameObject;
-
-        if (!car.CompareTag("Player") && !car.CompareTag("AI"))
-            return;
-
-        // Cooldown to prevent double trigger
-        if (Time.time - lastLapTime < lapTriggerCooldown)
-            return;
-
-        lastLapTime = Time.time;
-
-        RaceProgressTracker tracker = car.GetComponent<RaceProgressTracker>();
-        if (tracker == null || tracker.finished)
-            return;
-
-        // ?? IGNORE FIRST CROSSING (RACE START)
-        if (!raceStarted)
+        foreach (var tracker in FindObjectsOfType<RaceProgressTracker>())
         {
-            raceStarted = true;
-            Debug.Log("?? Race started — ignoring first finish line crossing");
-            return;
-        }
+            GameObject car = tracker.gameObject;
 
-        // ? VALID LAP COMPLETION
-        tracker.currentLap++;
+            if (!car.CompareTag("Player") && !car.CompareTag("AI"))
+                continue;
 
-        Debug.Log($"{car.name} completed lap {tracker.currentLap}");
+            if (tracker.finished)
+                continue;
 
-        // PLAYER LOGIC
-        if (car.CompareTag("Player"))
-        {
-            UpdateLapUI(tracker.currentLap);
+            if (!HasCrossedFinish(car))
+                continue;
 
-            if (tracker.currentLap >= totalLaps)
+            // COOLDOWN STILL APPLIES
+            if (Time.time - lastLapTime < lapTriggerCooldown)
+                continue;
+
+            lastLapTime = Time.time;
+
+            if (!raceStarted)
             {
-                FinishPlayer(tracker);
+                raceStarted = true;
+                return;
+            }
+
+            tracker.currentLap++;
+
+            if (car.CompareTag("Player"))
+            {
+                UpdateLapUI(tracker.currentLap);
+
+                if (tracker.currentLap >= totalLaps)
+                    FinishPlayer(tracker);
             }
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private bool HasCrossedFinish(GameObject car)
     {
-        OnTriggerEnter(other);
+        Vector3 finishNormal = transform.forward;
+        Vector3 finishPos = transform.position;
+
+        float dot = Vector3.Dot(car.transform.position - finishPos, finishNormal);
+
+        if (!lastDot.ContainsKey(car))
+        {
+            lastDot[car] = dot;
+            return false;
+        }
+
+        bool crossed = lastDot[car] < 0f && dot > 0f;
+        lastDot[car] = dot;
+
+        return crossed;
     }
 
     // =========================

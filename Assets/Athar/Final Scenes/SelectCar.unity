@@ -26571,6 +26571,7 @@ MonoBehaviour:
   CarPriceText: {fileID: 663123429}
   CurrencyIcon: {fileID: 587647535}
   BuyBtn: {fileID: 5940542175298721822}
+  StartBtn: {fileID: 1493216546}
   Player: {fileID: 0}
   CurrentCar: {fileID: 0}
 --- !u!224 &3543781963602811974
@@ -31017,7 +31018,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIButtonSound
   playOnClick: 1
-  isBuyButton: 0
 --- !u!224 &4440328257257508214
 RectTransform:
   m_ObjectHideFlags: 0

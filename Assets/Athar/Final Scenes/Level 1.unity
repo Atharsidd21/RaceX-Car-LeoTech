@@ -99474,7 +99474,7 @@ MonoBehaviour:
   aiCarPrefabs:
   - {fileID: 3454032159800958376, guid: a7db34c8732efb744844f838c053ada4, type: 3}
   - {fileID: 1710203364050535989, guid: 19e53b772971d264db69bdc92729caac, type: 3}
-  - {fileID: 6581627753695165113, guid: b4fd64d45a1e0a7408c51b83c79cfed1, type: 3}
+  - {fileID: 6581627753695165113, guid: b1e4caf4f635dd24b97cd6bb0b6ef55d, type: 3}
   - {fileID: 8144701162520380953, guid: dc6c0a1eb4837104ebeef626883918d2, type: 3}
   - {fileID: 891441542612362325, guid: dac1c90adf3f75344b7b2c53e01948f7, type: 3}
   - {fileID: 3380741278707781451, guid: 67c45e72a5cf6344f8cfe27b118ea9c6, type: 3}

@@ -1,4 +1,5 @@
 ﻿using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -23,7 +24,7 @@ public class AwakeManager : MonoBehaviour
     public TMPro.TMP_Text CarPriceText;
     public Image CurrencyIcon;
     public GameObject BuyBtn;
-    //public GameObject StartBtnBtn;
+    public GameObject StartBtn;
     public GameObject Player;
     public GameObject CurrentCar;
     //  [SerializeField] private PlayerProfileView selectCarProfileView;
@@ -131,6 +132,7 @@ public class AwakeManager : MonoBehaviour
             CarPriceText.text = "Owned";
             CurrencyIcon.gameObject.SetActive(false);
             BuyBtn.SetActive(false);
+            StartBtn.GetComponent<Button>().interactable = true;
         }
         else
         {
@@ -141,6 +143,7 @@ public class AwakeManager : MonoBehaviour
 
             BuyBtn.GetComponent<Button>().interactable =
                 currency >= car.CarPrice;
+            StartBtn.GetComponent<Button>().interactable = false;
         }
     }
 

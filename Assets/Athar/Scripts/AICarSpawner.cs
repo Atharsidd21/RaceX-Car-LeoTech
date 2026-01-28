@@ -14,7 +14,17 @@ public class AICarSpawner : MonoBehaviour
 
     void Start()
     {
+
+        //  MULTIPLAYER - NO AI CARS
+        if (GameModeManager.IsMultiplayer)
+        {
+            Debug.Log("AI Spawner disabled (Multiplayer Mode)");
+            return;
+        }
+
+        //  SINGLE PLAYER - NORMAL AI SPAWN
         SpawnUniqueAICarsExcludingPlayer();
+        
     }
 
     void SpawnUniqueAICarsExcludingPlayer()

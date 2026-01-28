@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Athar/Final Scenes/Level 5.unity
     guid: da6a3f811424f714bb435afd8f0d1c1f
+  - enabled: 1
+    path: Assets/Rajan/Scenes/MultiplayerLobby.unity
+    guid: 37f36461d63b7a64cb47cb8648749595
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: aad8c7df7ba91584693cf3b5cef18c55,
       type: 2}

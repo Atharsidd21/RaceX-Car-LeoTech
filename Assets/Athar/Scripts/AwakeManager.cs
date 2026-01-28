@@ -149,6 +149,16 @@ public class AwakeManager : MonoBehaviour
 
     public void PlayButton()
     {
+
+        //  MULTIPLAYER PATH (NEW)
+        if (GameModeManager.IsMultiplayer)
+        {
+            // MultiplayerCarSelect handle karega aage ka flow
+            FindObjectOfType<MultiplayerCarSelect>()?.Ready();
+            return; //  STOP single-player logic
+        }
+
+        //  SINGLE PLAYER (OLD LOGIC - UNCHANGED)
         int selectedIndex = PlayerPrefs.GetInt("Pointer", 0);
         GameObject selectedCar = ListOfVehicles.Vehicals[selectedIndex];
         string carName = selectedCar.GetComponent<CarController>().CarName;

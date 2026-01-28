@@ -8,11 +8,22 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
 {
     public TextMeshProUGUI statusText;
 
+
+    void Awake()
+    {
+        transform.SetParent(null); // ROOT
+        DontDestroyOnLoad(gameObject);   
+    }
+
     void Start()
     {
+        if (!PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.ConnectUsingSettings();
+        }
         PhotonNetwork.AutomaticallySyncScene = true;
         statusText.text = "Connecting to Photon...";
-        PhotonNetwork.ConnectUsingSettings();
+       
     }
 
     public override void OnConnectedToMaster()

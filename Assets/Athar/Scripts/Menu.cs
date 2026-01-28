@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -188,6 +189,21 @@ public class Menu : MonoBehaviour
 
         // 3️⃣ NORMAL ENTRY
       //  LoadPlayerProfile();*/
+
+        // this part changed by rajan. for multiplayer.
+        if (!PhotonNetwork.InRoom)
+        {
+            GameModeManager.IsMultiplayer = false;
+        }
+
+        if (GameModeManager.IsMultiplayer &&
+        PhotonNetwork.InRoom &&
+        PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("GoToLevelSelect"))
+        {
+            LevelsBtnClicked(); // tumhara existing method
+            PhotonNetwork.CurrentRoom.CustomProperties.Remove("GoToLevelSelect");
+        }
+
     }
     //Splash Screen
     private IEnumerator SplashFlow()
@@ -562,12 +578,12 @@ public class Menu : MonoBehaviour
     // ================= NAVIGATION =================
     public void GarageBtnClicked()
     {
+        GameModeManager.IsMultiplayer = false;      //changes by rajan for multiplayer
         //SceneManager.LoadScene("SelectCar");
         //SceneTransition.LoadScene("SelectCar"); Transition 1
         SceneTransition.Instance.LoadSceneSlide(1, true); //Transition 2
                                                           // SceneTransition.Instance.LoadSceneFast(1);
-
-
+        
 
     }
 
@@ -581,10 +597,20 @@ public class Menu : MonoBehaviour
 
     public void PlayButtonClicked()
     {
+        GameModeManager.IsMultiplayer = false;
         // SceneManager.LoadScene(1);
         SceneTransition.Instance.LoadSceneSlide(1, true); //Transition 2
 
     }
+
+    // Multiplayer Button Clicked
+    //changes by rajan for multiplayer
+    public void OnMultiplayerClick()
+    {
+        GameModeManager.IsMultiplayer = true;
+        SceneManager.LoadScene("MultiplayerLobby");
+    }
+
 
     public void BackBtnClicked()
     {

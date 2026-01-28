@@ -1,29 +1,33 @@
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class PhotonLauncher : MonoBehaviourPunCallbacks
 {
     public TextMeshProUGUI statusText;
 
-
     void Awake()
     {
-        transform.SetParent(null); // ROOT
-        DontDestroyOnLoad(gameObject);   
+        transform.SetParent(null);
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
     {
+        PhotonNetwork.AutomaticallySyncScene = true;
+
         if (!PhotonNetwork.IsConnected)
         {
+            statusText.text = "Connecting to Photon...";
             PhotonNetwork.ConnectUsingSettings();
         }
-        PhotonNetwork.AutomaticallySyncScene = true;
-        statusText.text = "Connecting to Photon...";
-       
+        else
+        {
+            // Already connected case (BACK - MULTIPLAYER again)
+            statusText.text = "Already connected. Joining Lobby...";
+            PhotonNetwork.JoinLobby();
+        }
     }
 
     public override void OnConnectedToMaster()

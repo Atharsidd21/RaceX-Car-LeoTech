@@ -50,6 +50,6 @@ public class MultiplayerCarSelect : MonoBehaviourPunCallbacks
             new Hashtable { { "GoToLevelSelect", true } }
         );
 
-        PhotonNetwork.LoadLevel("MainMenu"); //  MAIN MENU ONLY
+        PhotonNetwork.LoadLevel("Main Menu"); //  MAIN MENU ONLY
     }
 }

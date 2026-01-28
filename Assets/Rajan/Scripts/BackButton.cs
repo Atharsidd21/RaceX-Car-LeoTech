@@ -5,6 +5,6 @@ public class BackButton : MonoBehaviour
 {
     public void BackToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Main Menu");
     }
 }

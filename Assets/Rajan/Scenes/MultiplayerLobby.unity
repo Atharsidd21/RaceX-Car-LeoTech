@@ -490,6 +490,7 @@ MonoBehaviour:
   statusText: {fileID: 1114101989}
   createButton: {fileID: 1270970592}
   joinButton: {fileID: 2044826640}
+  roomInputField: {fileID: 616394236}
 --- !u!1 &616394234
 GameObject:
   m_ObjectHideFlags: 0

@@ -22483,12 +22483,12 @@ MonoBehaviour:
   - {fileID: 1464492301}
   - {fileID: 985918958}
   carPrefabs:
-  - {fileID: 4309340824244197867, guid: 4805691e5463bd84087236090328c1e3, type: 3}
-  - {fileID: 102514, guid: a0459a5bc3faf7c4fb192da6da5c673c, type: 3}
-  - {fileID: 8799075692723707581, guid: be95e3b5b23c76f4dbc57623b4299d19, type: 3}
-  - {fileID: 1609731031090814, guid: 6282ab3f8f5b78f419bd87d69029b461, type: 3}
-  - {fileID: 3416858561705245710, guid: d320aeddd3d3b4b49afee95c21b2dce2, type: 3}
-  - {fileID: 3380741278707781451, guid: 4695208b238d86b4eae77b4ea0fdb121, type: 3}
+  - {fileID: 4309340824244197867, guid: 3be80d84c6a85f14a8cc62b537544db6, type: 3}
+  - {fileID: 102514, guid: ed3cd22872f8c2b46a841fb591177fe4, type: 3}
+  - {fileID: 8799075692723707581, guid: 44b9b0d799815004285bde5042303efb, type: 3}
+  - {fileID: 1609731031090814, guid: e46aa9fadd7f2774ebf91246b493b4bb, type: 3}
+  - {fileID: 3416858561705245710, guid: 4fb88679078c8084ca012a4c1f5cd204, type: 3}
+  - {fileID: 3380741278707781451, guid: 33558d54eab9a86428f5cb42de02182c, type: 3}
 --- !u!4 &1153676736
 Transform:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
@@ -12,6 +13,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [Header("Buttons")]
     public GameObject createButton;
     public GameObject joinButton;
+    public TMP_InputField roomInputField;
 
     private bool isReadyForMatchmaking = false;
 
@@ -21,6 +23,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
         createButton.SetActive(false);
         joinButton.SetActive(false);
+        roomInputField.gameObject.SetActive(false);
 
         if (!PhotonNetwork.IsConnected)
         {
@@ -45,6 +48,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
         createButton.SetActive(true);
         joinButton.SetActive(true);
+        roomInputField.gameObject.SetActive(true);
     }
 
     // ===================== CREATE ROOM =====================
@@ -56,6 +60,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
             statusText.text = "Please wait...";
             return;
         }
+
+        // this is temporary disable for old UI.
+        roomInputField.gameObject.SetActive(false);
 
         string roomCode = Random.Range(1000, 9999).ToString();
 

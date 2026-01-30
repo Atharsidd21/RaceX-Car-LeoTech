@@ -1,70 +1,139 @@
-using Photon.Pun;
+﻿using Photon.Pun;
 using Photon.Realtime;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
-    [Header("UI")]
-    public TMP_InputField roomInput;
-    public TextMeshProUGUI statusText;
+    [Header("PANELS")]
+    public GameObject mainLobbyPanel;
+    public GameObject createRoomPanel;
+    public GameObject joinRoomPanel;
 
-    [Header("Buttons")]
-    public GameObject createButton;
-    public GameObject joinButton;
-    public TMP_InputField roomInputField;
+    [Header("MAIN LOBBY BUTTONS")]
+    public Button openCreatePanelBtn;
+    public Button openJoinPanelBtn;
 
-    private bool isReadyForMatchmaking = false;
+    [Header("CREATE ROOM PANEL")]
+    public Button createRoomBtn;
+    public Button copyCodeBtn;
+    public Button createBackBtn;
+    public TMP_InputField createRoomCodeField;   // readonly
+    public TextMeshProUGUI createRoomStatusText; // Player (0/2)
+
+    [Header("JOIN ROOM PANEL")]
+    public Button joinRoomBtn;
+    public Button pasteCodeBtn;
+    public Button joinBackBtn;
+    public TMP_InputField joinRoomInputField;    // editable
+    public TextMeshProUGUI joinRoomStatusText;
+
+    private bool isReady = false;
+    bool isMatchmakingInProgress = false;
+
+    // ================= START =================
 
     void Start()
     {
-        statusText.text = "Connecting...";
+        // Panel state
+        mainLobbyPanel.SetActive(true);
+        createRoomPanel.SetActive(false);
+        joinRoomPanel.SetActive(false);
 
-        createButton.SetActive(false);
-        joinButton.SetActive(false);
-        roomInputField.gameObject.SetActive(false);
+        createRoomStatusText.text = "";
+        joinRoomStatusText.text = "";
 
-        if (!PhotonNetwork.IsConnected)
-        {
-            PhotonNetwork.ConnectUsingSettings();
-        }
+        createRoomCodeField.interactable = false;
+
+        // Button listeners (NO OnClick usage)
+        openCreatePanelBtn.onClick.AddListener(OpenCreateRoomPanel);
+        openJoinPanelBtn.onClick.AddListener(OpenJoinRoomPanel);
+
+        createRoomBtn.onClick.AddListener(CreateRoom);
+        copyCodeBtn.onClick.AddListener(CopyRoomCode);
+        createBackBtn.onClick.AddListener(BackToMainLobby);
+
+        joinRoomBtn.onClick.AddListener(JoinRoom);
+        pasteCodeBtn.onClick.AddListener(PasteRoomCode);
+        joinBackBtn.onClick.AddListener(BackToMainLobby);
+
+       
     }
 
-    // ===================== CONNECTION FLOW =====================
+    // ================= PHOTON =================
 
-    public override void OnConnectedToMaster()
+    bool CanMatchmake()
     {
-        Debug.Log("Connected to Master");
-        PhotonNetwork.JoinLobby();
+        return PhotonNetwork.IsConnected &&
+               PhotonNetwork.NetworkClientState == ClientState.JoinedLobby;
     }
 
     public override void OnJoinedLobby()
     {
-        Debug.Log("Joined Lobby");
-        isReadyForMatchmaking = true;
-
-        statusText.text = "Ready";
-
-        createButton.SetActive(true);
-        joinButton.SetActive(true);
-        roomInputField.gameObject.SetActive(true);
+        isReady = true;
+        Debug.Log("[MP] Lobby Joined – Ready");
     }
 
-    // ===================== CREATE ROOM =====================
+    // ================= PANEL FLOW =================
 
-    public void CreateRoom()
+    void OpenCreateRoomPanel()
     {
-        if (!isReadyForMatchmaking)
+        Debug.Log("[MP] Open Create Room Panel");
+
+        mainLobbyPanel.SetActive(false);
+        joinRoomPanel.SetActive(false);
+        createRoomPanel.SetActive(true);
+
+        createRoomCodeField.text = "";
+        createRoomStatusText.text = "Player (0/2)";
+    }
+
+    void OpenJoinRoomPanel()
+    {
+        Debug.Log("[MP] Open Join Room Panel");
+
+        mainLobbyPanel.SetActive(false);
+        createRoomPanel.SetActive(false);
+        joinRoomPanel.SetActive(true);
+
+        joinRoomInputField.text = "";
+        joinRoomStatusText.text = "";
+    }
+
+    void BackToMainLobby()
+    {
+        Debug.Log("[MP] Back pressed");
+
+        if (isMatchmakingInProgress)
         {
-            statusText.text = "Please wait...";
+            Debug.Log("[MP] Cancelling matchmaking...");
+            PhotonNetwork.LeaveRoom();
+            isMatchmakingInProgress = false;
+        }
+
+        createRoomPanel.SetActive(false);
+        joinRoomPanel.SetActive(false);
+        mainLobbyPanel.SetActive(true);
+    }
+
+
+
+
+    // ================= CREATE ROOM =================
+
+    void CreateRoom()
+    {
+        if (!CanMatchmake())
+        {
+            Debug.Log("[MP] Not ready for matchmaking");
             return;
         }
 
-        // this is temporary disable for old UI.
-        roomInputField.gameObject.SetActive(false);
+        isMatchmakingInProgress = true; // 🔥 IMPORTANT
 
         string roomCode = Random.Range(1000, 9999).ToString();
+        createRoomCodeField.text = roomCode;
 
         RoomOptions options = new RoomOptions
         {
@@ -73,72 +142,87 @@ public class RoomManager : MonoBehaviourPunCallbacks
             IsOpen = true
         };
 
+        Debug.Log("[MP] Creating Room: " + roomCode);
         PhotonNetwork.CreateRoom(roomCode, options);
-        statusText.text = "Creating Room : " + roomCode;
     }
 
-    // ===================== JOIN ROOM =====================
 
-    public void JoinRoom()
-    {
-        if (!isReadyForMatchmaking)
-        {
-            statusText.text = "Please wait...";
-            return;
-        }
-
-        if (string.IsNullOrEmpty(roomInput.text))
-        {
-            statusText.text = "Enter room code";
-            return;
-        }
-
-        PhotonNetwork.JoinRoom(roomInput.text.Trim());
-        statusText.text = "Joining Room...";
-    }
-
-    // ===================== ROOM CALLBACKS =====================
 
     public override void OnJoinedRoom()
     {
-        statusText.text =
-            "Joined Room : " +
-            PhotonNetwork.CurrentRoom.Name +
-            " (" + PhotonNetwork.CurrentRoom.PlayerCount + "/" +
-            PhotonNetwork.CurrentRoom.MaxPlayers + ")";
+        isMatchmakingInProgress = false; // 🔥 RESET
+
+        Debug.Log("[MP] Joined Room");
+        createRoomStatusText.text =
+            $"Player ({PhotonNetwork.CurrentRoom.PlayerCount}/2)";
     }
+
+
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        statusText.text =
-            "Player Joined (" +
-            PhotonNetwork.CurrentRoom.PlayerCount + "/" +
-            PhotonNetwork.CurrentRoom.MaxPlayers + ")";
+        Debug.Log("[MP] Player Joined");
 
-        CheckRoomReady();
-    }
+        createRoomStatusText.text =
+            $"Player ({PhotonNetwork.CurrentRoom.PlayerCount}/2)";
 
-    void CheckRoomReady()
-    {
-        if (!PhotonNetwork.IsMasterClient) return;
-
-        if (PhotonNetwork.CurrentRoom.PlayerCount ==
-            PhotonNetwork.CurrentRoom.MaxPlayers)
+        if (PhotonNetwork.IsMasterClient &&
+            PhotonNetwork.CurrentRoom.PlayerCount == 2)
         {
-            statusText.text = "Room Full. Loading SelectCar...";
+            Debug.Log("[MP] Room Full -> Load SelectCar");
             PhotonNetwork.LoadLevel("SelectCar");
         }
     }
 
-    // ===================== FAIL CALLBACKS =====================
+    // ================= JOIN ROOM =================
 
-    public override void OnJoinRoomFailed(short returnCode, string message)
+    void JoinRoom()
     {
-        statusText.text = "Join Failed : " + message;
+        if (!CanMatchmake())
+        {
+            joinRoomStatusText.text = "Connecting...";
+            return;
+        }
+
+        if (string.IsNullOrEmpty(joinRoomInputField.text))
+        {
+            joinRoomStatusText.text = "Enter room code";
+            return;
+        }
+
+        isMatchmakingInProgress = true; // 🔥 IMPORTANT
+
+        Debug.Log("[MP] Joining Room: " + joinRoomInputField.text);
+        PhotonNetwork.JoinRoom(joinRoomInputField.text.Trim());
     }
 
-    public override void OnCreateRoomFailed(short returnCode, string message)
+
+
+    public override void OnJoinRoomFailed(short code, string message)
     {
-        statusText.text = "Create Failed : " + message;
+        isMatchmakingInProgress = false; // 🔥 RESET
+        Debug.LogWarning("[MP] Join Failed: " + message);
+        joinRoomStatusText.text = message;
+    }
+
+    public override void OnCreateRoomFailed(short code, string message)
+    {
+        isMatchmakingInProgress = false; // 🔥 RESET
+        Debug.LogWarning("[MP] Create Failed: " + message);
+        createRoomStatusText.text = message;
+    }
+
+    // ================= COPY / PASTE =================
+
+    void CopyRoomCode()
+    {
+        GUIUtility.systemCopyBuffer = createRoomCodeField.text;
+        Debug.Log("[MP] Room Code Copied");
+    }
+
+    void PasteRoomCode()
+    {
+        joinRoomInputField.text = GUIUtility.systemCopyBuffer;
+        Debug.Log("[MP] Room Code Pasted");
     }
 }

@@ -196,13 +196,6 @@ public class Menu : MonoBehaviour
             GameModeManager.IsMultiplayer = false;
         }
 
-        if (GameModeManager.IsMultiplayer &&
-        PhotonNetwork.InRoom &&
-        PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("GoToLevelSelect"))
-        {
-            LevelsBtnClicked(); // tumhara existing method
-            PhotonNetwork.CurrentRoom.CustomProperties.Remove("GoToLevelSelect");
-        }
 
     }
     //Splash Screen
@@ -270,6 +263,22 @@ public class Menu : MonoBehaviour
 
     private void HandlePostSplashNavigation()
     {
+        //  MULTIPLAYER → OPEN LEVEL SELECT (FINAL FIX)
+        if (GameModeManager.IsMultiplayer &&
+            PhotonNetwork.InRoom &&
+            PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("OpenLevelSelect"))
+        {
+            Debug.Log("[MENU] Multiplayer → Opening Level Select Panel");
+
+            DisableAllPanels();
+            LevelPanel.SetActive(true);
+            UpdatePlayerProfileUI();
+
+            // ❗ VERY IMPORTANT CLEANUP
+            PhotonNetwork.CurrentRoom.CustomProperties.Remove("OpenLevelSelect");
+
+            return; //  STOP all other menu logic
+        }
         // DisableAllPanels();
 
         // 1️⃣ If profile not completed → force name entry

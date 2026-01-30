@@ -1,48 +1,38 @@
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
-using TMPro;
 
 public class PhotonLauncher : MonoBehaviourPunCallbacks
 {
-    public TextMeshProUGUI statusText;
+    public static bool IsConnecting = false;
 
-    void Awake()
+    public void TryConnect()
     {
-        transform.SetParent(null);
-        DontDestroyOnLoad(gameObject);
-    }
+       
+        if (PhotonNetwork.IsConnected || IsConnecting)
+        {
+            Debug.Log("[Photon] Already connected / connecting");
+            return;
+        }
 
-    void Start()
-    {
+        Debug.Log("[Photon] Connecting...");
+        IsConnecting = true;
         PhotonNetwork.AutomaticallySyncScene = true;
-
-        if (!PhotonNetwork.IsConnected)
-        {
-            statusText.text = "Connecting to Photon...";
-            PhotonNetwork.ConnectUsingSettings();
-        }
-        else
-        {
-            // Already connected case (BACK - MULTIPLAYER again)
-            statusText.text = "Already connected. Joining Lobby...";
-            PhotonNetwork.JoinLobby();
-        }
+        PhotonNetwork.ConnectUsingSettings();
     }
 
     public override void OnConnectedToMaster()
     {
-        statusText.text = "Connected. Joining Lobby...";
-        PhotonNetwork.JoinLobby();
-    }
+        Debug.Log("[Photon] Connected to Master");
+        IsConnecting = false;
 
-    public override void OnJoinedLobby()
-    {
-        statusText.text = "Lobby Joined";
+        if (!PhotonNetwork.InLobby)
+            PhotonNetwork.JoinLobby();
     }
 
     public override void OnDisconnected(DisconnectCause cause)
     {
-        statusText.text = "Disconnected: " + cause.ToString();
+        Debug.LogWarning("[Photon] Disconnected: " + cause);
+        IsConnecting = false;
     }
 }

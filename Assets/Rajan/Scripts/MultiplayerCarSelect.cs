@@ -47,7 +47,7 @@ public class MultiplayerCarSelect : MonoBehaviourPunCallbacks
 
         // flag set
         PhotonNetwork.CurrentRoom.SetCustomProperties(
-            new Hashtable { { "GoToLevelSelect", true } }
+            new Hashtable { { "OpenLevelSelect", true } }
         );
 
         PhotonNetwork.LoadLevel("Main Menu"); //  MAIN MENU ONLY

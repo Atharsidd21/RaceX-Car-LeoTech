@@ -150,12 +150,17 @@ public class AwakeManager : MonoBehaviour
     public void PlayButton()
     {
 
-        //  MULTIPLAYER PATH (NEW)
         if (GameModeManager.IsMultiplayer)
         {
-            // MultiplayerCarSelect handle karega aage ka flow
-            FindObjectOfType<MultiplayerCarSelect>()?.Ready();
-            return; //  STOP single-player logic
+            var mpSelect = FindObjectOfType<MultiplayerCarSelect>();
+            if (mpSelect == null)
+            {
+                Debug.LogError("[AwakeManager] MultiplayerCarSelect NOT FOUND in scene!");
+                return;
+            }
+
+            mpSelect.Ready();
+            return;
         }
 
         //  SINGLE PLAYER (OLD LOGIC - UNCHANGED)
@@ -168,7 +173,7 @@ public class AwakeManager : MonoBehaviour
         {
             //int sceneInd = PlayerPrefs.GetInt(Menu.SelectedLevel, 2);
             //OnClickLetsPlayBtn();
-            PlayerPrefs.SetInt(Menu.GotoLevelSelection, 1);
+            PlayerPrefs.SetInt(Menu.GotoLevelSelection, 1);         //ye line dicide karti hai ki level selection wala panel open kare jab level select karne ham main menu me jaye.
             //SceneManager.LoadScene(0);// sceneInd);
             //  SceneTransition.Instance.LoadScene(0); Transition 1
             SceneTransition.Instance.LoadSceneSlide(0, true); //Transition 2

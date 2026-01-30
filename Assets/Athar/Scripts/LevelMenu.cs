@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class LevelMenu : MonoBehaviour
 {
@@ -23,26 +24,22 @@ public class LevelMenu : MonoBehaviour
     {
         foreach (LevelItem item in levels)
         {
-            Debug.Log($"Level {item.levelBuildIndex} Opened = " +
-          PlayerPrefs.GetInt($"LevelOpened_{item.levelBuildIndex}", 0));
-
-            bool isOpened = PlayerPrefs.GetInt($"LevelOpened_{item.levelBuildIndex}", 0) == 1;
+            bool isOpened =
+                PlayerPrefs.GetInt($"LevelOpened_{item.levelBuildIndex}", 0) == 1;
 
             // Clear old listeners
             item.levelButton.onClick.RemoveAllListeners();
-
-            // DEFAULT STATE
             item.levelButton.interactable = false;
 
             if (!isOpened)
             {
-                // 🔒 Still locked → show lock
+                // 🔒 Locked
                 if (item.lockButton != null)
                     item.lockButton.gameObject.SetActive(true);
             }
             else
             {
-                // ✅ Level unlocked → remove lock & enable level
+                // ✅ Unlocked
                 if (item.lockButton != null)
                     Destroy(item.lockButton.gameObject);
 
@@ -54,22 +51,29 @@ public class LevelMenu : MonoBehaviour
         }
     }
 
-
-    /*  void UnlockLevel(int levelIndex)
-      {
-          // Mark level as opened
-          PlayerPrefs.SetInt($"LevelOpened_{levelIndex}", 1);
-          PlayerPrefs.Save();
-
-          // Refresh UI
-          SetupLevels();
-      }*/
+    // ================= LEVEL LOAD =================
 
     public void OpenLevel(int levelIndex)
     {
         if (MusicManager.Instance != null)
             MusicManager.Instance.FadeOutAndStop();
 
-        SceneManager.LoadScene(levelIndex);
+        // ---------- MULTIPLAYER ----------
+        if (GameModeManager.IsMultiplayer)
+        {
+            // ❗ Only MASTER loads scene
+       
+            if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+            {
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    PhotonNetwork.LoadLevel(levelIndex);
+                }
+            }
+            else
+            {
+                SceneManager.LoadScene(levelIndex);
+            }
+        }
     }
 }

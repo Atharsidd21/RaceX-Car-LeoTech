@@ -3,7 +3,7 @@ using Photon.Realtime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System.Collections;
 public class RoomManager : MonoBehaviourPunCallbacks
 {
     [Header("PANELS")]
@@ -105,17 +105,43 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("[MP] Back pressed");
 
-        if (isMatchmakingInProgress)
+        StartCoroutine(LeaveRoomAndReturnToLobby());
+    }
+
+    IEnumerator LeaveRoomAndReturnToLobby()
+    {
+        //  RULE 1: Agar room me ho → ALWAYS leave
+        if (PhotonNetwork.InRoom)
         {
-            Debug.Log("[MP] Cancelling matchmaking...");
+            Debug.Log("[MP] Leaving room...");
             PhotonNetwork.LeaveRoom();
-            isMatchmakingInProgress = false;
+
+            while (PhotonNetwork.InRoom)
+                yield return null;
         }
 
+        //  RULE 2: Lobby ensure karo
+        if (!PhotonNetwork.InLobby &&
+            PhotonNetwork.NetworkClientState == ClientState.ConnectedToMaster)
+        {
+            Debug.Log("[MP] Joining lobby...");
+            PhotonNetwork.JoinLobby();
+
+            while (!PhotonNetwork.InLobby)
+                yield return null;
+        }
+
+        //  RULE 3: Reset flags
+        isMatchmakingInProgress = false;
+
+        //  RULE 4: UI AFTER Photon ready
         createRoomPanel.SetActive(false);
         joinRoomPanel.SetActive(false);
         mainLobbyPanel.SetActive(true);
+
+        Debug.Log("[MP] Back complete — Lobby ready");
     }
+
 
 
 

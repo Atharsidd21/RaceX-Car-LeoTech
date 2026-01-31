@@ -59,21 +59,16 @@ public class LevelMenu : MonoBehaviour
             MusicManager.Instance.FadeOutAndStop();
 
         // ---------- MULTIPLAYER ----------
-        if (GameModeManager.IsMultiplayer)
+        if (GameModeManager.IsMultiplayer &&
+    PhotonNetwork.IsConnected &&
+    PhotonNetwork.InRoom)
         {
-            // ❗ Only MASTER loads scene
-       
-            if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
-            {
-                if (PhotonNetwork.IsMasterClient)
-                {
-                    PhotonNetwork.LoadLevel(levelIndex);
-                }
-            }
-            else
+            if (PhotonNetwork.IsMasterClient)
+                PhotonNetwork.LoadLevel(levelIndex);
+        }
+        else
             {
                 SceneManager.LoadScene(levelIndex);
             }
         }
-    }
 }

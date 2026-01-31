@@ -8,7 +8,7 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
 
     public void TryConnect()
     {
-       
+        // FIXED CONDITION
         if (PhotonNetwork.IsConnected || IsConnecting)
         {
             Debug.Log("[Photon] Already connected / connecting");
@@ -17,6 +17,7 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
 
         Debug.Log("[Photon] Connecting...");
         IsConnecting = true;
+
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.ConnectUsingSettings();
     }

@@ -35,6 +35,7 @@ public class MultiplayerCarSelect : MonoBehaviourPunCallbacks
     void CheckAllReady()
     {
         if (!PhotonNetwork.IsMasterClient) return;
+        if (!PhotonNetwork.InRoom) return;
 
         foreach (Player p in PhotonNetwork.PlayerList)
         {
@@ -42,14 +43,26 @@ public class MultiplayerCarSelect : MonoBehaviourPunCallbacks
             if (!(bool)p.CustomProperties["ready"]) return;
         }
 
-        //  ALL READY
-        Debug.Log("All players ready, returning to Main Menu");
+        Debug.Log("[MP] All players ready -> Open Level Select");
 
-        // flag set
+        //  Room flag (menu will read this)
         PhotonNetwork.CurrentRoom.SetCustomProperties(
             new Hashtable { { "OpenLevelSelect", true } }
         );
 
-        PhotonNetwork.LoadLevel("Main Menu"); //  MAIN MENU ONLY
+        //  SAFE delayed scene load
+        StartCoroutine(LoadMainMenuSafe());
     }
+
+    System.Collections.IEnumerator LoadMainMenuSafe()
+    {
+        yield return null;          // wait 1 frame
+        yield return new WaitForSeconds(0.1f);
+
+        if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+        {
+            PhotonNetwork.LoadLevel("Main Menu");
+        }
+    }
+
 }

@@ -191,10 +191,7 @@ public class Menu : MonoBehaviour
       //  LoadPlayerProfile();*/
 
         // this part changed by rajan. for multiplayer.
-        if (!PhotonNetwork.InRoom)
-        {
-            GameModeManager.IsMultiplayer = false;
-        }
+       
 
 
     }

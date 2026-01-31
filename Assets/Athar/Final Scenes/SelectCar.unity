@@ -773,7 +773,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a001cc234f135e546abf8ff4a15e9053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MultiplayerCarSelect
-  statusText: {fileID: 0}
 --- !u!4 &232387071
 Transform:
   m_ObjectHideFlags: 0

@@ -81,7 +81,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("[MP] Open Create Room Panel");
 
-        mainLobbyPanel.SetActive(false);
+        mainLobbyPanel.SetActive(true);
         joinRoomPanel.SetActive(false);
         createRoomPanel.SetActive(true);
 
@@ -93,7 +93,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("[MP] Open Join Room Panel");
 
-        mainLobbyPanel.SetActive(false);
+        mainLobbyPanel.SetActive(true);
         createRoomPanel.SetActive(false);
         joinRoomPanel.SetActive(true);
 
